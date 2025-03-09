@@ -1,0 +1,118 @@
+:root {
+    --primary: #008080;
+    --primary-foreground: #ffffff;
+    --secondary: #279E9D;
+    --secondary-foreground: #000000;
+    --accent: #4EBCBA;
+    --accent-foreground: #000000;
+    --background: #ffffff;
+    --foreground: #000000;
+    --card: #ffffff;
+    --card-foreground: #000000;
+    --border: #109f7c;
+    --input: #4EBCBA;
+    --ring: #279E9D;
+    --radius: 0.5rem;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+body {
+    background-color: var(--accent);
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.auth-container {
+    max-width: 400px;
+    width: 90%;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.nav-pills .nav-link {
+    color: var(--foreground);
+    border-radius: var(--radius);
+}
+
+.nav-pills .nav-link.active {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+}
+
+.form-control {
+    border-color: var(--border);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+}
+
+.form-control:focus {
+    border-color: var(--ring);
+    box-shadow: 0 0 0 2px rgba(193, 234, 118, 0.25);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--primary-foreground);
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: #008080;
+    --bs-btn-border-color: #008080;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #008080;
+    --bs-btn-hover-border-color: #008080;
+    --bs-btn-focus-shadow-rgb: 13, 110, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #008080;
+    --bs-btn-active-border-color: #008080;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #008080;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #008080;
+    --bs-gradient: none;
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.social-login .btn {
+    padding: 0.75rem 1rem;
+}
+
+.return-link {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.return-link:hover {
+    color: var(--secondary);
+}
+
+/*.text-danger {*/
+/*    color: red;*/
+/*    margin-top: 0.5rem;*/
+/*    font-size: 0.875rem;*/
+/*}*/
+
+@media (max-width: 576px) {
+    .auth-container {
+        padding: 1.5rem !important;
+    }
+}
+
