@@ -62,6 +62,23 @@ body {
     max-height: 50vw;
 }
 
+.buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.buttons button {
+    margin-left: 0.5rem;
+}
+
+.min-salary {
+    padding-right: 0.3rem;
+}
+.max-salary {
+    padding-left: 0.3rem;
+}
+
+
 .card {
     background: var(--card);
     border: 1px solid var(--border);

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
     Document   : UpdateRoom
     Created on : Mar 9, 2025, 11:33:42 AM
@@ -13,7 +14,7 @@
         <title>Update Room Information</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="css/roomManagement.css">
+        <link rel="stylesheet" href="admin/css/roomManagement.css">
     </head>
     <body>
     <c:set var="room" value="${sessionScope.room}"/>
@@ -28,13 +29,13 @@
                     <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Management</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/RoomManagement"><i class="bi bi-door-open me-2"></i>Room Management</a>
+                    <a class="nav-link active" href="${pageContext.request.contextPath}/RoomManagement"><i class="bi bi-door-open me-2"></i>Room Details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-calendar-check me-2"></i>Booking Management</a>
+                    <a class="nav-link" href="#"><i class="bi bi-calendar-check me-2"></i>Booking Details</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"  style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);"><i class="bi bi-graph-up me-2"></i>Finance Overview</a>
@@ -47,8 +48,8 @@
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 class="col-md-10">Room Management</h2>
-                    <button class="btn btn-primary w-100">
-                        <a href="${pageContext.request.contextPath}/RoomManagement">Back</a>
+                    <button class="btn btn-primary w-100" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'RoomManagement')">
+                        Back
                     </button>
                 </div>
             </div>
@@ -69,14 +70,7 @@
                     <label class="form-label col-md-4">Room Type</label>
                     <select name="roomType" class="form-select" >
                         <c:forEach var="roomType" items="${sessionScope.roomTypes}">
-                            <c:choose>
-                                <c:when test="${room.getRoomType() eq (roomType.getName())}">
-                                    <option value="${roomType.getName()}" selected="selected">${roomType.getName()}</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="${roomType.getName()}">${roomType.getName()}</option>
-                                </c:otherwise>
-                            </c:choose>
+                            <option value="${roomType.getId()}" ${fn:contains(roomType.getId(), requestScope.roomTypeID)}>${item}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -86,16 +80,11 @@
                 </div>
                 <div class="mb-3 d-flex justify-content-between">
                     <label class="form-label col-md-4">Room Status</label>
-                    <select name="roomStatus" class="form-select">
+                    <select name="roomStatusID" class="form-select">
                         <c:forEach var="roomStatus" items="${sessionScope.roomStatuses}">
-                            <c:choose>
-                                <c:when test="${room.getRoomStatus() eq roomStatus.getStatusName()}">
-                                    <option value="${room.getRoomStatus()}" selected>${room.getRoomStatus()}</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="${roomStatus.getStatusName()}">${roomStatus.getStatusName()}</option>
-                                </c:otherwise>
-                            </c:choose>
+                            <option value="${roomStatus.getStatusID()} ${fn:contains(roomStatus.getStatusID(), requestScope.roomStatusID) ? "selected" : ""}">
+                                ${roomStatus.getName()}
+                            </option>
                         </c:forEach>
                     </select>
                 </div>
@@ -104,10 +93,8 @@
                     <textarea class="form-control" rows="3" >${room.getDescription()}</textarea>
                 </div>
                 <div class="mb-3 d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary">
-                        <a href="${pageContext.request.contextPath}/UpdateRoom?roomID=${room.getRoomID()}">
-                            Refresh
-                        </a>
+                    <button type="button" class="btn btn-secondary" onclick="">
+                        Refresh
                     </button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
@@ -131,7 +118,7 @@
 
             roomTypeSelect.addEventListener("change", redirectToUpdateRoom);
         });
-
     </script>
+    <script src="admin/js/home.js"></script>
     </body>
 </html>

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -9,7 +10,7 @@
     <title>Hotel Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="admin/css/home.css">
 <%--    <link rel="stylesheet" href="EmployeeManagement/css/add.css">--%>
 
 </head>
@@ -25,13 +26,13 @@
                     <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Management</a>
+                    <a class="nav-link active" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/RoomManagement"><i class="bi bi-door-open me-2"></i>Room Management</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/RoomManagement"><i class="bi bi-door-open me-2"></i>Room Details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-calendar-check me-2"></i>Booking Management</a>
+                    <a class="nav-link" href="#"><i class="bi bi-calendar-check me-2"></i>Booking Details</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"  style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);"><i class="bi bi-graph-up me-2"></i>Finance Overview</a>
@@ -48,47 +49,79 @@
                         <i class="bi bi-plus-circle me-2"></i>Add New Employee
                     </button>
                 </div>
-                <form action="${pageContext.request.contextPath}/admin" method="get">
-                    <div class="search" id="filterContainer">
+                <form action="${pageContext.request.contextPath}/SearchEmployee" method="get">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h3>Filter Options</h3>
+                        <button type="button" class="btn btn-primary" onclick="showFilter()" id="filterBtn">
+                            <i class="bi bi-plus-circle me-2"></i>Show Filters
+                        </button>
+                    </div>
+                    <div class="hidden" id="filterContainer">
                         <div class="row g-3 search-row">
-                            <div class="col-md-3 d-flex flex-column">
-                                <div class="d-flex gap-2 filter-row">
-                                    <button class="btn btn-outline-primary add-filter-btn" type="button" title="Add Filter Field" onclick="addFilterRow()">
-                                        <i class="bi bi-plus-lg"></i>
-                                    </button>
-                                    <select class="form-select searchField" name="type" id="filterType0">
-                                        <option value="all">Search All</option>
-                                        <option value="EmployeeID">Employee ID</option>
-                                        <option value="Name">Name</option>
-                                        <option value="RoleName">Role</option>
-                                        <option value="hotelName">Hotel Branch</option>
-                                        <option value="Mail">Mail</option>
-                                        <option value="PhoneNum">PhoneNum</option>
-                                        <option value="StatusName">Status</option>
-                                        <option value="Salary">Salary</option>
-                                    </select>
+                            <div class="col-md-3 form-group">
+                                <label for="employeeID">Employee ID</label>
+                                <input name="employeeID" type="text" class="form-control" id="employeeID" placeholder="Enter Employee ID" value="${sessionScope.employeeID}">
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="employeeName">Employee Name</label>
+                                <input name="name" type="text" class="form-control" id="employeeName" placeholder="Enter Employee Name" value="${sessionScope.name}">
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="status">Status</label>
+                                <select name="statusID" class="form-select" id="status">
+                                    <c:forEach var="status" items="${sessionScope.employeeStatuses}">
+                                        <option value="${status.getId()}" ${fn:contains(status.getId(), sessionScope.statusID) ? "selected" : ""}>${status.getName()}</option>
+                                    </c:forEach>
+                                    <option value="" ${empty sessionScope.statusID ? "selected" : ""}>Select all Status</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="role">Employee Role</label>
+                                <select name="roleID" class="form-select" id="role">
+                                    <c:forEach var="role" items="${sessionScope.roles}">
+                                        <option value="${role.getRoleId()}" ${fn:contains(role.getRoleId(), sessionScope.roleID) ? "selected" : ""}>${role.getRoleName()}</option>
+                                    </c:forEach>
+                                    <option value="" ${empty sessionScope.roleID ? "selected" : ""}>Select all Role</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row g-3 search-row">
+                            <div class="col-md-3 form-group">
+                                <label for="Mail">Mail</label>
+                                <input name="mail" type="text" class="form-control" id="Mail" placeholder="Enter Mail" value="${sessionScope.mail}">
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="Phone">Phone Number</label>
+                                <input name="phoneNum" type="text" class="form-control" id="Phone" placeholder="Enter Phone" value="${sessionScope.phoneNum}">
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="salary">Salary</label>
+                                <div class="input-group d-flex justify-context-between" id="salary">
+                                    <div class="col-md-6 min-salary">
+                                        <input name="minSalary" type="number" class="form-control" placeholder="Min Salary" value="${sessionScope.minSalary}">
+                                    </div>
+                                    <div class="col-md-6 max-salary">
+                                        <input name="maxSalary" type="number" class="form-control" placeholder="Max Salary" value="${sessionScope.maxSalary}">
+                                    </div>
                                 </div>
                             </div>
-<%--                            <div class="col-md-9" id="dynamicFilter0">--%>
-<%--                                <select class="form-select hidden" id="hotelFilter">--%>
-<%--                                    <option value="">Select Hotel</option>--%>
-<%--                                    <c:forEach var="hotel" items="${sessionScope.hotels}">--%>
-<%--                                        <option value="${hotel.getName()}">${hotel.getName()}</option>--%>
-<%--                                    </c:forEach>--%>
-<%--                                </select>--%>
-<%--                                <input name="type" id="employeeIdFilter" type="text" class="form-control hidden" placeholder="Employee ID">--%>
-<%--                            </div>--%>
-                            <div class="col-md-9">
-                                <div class="input-group">
-                                    <input type="text" name="value" id="value" class="form-control" placeholder="Search employees..." ">
-                                    <button class="btn btn-outline-secondary" type="submit">
-                                        <i class="bi bi-search"></i>
-                                    </button>
-                                </div>
+                            <div class="col-md-3 form-group">
+                                <label for="hotelName">Hotel Branch</label>
+                                <select name="hotelID" class="form-select" id="hotelName">
+                                    <c:forEach var="hotel" items="${sessionScope.hotels}">
+                                        <option value="${hotel.getHotelId()}" ${fn:contains(hotel.getHotelId(), sessionScope.hotelID) ? "selected" : ""}> ${hotel.getName()}</option>
+                                    </c:forEach>
+                                    <option value="" ${empty sessionScope.hotelID ? "selected" : ""}>Select all Hotel</option>
+                                </select>
                             </div>
+                        </div>
+                        <div class="buttons">
+                            <button class="btn btn-secondary" type="button" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'SearchRoom')">Reset all Filters</button>
+                            <button class="btn btn-primary" type="submit" id="filterButton">Filter</button>
                         </div>
                     </div>
                 </form>
+
             </div>
 
             <c:set var="employees" value="${sessionScope.employees}"/>
@@ -200,7 +233,7 @@
                                                                     <div class="col-md-6">
                                                                         <label class="form-label">Status</label>
                                                                         <select name="status" class="form-select">
-                                                                            <c:forEach var="status" items="${sessionScope.statuses}">
+                                                                            <c:forEach var="status" items="${sessionScope.employeeStatuses}">
                                                                                 <c:choose>
                                                                                     <c:when test="${employee.getStatus() eq (status.getName())}">
                                                                                         <option value="${status.getName()}" selected="selected">${status.getName()}</option>
@@ -227,7 +260,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         <button type="submit" class="btn btn-primary">Save Changes</button>
                                                     </div>
                                                 </form>
@@ -310,7 +343,7 @@
                                             <div class="col-12 col-md-6">
                                                 <label class="form-label">Status</label>
                                                 <select name="status" class="form-select" required>
-                                                    <c:forEach var="status" items="${sessionScope.statuses}">
+                                                    <c:forEach var="status" items="${sessionScope.employeeStatus}">
                                                         <option value="${status.getName()}">${status.getName()}</option>
                                                     </c:forEach>
                                                 </select>
@@ -340,19 +373,7 @@
     </div>
 
 
-<%--    <script>--%>
-<%--        function redirectToServlet() {--%>
-<%--            const selectBox = document.getElementById("field");--%>
-<%--            const inputText = document.getElementById("search-input");--%>
-<%--            const selectedValue = selectBox.value;--%>
-<%--            const inputtedText = inputText.valueOf(inputText);--%>
-<%--            if (selectedValue) {--%>
-<%--                window.location.href = ${pageContext.request.contextPath} + `admin?type=` + selectedValue + '&value=' + inputtedText;--%>
-<%--            }--%>
-
-<%--        }--%>
-<%--    </script>--%>
-    <script src="js/home.js"></script>
+    <script src="admin/js/home.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

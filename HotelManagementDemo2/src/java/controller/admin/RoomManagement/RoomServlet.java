@@ -7,16 +7,17 @@ package controller.admin.RoomManagement;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
-import dao.PriceDAO;
-import dao.RoomDAO;
-import dao.RoomStatusDAO;
-import dao.RoomTypeDAO;
+import dao.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.FilterType;
 import model.RoomStatus;
 
 /**
@@ -29,16 +30,30 @@ public class RoomServlet extends HttpServlet {
     throws ServletException, IOException {
         RoomDAO roomDAO = new RoomDAO();
         RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
-        PriceDAO priceDAO = new PriceDAO();
-
-
+        RoomStatusDAO roomStatusDAO = new RoomStatusDAO();
+        HotelDAO hotelDAO = new HotelDAO();
 
         HttpSession session = request.getSession();
-        session.setAttribute("rooms", roomDAO.getAll());
+        session.setAttribute("hotels", hotelDAO.getAll());
         session.setAttribute("roomTypes", roomTypeDAO.getAll());
-        session.setAttribute("prices", priceDAO.getAll());
+        session.setAttribute("roomStatus", roomStatusDAO.getAll());
 
-        response.sendRedirect("admin/RoomManagement.jsp");
+        LinkedList<String> filterTypes = FilterType.getRoomFilterTypes();
+        Map<String, String> selected = new HashMap<String, String>();
+        String minPrice = request.getParameter("minPrice");
+        if (minPrice != null && !minPrice.isEmpty()) {
+            filterTypes.add("minPrice");
+            filterTypes.add("maxPrice");
+        }               //FilterType.getFilterTypeMap();
+        for (String filterType : filterTypes) {
+            selected.put(filterType, request.getParameter(filterType));
+            request.setAttribute(filterType, request.getParameter(filterType));
+        }
+        session.setAttribute("rooms", roomDAO.getRoomsByTypes(selected));
+
+
+//        response.sendRedirect("admin/RoomManagement.jsp");
+        request.getRequestDispatcher("admin/RoomManagement.jsp").forward(request, response);
     } 
 
 

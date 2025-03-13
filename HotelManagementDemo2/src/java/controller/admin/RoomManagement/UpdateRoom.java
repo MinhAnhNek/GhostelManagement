@@ -45,7 +45,8 @@ public class UpdateRoom extends HttpServlet {
         }
         session.setAttribute("room", room);
         session.setAttribute("roomStatuses", roomStatusDAO.getAll());
-        response.sendRedirect("admin/UpdateRoom.jsp");
+//        response.sendRedirect("admin/UpdateRoom.jsp");
+        request.getRequestDispatcher("admin/UpdateRoom.jsp").forward(request, response);
     }
 
 
@@ -53,13 +54,13 @@ public class UpdateRoom extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String roomID = request.getParameter("roomID");
-        String roomType = request.getParameter("roomType");
-        String roomStatus = request.getParameter("roomStatus");
+        String roomTypeID = request.getParameter("roomTypeID");
+        String roomStatusID = request.getParameter("roomStatusID");
 
         RoomDAO roomDAO = new RoomDAO();
 
         HttpSession session = request.getSession();
-        session.setAttribute("updated", roomDAO.update(roomID, roomType, roomStatus));
+        session.setAttribute("updated", roomDAO.update(roomID, roomTypeID, roomStatusID));
 
         response.sendRedirect("RoomManagement");
 

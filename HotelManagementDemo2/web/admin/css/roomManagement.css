@@ -104,6 +104,22 @@ body {
     color: var(--primary-foreground);
 }
 
+.buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.buttons button {
+    margin-left: 0.5rem;
+}
+
+.min-price {
+    padding-right: 0.3rem;
+}
+.max-price {
+    padding-left: 0.3rem;
+}
+
 .form-control, .form-select {
     border-color: var(--input);
     border-radius: var(--radius);
@@ -157,9 +173,6 @@ body {
 
 .show-up {
     display: block;
-}
-.show-up-price {
-    display: flex;
 }
 
 @media (max-width: 768px) {

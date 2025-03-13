@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
     Document   : RoomManagement
     Created on : Mar 6, 2025, 6:23:18 PM
@@ -14,7 +15,7 @@
     <title>Hotel Room Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/roomManagement.css">
+    <link rel="stylesheet" href="admin/css/roomManagement.css">
 </head>
 <body>
 
@@ -28,13 +29,13 @@
                 <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Management</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Details</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="${pageContext.request.contextPath}/RoomManagement"><i class="bi bi-door-open me-2"></i>Room Management</a>
+                <a class="nav-link active" href="${pageContext.request.contextPath}/RoomManagement"><i class="bi bi-door-open me-2"></i>Room Details</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="bi bi-calendar-check me-2"></i>Booking Management</a>
+                <a class="nav-link" href="#"><i class="bi bi-calendar-check me-2"></i>Booking Details</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"  style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);"><i class="bi bi-graph-up me-2"></i>Finance Overview</a>
@@ -57,44 +58,69 @@
                 <div class="col-12">
                     <div class="card shadow-sm">
                         <div class="card-body">
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                    <select class="form-select" id="filterType" onchange="dynamicFilter()">
-                                        <option value="" selected>Filter By</option>
-                                        <option value="hotel">Hotel Name</option>
-                                        <option value="room">Room Number</option>
-                                        <option value="type">Room Type</option>
-                                        <option value="price">Price</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6" id="dynamicFilter">
-                                    <select class="form-select hidden" id="hotelFilter">
-                                        <option value="">Select Hotel</option>
-                                        <c:forEach var="hotel" items="${sessionScope.hotels}">
-                                            <option value="${hotel.getName()}">${hotel.getName()}</option>
-                                        </c:forEach>
-                                    </select>
-                                    <select class="form-select hidden" id="typeFilter">
-                                        <option value="">Select Room Type</option>
-                                        <c:forEach var="roomType" items="${sessionScope.roomTypes}">
-                                            <option value="${roomType.getName()}">${roomType.getName()}</option>
-                                        </c:forEach>
-                                    </select>
-                                    <input type="number" class="form-control hidden" id="roomFilter" placeholder="Enter Room Number">
-                                    <div class="row hidden" id="priceFilter">
-                                        <div class="col-6">
-                                            <input type="number" class="form-control" placeholder="Min Price">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h3>Filter Options</h3>
+                                <button type="button" class="btn btn-primary" onclick="showFilter()" id="filterBtn">
+                                    <i class="bi bi-plus-circle me-2"></i>Show Filters
+                                </button>
+                            </div>
+                            <form action="${pageContext.request.contextPath}/RoomManagement" method="get">
+                                <div class="hidden" id="filterContainer">
+                                    <div class="row g-3 d-flex">
+                                        <div class="col-md-3 form-group">
+                                            <label for="hotelName">Hotel Branch</label>
+                                            <select name="hotelID" class="form-control" id="hotelName">
+                                                <c:forEach var="hotel" items="${sessionScope.hotels}">
+                                                    <option value="${hotel.getHotelId()}" ${fn:contains(hotel.getHotelId(), requestScope.hotelID) ? "selected" : ""}>${hotel.getName()}</option>
+                                                </c:forEach>
+                                                <option value="" ${empty requestScope.hotelID ? "selected" : ""}>Select all Hotel</option>
+                                            </select>
                                         </div>
-                                        <div class="col-6">
-                                            <input type="number" class="form-control" placeholder="Max Price">
+                                        <div class="col-md-3 form-group">
+                                            <label for="roomTypeID">Room Type</label>
+                                            <select name="roomTypeID" class="form-control" id="roomTypeID">
+                                                <c:forEach var="roomType" items="${sessionScope.roomTypes}">
+                                                    <option value="${roomType.getId()}" ${fn:contains(roomType.getId(), requestScope.roomTypeID) ? "selected" : ""}>
+                                                            ${roomType.getName()}
+                                                    </option>
+                                                </c:forEach>
+                                                <option value="" ${empty requestScope.roomTypeID ? "selected" : ""}>Select All Room Type</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 form-group">
+                                            <label for="price">Price</label>
+                                            <div class="input-group d-flex justify-context-between" id="price">
+                                                <div class="col-md-6 min-price">
+                                                    <input name="minPrice" type="number" class="form-control" placeholder="Min Price" value="${requestScope.minPrice}">
+                                                </div>
+                                                <div class="col-md-6 max-price">
+                                                    <input name="maxPrice" type="number" class="form-control" placeholder="Max Price" value="${requestScope.maxPrice}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 form-group">
+                                            <label for="roomNo">Room Number</label>
+                                            <input name="roomNumber" type="number" id="roomNo" class="form-control" placeholder="Room Number" value="${requestScope.roomNumber}">
                                         </div>
                                     </div>
+                                    <div class="row g-3 d-flex">
+                                        <div class="col-md-3 form-group">
+                                            <label for="roomStatus">Room Status</label>
+                                            <select name="roomStatusID" class="form-select" id="roomStatus">
+                                                <c:forEach var="roomStatus" items="${sessionScope.roomStatus}">
+                                                    <option value="${roomStatus.getStatusID()}" ${fn:contains(roomStatus.getStatusID(), requestScope.roomStatusID) ? "selected" : ""}>${roomStatus.getStatusName()}</option>
+                                                </c:forEach>
+                                                <option value="" ${empty requestScope.roomStatusID ? "selected" : ""}>Select all Status</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="buttons">
+                                        <button class="btn btn-secondary" type="button" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'RoomManagement')">Reset all Filters</button>
+                                        <button class="btn btn-primary" type="submit" id="filterButton">Filter</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-
-                                </div>
-                            </div>
-                        </div>
+                            </form>
+                       </div>
                     </div>
                 </div>
             </div>
@@ -111,6 +137,7 @@
                             <div class="mb-2"><strong>Price:</strong> $${room.getPrice()}/night</div>
                             <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewRoomModal${room.getRoomID()}">View Details</button>
                         </div>
+
                         <!-- View Room Modal -->
                         <div class="modal fade" id="viewRoomModal${room.getRoomID()}" tabindex="-1">
                             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -132,14 +159,9 @@
                                             <label class="form-label col-md-4">Room Type</label>
                                             <select name="roomType" class="form-select" disabled>
                                                 <c:forEach var="roomType" items="${sessionScope.roomTypes}">
-                                                    <c:choose>
-                                                        <c:when test="${room.getRoomType() eq (roomType.getName())}">
-                                                            <option value="${roomType.getName()}" selected="selected">${roomType.getName()}</option>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <option value="${roomType.getName()}">${roomType.getName()}</option>
-                                                        </c:otherwise>
-                                                    </c:choose>
+                                                    <option value="${roomType.getId()}" ${fn:contains(roomType.getId(), requestScope.roomTypeID) ? "selected" : ""}>
+                                                            ${roomType.getName()}
+                                                    </option>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -158,7 +180,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary"><a href="${pageContext.request.contextPath}/UpdateRoom?roomID=${room.getRoomID()}">Update Information</a></button>
+                                        <button type="button" class="btn btn-primary" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'UpdateRoom?roomID=' + ${room.getRoomID()})">Update Information</button>
                                     </div>
                                 </div>
                             </div>
@@ -220,104 +242,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/RoomManagement.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const hotelSelect = document.querySelector("select[name='hotelName']");
-        const roomTypeSelect = document.querySelector("select[name='roomType']");
-        const priceInput = document.getElementById("priceInput");
-        const descriptionTextarea = document.querySelector("textarea");
-        const roomSelect = document.getElementById("roomSelect"); // Dropdown to select a room
-
-        // Transforming sessionScope lists into JavaScript objects
-        const rooms = [
-            <c:forEach var="room" items="${sessionScope.rooms}">
-            { roomID: ${room.getRoomID()}, hotelName: "${room.getHotelName()}", roomTypeName: "${room.getRoomType()}" },
-            </c:forEach>
-        ];
-
-        const hotels = [
-            <c:forEach var="hotel" items="${sessionScope.hotels}">
-            { hotelID: ${hotel.getHotelId()}, name: "${hotel.getName()}" },
-            </c:forEach>
-        ];
-
-        const roomTypes = [
-            <c:forEach var="roomType" items="${sessionScope.roomTypes}">
-            { roomTypeID: ${roomType.getId()}, roomTypeName: "${roomType.getName()}", description: "${roomType.getDescription()}" },
-            </c:forEach>
-        ];
-
-        const prices = [
-            <c:forEach var="price" items="${sessionScope.prices}">
-            { hotelID: ${price.getHotelID()}, roomTypeID: ${price.getRoomTypeID()}, price: ${price.getPrice()} },
-            </c:forEach>
-        ];
-
-        const hotelMapping = {};
-        hotels.forEach(hotel => {
-            hotelMapping[hotel.name] = hotel.hotelID;
-        });
-
-        const roomTypeMapping = {};
-        roomTypes.forEach(roomType => {
-            roomTypeMapping[roomType.roomTypeName] = roomType.roomTypeID;
-        });
-
-        function updatePriceAndDescription() {
-            const selectedHotelName = hotelSelect.value;
-            const selectedRoomTypeName = roomTypeSelect.value;
-
-            const selectedHotelID = hotelMapping[selectedHotelName] || null;
-            const selectedRoomTypeID = roomTypeMapping[selectedRoomTypeName] || null;
-
-            const matchingPrice = prices.find(price =>
-                (!selectedHotelID || price.hotelID === selectedHotelID) &&
-                (!selectedRoomTypeID || price.roomTypeID === selectedRoomTypeID)
-            );
-
-            if (matchingPrice) {
-                priceInput.value = matchingPrice.price;
-                if (selectedRoomTypeID) {
-                    descriptionTextarea.value = roomTypes.find(rt => rt.roomTypeID === selectedRoomTypeID)?.description || "No description available.";
-                }
-            } else {
-                priceInput.value = "";
-                descriptionTextarea.value = "";
-            }
-        }
-
-        function loadRoomDetails() {
-            const selectedRoomID = roomSelect.value;
-            if (selectedRoomID !== "") {
-                const selectedRoom = rooms.find(room => room.roomID === selectedRoomID);
-                if (selectedRoom) {
-                    hotelSelect.value = selectedRoom.hotelName;
-                    roomTypeSelect.value = selectedRoom.roomTypeName;
-                    updatePriceAndDescription();
-                }
-            }
-        }
-
-        console.log("Prices:", prices);
-        console.log("Hotels Mapping:", hotelMapping);
-        console.log("Room Types Mapping:", roomTypeMapping);
-        roomSelect.addEventListener("change", loadRoomDetails);
-        hotelSelect.addEventListener("change", updatePriceAndDescription);
-        roomTypeSelect.addEventListener("change", updatePriceAndDescription);
-
-        // Initialize the first room if available
-        if (rooms.length > 0) {
-            roomSelect.value = rooms[0].roomID;
-            loadRoomDetails();
-        }
-    });
-
-
-
-
-
-
-</script>
+<script src="admin/js/home.js"></script>
 </body>
 </html>

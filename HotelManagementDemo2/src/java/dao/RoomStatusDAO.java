@@ -28,7 +28,7 @@ public class RoomStatusDAO extends DBContext {
     }
 
     public RoomStatus getByStatusName(String statusName) {
-        String sql = "select * from RoomStatus where statusName = ?";
+        String sql = "select * from RoomStatus where RoomstatusName = ?";
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setString(1, statusName);

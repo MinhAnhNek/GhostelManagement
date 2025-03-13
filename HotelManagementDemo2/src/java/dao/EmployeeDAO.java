@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class EmployeeDAO extends DBContext {
 
@@ -38,7 +39,7 @@ public class EmployeeDAO extends DBContext {
                 ));
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("EmployeeDAO getAll: " + e.getMessage());
         }
         return list;
     }
@@ -80,32 +81,69 @@ public class EmployeeDAO extends DBContext {
                 );
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("EmployeeDAO getEmployeeById: " + e.getMessage());
         }
         return null;
     }
 
-    public List<Employee> getEmployeeByType(String type, String value) {
-        String sql =
+    public String convertTypeToColumnName(String type) {
+        if (type.equals("minSalary") || type.equals("maxSalary")) {
+            return "e.salary";
+        }
+        return "e." + type;
+    }
+
+    public List<Employee> getEmployeeByType(Map<String, String> selected) {
+        StringBuilder sql = new StringBuilder(
                 "select e.EmployeeID, " +
-                        "e.Name, " +
-                        "es.StatusName, " +
-                        "er.RoleName, " +
-                        "e.StartDate, " +
-                        "h.Name, " +
-                        "e.Mail, " +
-                        "e.PhoneNum, " +
-                        "e.Address, " +
-                        "e.Salary " +
+                "e.Name, " +
+                "es.StatusName, " +
+                "er.RoleName, " +
+                "e.StartDate, " +
+                "h.Name, " +
+                "e.Mail, " +
+                "e.PhoneNum, " +
+                "e.Address, " +
+                "e.Salary " +
                 "from Employee e " +
                 "left join EmployeeRole er on e.RoleID = er.RoleID " +
                 "left join Hotel h on e.HotelID = h.HotelID " +
                 "left join EmployeeStatus es on e.StatusID = es.StatusID " +
-                "where " + type + " like '%" + value + "%'";
+                "where ");
+        boolean hasSalary = false;
+        boolean appended = false;
+        for (Map.Entry<String, String> entry : selected.entrySet()) {
+            if (entry.getValue() != null && !entry.getValue().isEmpty() ) {
+                System.out.println(entry.getKey() + " = " + entry.getValue());
+                if (entry.getKey().equals("minSalary")) {
+                    sql.append(" e.Salary >= ").append(entry.getValue());
+                    hasSalary = true;
+                } else if (entry.getKey().equals("maxSalary")) {
+                    sql.append("e.Salary <= ").append(entry.getValue());
+                } else {
+                    sql.append(convertTypeToColumnName(entry.getKey())).append(" like '%").append(entry.getValue()).append("%'");
+                }
+                sql.append(" and ");
+                appended = true;
+                System.out.println(appended);
+            }
+        }
+        if (!appended) {
+            return getAll();
+        }
+        String sql2 = sql.substring(0, sql.length() - 4);
         LinkedList<Employee> list = new LinkedList<>();
         try {
-            PreparedStatement pre = connection.prepareStatement(sql);
-            System.out.println(sql);
+            PreparedStatement pre = connection.prepareStatement(sql2);
+            System.out.println(sql2);
+            for (Map.Entry<String, String> entry : selected.entrySet()) {
+                if (entry.getValue() != null && !entry.getValue().isEmpty() ) {
+                    System.out.println(entry.getValue() + " " + entry.getKey() + " ");
+                    if (!hasSalary && entry.getKey().equals("minSalary")) {
+                        break;
+                    }
+                }
+            }
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 list.add(new Employee(
@@ -122,7 +160,7 @@ public class EmployeeDAO extends DBContext {
                 ));
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("EmployeeDAO getEmployeeByType: " + e.getMessage());
         }
         return list;
     }
@@ -140,7 +178,7 @@ public class EmployeeDAO extends DBContext {
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setString(1, e.getName());
             pre.setInt(2, erDAO.getEmployeeRoleIDByName(e.getRole()));
-            System.out.println(e.getRole() + " " + erDAO.getEmployeeRoleIDByName(e.getRole()));
+//            System.out.println(e.getRole() + " " + erDAO.getEmployeeRoleIDByName(e.getRole()));
             pre.setFloat(3, e.getSalary());
             pre.setString(4, e.getStartDate());
             pre.setInt(5, hotelDAO.getHotelIDByName(e.getHotelName()));
@@ -150,7 +188,7 @@ public class EmployeeDAO extends DBContext {
             pre.setString(9, e.getAddress());
             pre.executeUpdate();
         } catch (SQLException ex) {
-            System.out.println("EmployeeDAO: " + ex);
+            System.out.println("EmployeeDAO addNew(): " + ex.getMessage());
         }
     }
 
@@ -169,7 +207,7 @@ public class EmployeeDAO extends DBContext {
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setString(1, e.getName());
             pre.setInt(2, erDAO.getEmployeeRoleIDByName(e.getRole()));
-            System.out.println(e.getRole() + " " + erDAO.getEmployeeRoleIDByName(e.getRole()));
+//            System.out.println(e.getRole() + " " + erDAO.getEmployeeRoleIDByName(e.getRole()));
             pre.setFloat(3, e.getSalary());
             pre.setString(4, e.getStartDate());
             pre.setInt(5, hotelDAO.getHotelIDByName(e.getHotelName()));
@@ -181,7 +219,7 @@ public class EmployeeDAO extends DBContext {
             pre.setInt(10, e.getId());
             pre.executeUpdate();
         } catch (SQLException ex) {
-            System.out.println("EmployeeDAO: " + ex);
+            System.out.println("EmployeeDAO update(): " + ex.getMessage());
         }
     }
 }
