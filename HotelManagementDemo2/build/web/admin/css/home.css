@@ -180,15 +180,15 @@ body {
 
 .status-1 {
     color: var(--status-1);
-    /*text-decoration: var(--status-1);*/
+    text-decoration: var(--status-1);
 }
 .status-2 {
     color: var(--status-2);
-    /*text-decoration: var(--status-2);*/
+    text-decoration: var(--status-2);
 }
 .status-3 {
     color: var(--status-3);
-    /*text-decoration: var(--status-3);*/
+    text-decoration: var(--status-3);
 }
 
 .test {
