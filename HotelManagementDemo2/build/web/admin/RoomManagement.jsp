@@ -157,13 +157,14 @@
                                         </div>
                                         <div class="mb-3 d-flex justify-content-between">
                                             <label class="form-label col-md-4">Room Type</label>
-                                            <select name="roomType" class="form-select" disabled>
-                                                <c:forEach var="roomType" items="${sessionScope.roomTypes}">
-                                                    <option value="${roomType.getId()}" ${fn:contains(roomType.getId(), requestScope.roomTypeID) ? "selected" : ""}>
-                                                            ${roomType.getName()}
-                                                    </option>
-                                                </c:forEach>
-                                            </select>
+<%--                                            <select name="roomType" class="form-select" disabled>--%>
+<%--                                                <c:forEach var="roomType" items="${sessionScope.roomTypes}">--%>
+<%--                                                    <option value="${roomType.getId()}" ${fn:contains(roomType.getId(), requestScope.roomTypeID) ? "selected" : ""}>--%>
+<%--                                                            ${roomType.getName()}--%>
+<%--                                                    </option>--%>
+<%--                                                </c:forEach>--%>
+<%--                                            </select>--%>
+                                            <input type="text" class="form-control" value="${room.getRoomType()}" readonly>
                                         </div>
                                         <div class="mb-3 d-flex justify-content-between">
                                             <label class="form-label col-md-4">Price per Night</label>
