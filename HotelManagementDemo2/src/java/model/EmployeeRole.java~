@@ -1,0 +1,6 @@
+package model;
+
+public class EmployeeRole {
+    private int roleId;
+    private String role
+}

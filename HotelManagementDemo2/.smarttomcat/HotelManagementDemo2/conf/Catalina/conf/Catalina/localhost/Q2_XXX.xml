@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context docBase="D:\SE\K4\PRJ301\PE\FA24_B5\given\given\Q2_XXX\deploy">
+  <Resources cacheMaxSize="10240">
+    <PreResources base="D:/SE/K4/PRJ301/PE/FA24_B5/given/given/Q2_XXX/out/production/Q2_XXX" className="org.apache.catalina.webresources.DirResourceSet" webAppMount="/WEB-INF/classes"/>
+    <PostResources base="C:/Program Files/Apache Software Foundation/Tomcat 10.1/lib/servlet-api.jar" className="org.apache.catalina.webresources.FileResourceSet" webAppMount="/WEB-INF/lib/servlet-api.jar"/>
+    <PostResources base="D:/SE/K4/PRJ301/PE/FA24_B5/given/given/Q2_XXX/allowedlib/jakarta.servlet.jsp.jstl-2.0.0.jar" className="org.apache.catalina.webresources.FileResourceSet" webAppMount="/WEB-INF/lib/jakarta.servlet.jsp.jstl-2.0.0.jar"/>
+  </Resources>
+</Context>

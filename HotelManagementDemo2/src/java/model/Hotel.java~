@@ -1,0 +1,8 @@
+package model;
+
+public class Hotel {
+    private int hotelId;
+    private String name;
+    private String address;
+    
+}
