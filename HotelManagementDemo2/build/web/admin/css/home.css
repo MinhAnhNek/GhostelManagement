@@ -27,8 +27,6 @@ body {
 }
 
 .sidebar {
-    display: block;
-    position: fixed;
     width: 280px;
     min-height: 100vh;
     background: var(--card) !important;
