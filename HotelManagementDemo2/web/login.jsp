@@ -13,18 +13,18 @@
     <div class="auth-container bg-white p-4 rounded-4 shadow-lg">
         <ul class="nav nav-pills mb-4" id="authTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#login" type="button">Login</button>
+                <button class="nav-link ${empty requestScope.toRegister and empty requestScope.toForgotPass ? "active" : ""}" data-bs-toggle="pill" data-bs-target="#login" type="button">Login</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#register" type="button">Register</button>
+                <button class="nav-link ${not empty requestScope.toRegister ? "active" : ""}" data-bs-toggle="pill" data-bs-target="#register" type="button">Register</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#forgot" type="button">Forgot Password</button>
+                <button class="nav-link ${not empty requestScope.toForgotPass ? "active" : ""}" data-bs-toggle="pill" data-bs-target="#forgot" type="button">Forgot Password</button>
             </li>
         </ul>
         <div class="tab-content" id="authTabContent">
-            <div class="tab-pane fade show active" id="login">
-                <form action="login" method="post" class="needs-validation" novalidate>
+            <div class="tab-pane fade ${empty requestScope.toRegister and empty requestScope.toForgotPass ? "show active" : ""}" id="login">
+                <form action="login" method="post" class="needs-validation">
                     <c:set var="invalidAcc" value="${requestScope.wrongAccount}"/>
                     <div class="mb-3">
                         <div class="btn-group w-100 mb-3" role="group">
@@ -35,11 +35,11 @@
                         </div>
                         <div id="emailInput" class="login-input">
                             <input name="user" value="${invalidAcc.getUsername()}" type="email" class="form-control" placeholder="Enter your email" required>
-                            <div class="invalid-feedback">Please enter a valid email</div>
+<%--                            <div class="invalid-feedback">Please enter a valid email</div>--%>
                         </div>
                         <div id="phoneInput" class="login-input d-none">
                             <input name="user" type="tel" class="form-control" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
-                            <div class="invalid-feedback">Please enter a valid phone number</div>
+<%--                            <div class="invalid-feedback">Please enter a valid phone number</div>--%>
                         </div>
                     </div>
                     <div class="mb-3 password-field">
@@ -53,7 +53,9 @@
                     </div>
 
                     <div class="text-center mt-3">
-                        ${requestScope.error ? "<div class=\"alert alert-danger\" role=\"alert\">" + requestScope.error + "</div>" : ""}
+                        <c:if test="${not empty requestScope.warningL}">
+                            <div class="alert alert-warning" role="alert">${requestScope.warningL}</div>
+                        </c:if>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Login</button>
 <%--                    <div class="social-login mt-4">--%>
@@ -62,8 +64,8 @@
 <%--                    </div>--%>
                 </form>
             </div>
-            <div class="tab-pane fade" id="register">
-                <form class="needs-validation" novalidate>
+            <div class="tab-pane fade ${not empty requestScope.toRegister ? "show active" : ""}" id="register">
+                <form class="needs-validation">
                     <div class="mb-3">
                         <input type="text" class="form-control" placeholder="Full Name" required>
                         <div class="invalid-feedback">Please enter your name</div>
@@ -88,15 +90,43 @@
                     <button type="submit" class="btn btn-primary w-100">Register</button>
                 </form>
             </div>
-            <div class="tab-pane fade" id="forgot">
-                <form class="needs-validation" novalidate>
+            <div class="tab-pane fade ${not empty requestScope.toForgotPass ? "show active" : ""}" id="forgot">
+                <form action="${pageContext.request.contextPath}/ForgotPassword" method="post" class="needs-validation">
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Enter your email" required>
-                        <div class="invalid-feedback">Please enter a valid email</div>
+<%--                        <label for="username" class="form-label">Username</label>--%>
+                        <input name="username" value="${requestScope.usernameFG}" id="username" type="email" class="form-control" placeholder="Enter your email" required>
+<%--                        <div class="invalid-feedback">Please enter a valid email</div>--%>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Send Recovery Link</button>
+                    <div class="mb-3">
+<%--                        <label for="phoneNum" class="form-label">Phone Number</label>--%>
+                        <input name="phoneNum" type="tel" value="${requestScope.phoneNumFG}" id="phoneNum" class="form-control" placeholder="Enter your Phone Number" required>
+<%--                        <div class="invalid-feedback">Please enter a valid phone number</div>--%>
+                    </div>
+                    <div class="mb-3">
+<%--                        <label for="id" class="form-label">Your ID</label>--%>
+                        <input name="id" id="id" type="number" value="${requestScope.idFG}" class="form-control" placeholder="Enter your ID" required>
+                    </div>
+                    <div class="mb-3">
+<%--                        <label for="password" class="form-label">New Password</label>--%>
+                        <input name="password" id="password" type="password" class="form-control" placeholder="Enter new password" required>
+<%--                        <div class="invalid-feedback">Password is required</div>--%>
+                    </div>
+                    <div class="mb-3">
+<%--                        <label for="confirm_pass" class="form-label">Confirm New Password</label>--%>
+                        <input name="cfpass" type="password" id="confirm_pass" class="form-control" placeholder="Confirm password" required>
+<%--                        <div class="invalid-feedback">Passwords must match</div>--%>
+                    </div>
+                    <c:if test="${not empty requestScope.warningFG}">
+                        <div class="alert alert-warning" role="alert">${requestScope.warningFG}</div>
+                    </c:if>
+                    <c:if test="${not empty requestScope.confirmFG}">
+                        <div class="alert alert-success">${requestScope.confirmFG}</div>
+                    </c:if>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary w-100">Reset Password</button>
+                    </div>
                     <div class="text-center mt-3">
-                        <a href="#" class="return-link" data-bs-toggle="pill" data-bs-target="#login">Return to Login</a>
+                        <a href="" class="return-link" data-bs-toggle="pill" data-bs-target="#login">Return to Login</a>
                     </div>
                 </form>
             </div>

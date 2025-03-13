@@ -22,18 +22,17 @@ public class AccountDAO extends DBContext {
                 ));
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("AccountDAO.getAll(): " + e.getMessage());
         }
         return list;
     }
 
     public Account getAccount(String user) {
-        String sql = "select * from Account where username = ?";
+        String sql = "select * from Account where username like '%" + user + "%'";
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
-            pre.setString(1, user);
             ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 return new Account(
                         rs.getString(1),
                         rs.getString(2),
@@ -41,13 +40,13 @@ public class AccountDAO extends DBContext {
                 );
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("AccountDAO getAccount(username):" + e.getMessage());
         }
         return null;
     }
 
     public boolean checkLogin(String username, String password) {
-        String sql = "select * from Account where username = ? and password = ?";
+        String sql = "select * from Account where username like '%" + username + "%' and password like '%" + password + "%'";
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setString(1, username);
@@ -58,5 +57,19 @@ public class AccountDAO extends DBContext {
             System.out.println(e);
         }
         return false;
+    }
+
+
+
+    public void updateAccount(Account account) {
+        String sql = "update Account " +
+                "set password = " + account.getPassword() +
+                " where username = '" + account.getUsername() + "'";
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("AccountDAO updateAccount: " + e.getMessage());
+        }
     }
 }

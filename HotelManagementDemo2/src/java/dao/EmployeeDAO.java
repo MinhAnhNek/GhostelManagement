@@ -86,6 +86,46 @@ public class EmployeeDAO extends DBContext {
         return null;
     }
 
+    public Employee getEmployeeByUsername(String username) {
+        StringBuilder sql = new StringBuilder(
+                "select e.EmployeeID, " +
+                        "e.Name, " +
+                        "es.StatusName, " +
+                        "er.RoleName, " +
+                        "e.StartDate, " +
+                        "h.Name, " +
+                        "e.Mail, " +
+                        "e.PhoneNum, " +
+                        "e.Address, " +
+                        "e.Salary " +
+                        "from Employee e " +
+                        "left join EmployeeRole er on e.RoleID = er.RoleID " +
+                        "left join Hotel h on e.HotelID = h.HotelID " +
+                        "left join EmployeeStatus es on e.StatusID = es.StatusID " +
+                        "where e.Mail like '%" + username + "%'");
+        try {
+            PreparedStatement pre = connection.prepareStatement(String.valueOf(sql));
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                return new Employee(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getFloat(10)
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("EmployeeDAO getEmployeeByUsername: " + e.getMessage());
+        }
+        return null;
+    }
+
     public String convertTypeToColumnName(String type) {
         if (type.equals("minSalary") || type.equals("maxSalary")) {
             return "e.salary";
@@ -93,7 +133,7 @@ public class EmployeeDAO extends DBContext {
         return "e." + type;
     }
 
-    public List<Employee> getEmployeeByType(Map<String, String> selected) {
+    public List<Employee> getEmployeesByTypes(Map<String, String> selected) {
         StringBuilder sql = new StringBuilder(
                 "select e.EmployeeID, " +
                 "e.Name, " +
@@ -160,7 +200,7 @@ public class EmployeeDAO extends DBContext {
                 ));
             }
         } catch (SQLException e) {
-            System.out.println("EmployeeDAO getEmployeeByType: " + e.getMessage());
+            System.out.println("EmployeeDAO getEmployeesByTypes: " + e.getMessage());
         }
         return list;
     }

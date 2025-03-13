@@ -25,6 +25,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
@@ -48,9 +49,10 @@ public class Login extends HttpServlet {
             }
             response.sendRedirect("employee");
         } else {
-            request.setAttribute("error", "Invalid Username or Password");
+            request.setAttribute("warningL", "Invalid Username or Password");
             request.setAttribute("wrongAccount", new Account(username, password));
-            response.sendRedirect("login.jsp");
+//            response.sendRedirect("login.jsp");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 

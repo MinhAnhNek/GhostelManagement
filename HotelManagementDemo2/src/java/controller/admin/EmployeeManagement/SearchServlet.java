@@ -42,7 +42,7 @@ public class SearchServlet extends HttpServlet {
         }
 
         EmployeeDAO employeeDAO = new EmployeeDAO();
-        session.setAttribute("employees", employeeDAO.getEmployeeByType(selected));
+        session.setAttribute("employees", employeeDAO.getEmployeesByTypes(selected));
 
         request.getRequestDispatcher("admin/home.jsp").forward(request, response);
 //        response.sendRedirect("admin/home.jsp");
