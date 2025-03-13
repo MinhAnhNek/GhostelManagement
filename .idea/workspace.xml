@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="7bc5be4d-9701-4106-aad6-3150c651d149" name="Changes" comment="" />
+    <list default="true" id="2edf0b1a-89a1-4bd3-b0bb-7428105d7b47" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,10 +12,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
-  <component name="ProjectId" id="2u5WDVLIcgbgZuQLBAlW76Z0jCc" />
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MinhAnhNek&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MinhAnhNek/GhostelManagement.git&quot;,
+    &quot;accountId&quot;: &quot;f305d64b-c177-48eb-8f3b-259817c94405&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2uGD5XaPwdnepQvAWgp4tgvWK9y" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -26,12 +37,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "PRJ301__Assignment",
     "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "com.poratu.idea.plugins.tomcat.setting.TomcatServersConfigurable",
     "vue.rearranger.settings.migration": "true"
@@ -48,12 +55,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7bc5be4d-9701-4106-aad6-3150c651d149" name="Changes" comment="" />
-      <created>1741538795814</created>
+      <changelist id="2edf0b1a-89a1-4bd3-b0bb-7428105d7b47" name="Changes" comment="" />
+      <created>1741865834920</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1741538795814</updated>
-      <workItem from="1741538796925" duration="580000" />
+      <updated>1741865834920</updated>
+      <workItem from="1741865836150" duration="166000" />
+      <workItem from="1741866068299" duration="17000" />
     </task>
     <servers />
   </component>

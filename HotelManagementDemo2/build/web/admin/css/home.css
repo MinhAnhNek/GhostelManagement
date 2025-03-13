@@ -13,6 +13,11 @@
 
     --radius: 0.5rem;
     --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+
+    --status-1: #0a8c6d;
+    --status-2: #de0101;
+    --status-3: #d2b800;
+
 }
 
 body {
@@ -22,7 +27,6 @@ body {
 }
 
 .sidebar {
-    /*position: fixed;*/
     width: 280px;
     min-height: 100vh;
     background: var(--card) !important;
@@ -56,6 +60,7 @@ body {
 
 .main-content {
     background-color: var(--secondary);
+    display: block;
 }
 
 .search {
@@ -127,10 +132,10 @@ body {
     max-width: 80vw;
     max-height: 90vh;
 }
-/*.modal {*/
-/*    --bs-modal-width: 80vw;*/
-/*    --bs-modal-height: 90vh;*/
-/*}*/
+.modal {
+    --bs-modal-width: 80vw;
+    --bs-modal-height: 90vh;
+}
 
 .modal-content {
     background: var(--card);
@@ -171,6 +176,23 @@ body {
 
 .show-up {
     display: block;
+}
+
+.status-1 {
+    color: var(--status-1);
+    text-decoration: var(--status-1);
+}
+.status-2 {
+    color: var(--status-2);
+    text-decoration: var(--status-2);
+}
+.status-3 {
+    color: var(--status-3);
+    text-decoration: var(--status-3);
+}
+
+.test {
+    color: var(--primary);
 }
 
 @media (max-width: 768px) {

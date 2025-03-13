@@ -201,14 +201,7 @@
                                                                         <select class="form-select" name="role">
                                                                             <option value="">Choose...</option>
                                                                             <c:forEach var="role" items="${sessionScope.roles}">
-                                                                                <c:choose>
-                                                                                    <c:when test="${employee.getRole().equals(role.getRoleName())}">
-                                                                                        <option value="${role.getRoleName()}" selected="selected">${role.getRoleName()}</option>
-                                                                                    </c:when>
-                                                                                    <c:otherwise>
-                                                                                        <option value="${role.getRoleName()}">${role.getRoleName()}</option>
-                                                                                    </c:otherwise>
-                                                                                </c:choose>
+                                                                                <option value="${role.getRoleId()}" ${fn:contains(role.getRoleName(), employee.getRole()) ? "selected" : ""}>${role.getRoleName()}</option>
                                                                             </c:forEach>
                                                                         </select>
                                                                     </div>
@@ -217,14 +210,7 @@
                                                                         <select name="hotelName" class="form-select">
                                                                             <option value="">Choose...</option>
                                                                             <c:forEach var="hotel" items="${sessionScope.hotels}">
-                                                                                <c:choose>
-                                                                                    <c:when test="${employee.getHotelName() eq (hotel.getName())}">
-                                                                                        <option value="${hotel.getName()}" selected="selected">${hotel.getName()}</option>
-                                                                                    </c:when>
-                                                                                    <c:otherwise>
-                                                                                        <option value="${hotel.getName()}">${hotel.getName()}</option>
-                                                                                    </c:otherwise>
-                                                                                </c:choose>
+                                                                                <option value="${hotel.getHotelId()}" ${fn:contains(hotel.getName(), employee.getHotelName()) ? "selected" : ""}> ${hotel.getName()}</option>
                                                                             </c:forEach>
                                                                         </select>
                                                                     </div>
@@ -234,14 +220,7 @@
                                                                         <label class="form-label">Status</label>
                                                                         <select name="status" class="form-select">
                                                                             <c:forEach var="status" items="${sessionScope.employeeStatuses}">
-                                                                                <c:choose>
-                                                                                    <c:when test="${employee.getStatus() eq (status.getName())}">
-                                                                                        <option value="${status.getName()}" selected="selected">${status.getName()}</option>
-                                                                                    </c:when>
-                                                                                    <c:otherwise>
-                                                                                        <option value="${status.getName()}">${status.getName()}</option>
-                                                                                    </c:otherwise>
-                                                                                </c:choose>
+                                                                                <option value="${status.getId()}" ${fn:contains(status.getName(), employee.getStatus()) ? "selected" : ""}>${status.getName()}</option>
                                                                             </c:forEach>
                                                                         </select>
                                                                     </div>
