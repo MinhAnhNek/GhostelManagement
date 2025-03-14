@@ -17,7 +17,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Employee;
 import model.FilterType;
+import model.Room;
 import model.RoomStatus;
 
 /**
@@ -49,8 +51,12 @@ public class RoomServlet extends HttpServlet {
             selected.put(filterType, request.getParameter(filterType));
             request.setAttribute(filterType, request.getParameter(filterType));
         }
-        session.setAttribute("rooms", roomDAO.getRoomsByTypes(selected));
+        String type = request.getParameter("type");
+        LinkedList<Room> list = (LinkedList<Room>) roomDAO.getRoomsByTypes(selected, type == null ? "" : type);
 
+//        response.sendRedirect("admin/home.jsp");
+        request.setAttribute("type", type);
+        session.setAttribute("rooms", list);
 
 //        response.sendRedirect("admin/RoomManagement.jsp");
         request.getRequestDispatcher("admin/RoomManagement.jsp").forward(request, response);

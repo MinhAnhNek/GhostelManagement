@@ -113,8 +113,24 @@
                                                 <option value="" ${empty requestScope.roomStatusID ? "selected" : ""}>Select all Status</option>
                                             </select>
                                         </div>
+                                        <div class="col-md-3 form-group">
+                                            <label for="capacity">Capacity</label>
+                                            <input type="number" name="capacity" id="capacity" class="form-control" placeholder="Capacity" value="${requestScope.capacity}">
+                                        </div>
+
                                     </div>
                                     <div class="buttons">
+                                        <select name="type" class="form-select" style="width: 25%" id="type">
+                                            <option value="roomNumber" ${fn:contains(requestScope.type, "roomNumber") ? 'selected' : ''}>Sort by Room Number Ascending</option>
+                                            <option value="roomNumber desc" ${fn:contains(requestScope.type, "roomNumber desc") ? 'selected' : ''}>Sort by Room Number Descending</option>
+                                            <option value="price" ${fn:contains(requestScope.type, "price") ? 'selected' : ''}>Sort by Price Ascending</option>
+                                            <option value="price desc" ${fn:contains(requestScope.type, "price desc") ? 'selected' : ''}>Sort by Price Descending</option>
+                                            <option value="roomType" ${fn:contains(requestScope.type, "roomType") ? 'selected' : ''}>Sort by Room Type Ascending</option>
+                                            <option value="roomType desc" ${fn:contains(requestScope.type, "roomType desc") ? 'selected' : ''}>Sort by Room Type Descending</option>
+                                            <option value="" ${empty requestScope.type ? 'selected' : ''}>Sort by Room ID</option>
+                                            <option value="capacity" ${fn:contains(requestScope.type, "capacity") ? 'selected' : ''}>Sort by Capacity Ascending</option>
+                                            <option value="capacity desc" ${fn:contains(requestScope.type, "capacity desc") ? 'selected' : ''}>Sort by Capacity Descending</option>
+                                        </select>
                                         <button class="btn btn-secondary" type="button" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'RoomManagement')">Reset all Filters</button>
                                         <button class="btn btn-primary" type="submit" id="filterButton">Filter</button>
                                     </div>
@@ -131,10 +147,11 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body">
-                            <h5 class="card-title">${room.getHotelName()}</h5>
-                            <div class="mb-2"><strong>Room:</strong> ${room.getRoomNumber()}</div>
+                            <h5 class="card-title">${room.getHotelName()} - ${room.getRoomNumber()}</h5>
+                            <div class="mb-2"><strong>Room ID:</strong> ${room.getRoomID()}</div>
                             <div class="mb-2"><strong>Type:</strong> ${room.getRoomType()}</div>
                             <div class="mb-2"><strong>Price:</strong> $${room.getPrice()}/night</div>
+                            <div class="mb-2"><strong>Capacity:</strong> ${room.getCapacity()} persons</div>
                             <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewRoomModal${room.getRoomID()}">View Details</button>
                         </div>
 
@@ -173,6 +190,10 @@
                                         <div class="mb-3 d-flex justify-content-between">
                                             <label class="form-label col-md-4">Room Status</label>
                                             <input type="text" class="form-control" value="${room.getRoomStatus()}" readonly>
+                                        </div>
+                                        <div class="mb-3 d-flex justify-content-between">
+                                            <label class="form-label col-md-4">Capacity</label>
+                                            <input type="number" name="capacity" class="form-control" placeholder="Capacity" value="${room.getCapacity()}">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>

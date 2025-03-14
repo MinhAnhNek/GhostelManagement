@@ -6,7 +6,9 @@
 package controller.admin.EmployeeManagement;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import dao.EmployeeDAO;
@@ -18,6 +20,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Employee;
 import model.FilterType;
 
 /**
@@ -37,8 +40,7 @@ public class EmployeeServlet extends HttpServlet {
         session.setAttribute("hotels", hotelDAO.getAll());
 
         EmployeeDAO employeeDAO = new EmployeeDAO();
-        String type = request.getParameter("type");
-        session.setAttribute("employees", employeeDAO.getAll());
+        session.setAttribute("employees", employeeDAO.getAll(""));
 //        }
         request.getRequestDispatcher("admin/home.jsp").forward(request, response);
 //        response.sendRedirect("admin/home.jsp");
@@ -49,6 +51,7 @@ public class EmployeeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+
     }
 
 

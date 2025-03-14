@@ -14,13 +14,17 @@ public class EmployeeDAO extends DBContext {
     // ===============================      READ FROM DATABASE     ===============================
     // Read information of Employees from database
 
-    public List<Employee> getAll() {
+    public List<Employee> getAll(String sortType) {
         LinkedList<Employee> list = new LinkedList<>();
         String sql ="select e.EmployeeID, e.Name, es.StatusName, er.RoleName, e.StartDate, h.Name, e.Mail, e.PhoneNum, e.Address, e.Salary " +
                 "from Employee e " +
                 "left join EmployeeRole er on e.RoleID = er.RoleID " +
                 "left join Hotel h on e.HotelID = h.HotelID " +
-                "left join EmployeeStatus es on e.StatusID = es.StatusID";
+                "left join EmployeeStatus es on e.StatusID = es.StatusID ";
+        if (!sortType.isEmpty()) {
+            sql += "order by " + convertTypeToColumnName(sortType) + " ";
+            System.out.println(sql);
+        }
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
@@ -133,7 +137,7 @@ public class EmployeeDAO extends DBContext {
         return "e." + type;
     }
 
-    public List<Employee> getEmployeesByTypes(Map<String, String> selected) {
+    public List<Employee> getEmployeesByTypes(Map<String, String> selected, String sortType) {
         StringBuilder sql = new StringBuilder(
                 "select e.EmployeeID, " +
                 "e.Name, " +
@@ -169,9 +173,12 @@ public class EmployeeDAO extends DBContext {
             }
         }
         if (!appended) {
-            return getAll();
+            return getAll(sortType);
         }
         String sql2 = sql.substring(0, sql.length() - 4);
+        if (!sortType.isEmpty()) {
+            sql2 += " order by " + convertTypeToColumnName(sortType);
+        }
         LinkedList<Employee> list = new LinkedList<>();
         try {
             PreparedStatement pre = connection.prepareStatement(sql2);

@@ -116,6 +116,15 @@
                             </div>
                         </div>
                         <div class="buttons">
+                            <select name="type" class="form-select" style="width: 25%" id="type">
+                                <option value="name" ${fn:contains(requestScope.type, "name") ? 'selected' : ''}>Sort by Name Ascending</option>
+                                <option value="name desc" ${fn:contains(requestScope.type, "name desc") ? 'selected' : ''}>Sort by Name Descending</option>
+                                <option value="salary" ${fn:contains(requestScope.type, "salary") ? 'selected' : ''}>Sort by Salary Ascending</option>
+                                <option value="salary desc" ${fn:contains(requestScope.type, "salary desc") ? 'selected' : ''}>Sort by Salary Descending</option>
+                                <option value="startDate" ${fn:contains(requestScope.type, "startDate") ? 'selected' : ''}>Sort by Start Date Ascending</option>
+                                <option value="startDate desc" ${fn:contains(requestScope.type, "startDate desc") ? 'selected' : ''}>Sort by Start Date Descending</option>
+                                <option value="" ${empty requestScope.type ? 'selected' : ''}>Sort by Employee ID</option>
+                            </select>
                             <button class="btn btn-secondary" type="button" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'SearchRoom')">Reset all Filters</button>
                             <button class="btn btn-primary" type="submit" id="filterButton">Filter</button>
                         </div>

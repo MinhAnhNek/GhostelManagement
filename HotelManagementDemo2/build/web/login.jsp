@@ -34,11 +34,11 @@
                             <label class="btn btn-outline-primary" for="phoneLogin">Phone</label>
                         </div>
                         <div id="emailInput" class="login-input">
-                            <input name="user" value="${invalidAcc.getUsername()}" type="email" class="form-control" placeholder="Enter your email" required>
+                            <input name="user" value="${invalidAcc.getUsername()}" type="email" class="form-control" placeholder="Enter your email" >
 <%--                            <div class="invalid-feedback">Please enter a valid email</div>--%>
                         </div>
                         <div id="phoneInput" class="login-input d-none">
-                            <input name="user" type="tel" class="form-control" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
+                            <input name="phone" type="tel" class="form-control" placeholder="Enter your phone number" pattern="[0-9]{10}" >
 <%--                            <div class="invalid-feedback">Please enter a valid phone number</div>--%>
                         </div>
                     </div>

@@ -46,7 +46,8 @@ public class AccountDAO extends DBContext {
     }
 
     public boolean checkLogin(String username, String password) {
-        String sql = "select * from Account where username like '%" + username + "%' and password like '%" + password + "%'";
+        String sql = "select * from Account " +
+                "where username = ? and password = ?";
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setString(1, username);

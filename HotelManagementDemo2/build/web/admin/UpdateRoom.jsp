@@ -70,7 +70,7 @@
                     <label class="form-label col-md-4">Room Type</label>
                     <select name="roomType" class="form-select" >
                         <c:forEach var="roomType" items="${sessionScope.roomTypes}">
-                            <option value="${roomType.getId()}" ${fn:contains(roomType.getId(), requestScope.roomTypeID)}>${item}</option>
+                            <option value="${roomType.getId()}" ${fn:contains(roomType.getId(), requestScope.roomTypeID)}>${roomType.getName()}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -83,10 +83,14 @@
                     <select name="roomStatusID" class="form-select">
                         <c:forEach var="roomStatus" items="${sessionScope.roomStatuses}">
                             <option value="${roomStatus.getStatusID()} ${fn:contains(roomStatus.getStatusID(), requestScope.roomStatusID) ? "selected" : ""}">
-                                ${roomStatus.getName()}
+                                    ${roomStatus.getStatusName()}
                             </option>
                         </c:forEach>
                     </select>
+                </div>
+                <div class="mb-3 d-flex justify-content-between">
+                    <label class="form-label col-md-4">Capacity</label>
+                    <input name="capacity" type="number" class="form-control" value="${room.getCapacity()}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Description</label>

@@ -32,13 +32,22 @@ public class UpdateRoom extends HttpServlet {
         RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
         RoomStatusDAO roomStatusDAO = new RoomStatusDAO();
 
-        String roomID = request.getParameter("roomID");
-        Room room =  roomDAO.getByID(Integer.parseInt(roomID));
+        session.setAttribute("hotels", hotelDAO.getAll());
+        session.setAttribute("roomTypes", roomTypeDAO.getAll());
+        session.setAttribute("roomStatus", roomStatusDAO.getAll());
 
+        String roomID = request.getParameter("roomID");
+        if (roomID == null) {
+            response.sendRedirect("RoomManagement");
+        }
+        Room room = roomDAO.getByID(Integer.parseInt(roomID));
+
+        // when user change room type option,
+        // automatically redirect to this servlet to preview new information if changed
         String roomType = request.getParameter("roomType");
         if (roomType != null) {
             int hotelID = hotelDAO.getHotelIDByName(room.getHotelName());
-            int roomTypeID = roomTypeDAO.getRoomTypeIDByName(roomType);
+            int roomTypeID = Integer.parseInt(roomType);
             room.setRoomType(roomType);
             room.setDescription(roomTypeDAO.getById(roomTypeID).getDescription());
             room.setPrice(priceDAO.get(hotelID, roomTypeID).getPrice());
@@ -56,11 +65,12 @@ public class UpdateRoom extends HttpServlet {
         String roomID = request.getParameter("roomID");
         String roomTypeID = request.getParameter("roomTypeID");
         String roomStatusID = request.getParameter("roomStatusID");
+        String capacity = request.getParameter("capacity");
 
         RoomDAO roomDAO = new RoomDAO();
 
         HttpSession session = request.getSession();
-        session.setAttribute("updated", roomDAO.update(roomID, roomTypeID, roomStatusID));
+        session.setAttribute("updated", roomDAO.update(roomID, roomTypeID, roomStatusID, capacity));
 
         response.sendRedirect("RoomManagement");
 

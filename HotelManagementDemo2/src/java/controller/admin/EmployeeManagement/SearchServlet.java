@@ -3,6 +3,7 @@
 package controller.admin.EmployeeManagement;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -39,14 +40,16 @@ public class SearchServlet extends HttpServlet {
         }
 
         EmployeeDAO employeeDAO = new EmployeeDAO();
-        session.setAttribute("employees", employeeDAO.getEmployeesByTypes(selected));
+        String type = request.getParameter("type");
+        LinkedList<Employee> list = (LinkedList<Employee>) employeeDAO.getEmployeesByTypes(selected, type);
 
-        request.getRequestDispatcher("admin/home.jsp").forward(request, response);
 //        response.sendRedirect("admin/home.jsp");
+        request.setAttribute("type", type);
+        session.setAttribute("employees", list);
+        request.getRequestDispatcher("admin/home.jsp").forward(request, response);
     }
 
 
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
