@@ -48,11 +48,22 @@
         <div class="mb-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2 class="col-md-10">Room Management</h2>
-                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#addRoomModal">
-                    <i class="bi bi-plus-circle me-2"></i>Add New Room
+                <button class="btn btn-outline-primary" type="button" onclick="showButtons()">Add New</button>
+            </div>
+            <div id="buttonBar" class="d-flex justify-content-end align-items-center d-none">
+                <button class="btn btn-primary w-100" style="margin-right: 2rem" data-bs-toggle="modal" data-bs-target="#addRoomModal">
+                    <i class="bi bi-plus-circle me-2"></i>Add Room
+                </button>
+                <button class="btn btn-primary w-100" style="margin: 2rem 0" data-bs-toggle="modal" data-bs-target="#addRoomTypeModal">
+                    <i class="bi bi-plus-circle me-2"></i>Add Room Type
+                </button>
+                <button class="btn btn-primary w-100" style="margin-left: 2rem" data-bs-toggle="modal" data-bs-target="#addHotelModal">
+                    <i class="bi bi-pencil me-2"></i>Add Hotel
                 </button>
             </div>
+
         </div>
+
         <div class="container-fluid py-4">
             <div class="row mb-4">
                 <div class="col-12">

@@ -19,3 +19,12 @@ function redirectToSearchServlet(contextPath, servletName) {
     // confirm("go to path " + contextPath + "/" + servletName + "?");
     window.location.href = contextPath + "/" + servletName;
 }
+
+function showButtons() {
+    let buttons = document.getElementById("buttonBar");
+    if (buttons.classList.contains("d-none")) {
+        buttons.classList.remove("d-none");
+    } else {
+        buttons.classList.add("d-none");
+    }
+}

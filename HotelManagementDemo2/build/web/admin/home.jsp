@@ -152,10 +152,15 @@
                                 <c:forEach var="employee" items="${employees}">
                                     <tr>
                                         <td>${employee.getId()}</td>
-                                        <td>
+                                        <c:forEach var="eStatus" items="${sessionScope.employeeStatuses}">
+                                            <c:if test="${eStatus.getName() eq employee.getStatus()}">
+                                                <td class="status-${eStatus.getId()}">${employee.getStatus()}</td>
+                                            </c:if>
+                                        </c:forEach>
+<%--                                        <td>--%>
         <%--                                        <img src="https://images.unsplash.com/photo-1557862921-37829c790f19" class="employee-avatar me-2" alt="Employee">--%>
-                                            ${employee.getName()}
-                                        </td>
+<%--                                            ${employee.getName()}--%>
+<%--                                        </td>--%>
                                         <td>${employee.getRole()}</td>
                                         <td>${employee.getHotelName()}</td>
                                         <td>${employee.getMail()}</td>
