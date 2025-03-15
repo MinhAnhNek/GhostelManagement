@@ -42,8 +42,11 @@ public class EmployeeServlet extends HttpServlet {
         if (id != null) {
             LinkedList<Attendance> list = (LinkedList<Attendance>)  attendanceDAO.getByEmployeeID(Integer.parseInt(id));
             System.out.println(list.isEmpty());
+            PayrollDAO pDAO = new PayrollDAO();
             session.setAttribute("attendance", list);
             session.setAttribute("emp", employeeDAO.getEmployeeById(Integer.parseInt(id)));
+            String month = request.getParameter("month");
+            session.setAttribute("payroll", pDAO.getByEmpIDAndMonth(Integer.parseInt(id), month == null ? "" : month));
             request.getRequestDispatcher("admin/EmployeeDetails.jsp").forward(request, response);
             return;
         }
@@ -75,7 +78,7 @@ public class EmployeeServlet extends HttpServlet {
             session.setAttribute("employees", Employee.getPage(Integer.parseInt(pageNo), list));
             request.setAttribute("pageNo", Integer.parseInt(pageNo));
         }
-        request.getRequestDispatcher("admin/home.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/EmployeeDashboard.jsp").forward(request, response);
     }
 
 

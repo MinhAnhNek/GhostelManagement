@@ -50,9 +50,9 @@ public class SearchServlet extends HttpServlet {
 //            session.setAttribute("employees", Employee.getPage(Integer.parseInt(pageNo), list));
 //            request.setAttribute("pageNo", Integer.parseInt(pageNo));
 //        }
-////        response.sendRedirect("admin/home.jsp");
+////        response.sendRedirect("admin/EmployeeDashboard.jsp");
 //        request.setAttribute("type", type);
-//        request.getRequestDispatcher("admin/home.jsp").forward(request, response);
+//        request.getRequestDispatcher("admin/EmployeeDashboard.jsp").forward(request, response);
     }
 
 

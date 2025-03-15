@@ -49,7 +49,7 @@ public class RoomServlet extends HttpServlet {
         String sortType = request.getParameter("sortType");
         LinkedList<Room> list = (LinkedList<Room>) roomDAO.getRoomsByTypes(selected, sortType == null ? "" : sortType);
 
-//        response.sendRedirect("admin/home.jsp");
+//        response.sendRedirect("admin/EmployeeDashboard.jsp");
         request.setAttribute("sortType", sortType);
         session.setAttribute("rooms", list);
 

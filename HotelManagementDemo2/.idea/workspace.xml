@@ -4,26 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="delete redundant comment and variables">
+    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="use admin servlet to manage searching employees instead of SearchServlet">
+      <change afterPath="$PROJECT_DIR$/src/java/model/Payroll.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/SearchServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/SearchServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeDetails.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/RoomManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/RoomManagement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/UpdateRoom.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/UpdateRoom.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/js/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/HotelManagementDemo2.war" beforeDir="false" afterPath="$PROJECT_DIR$/dist/HotelManagementDemo2.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/SearchServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/SearchServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/PayrollDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/PayrollDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/Employee.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/SearchServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/SearchServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/PayrollDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/PayrollDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/RoomManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/RoomManagement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/UpdateRoom.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/UpdateRoom.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/js/home.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +189,7 @@
       <workItem from="1742010094232" duration="9401000" />
       <workItem from="1742021939063" duration="585000" />
       <workItem from="1742025896153" duration="8979000" />
-      <workItem from="1742035151139" duration="6814000" />
+      <workItem from="1742035151139" duration="13557000" />
     </task>
     <task id="LOCAL-00001" summary="fix css">
       <option name="closed" value="true" />
@@ -312,7 +303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742039338096</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="use admin servlet to manage searching employees instead of SearchServlet">
+      <option name="closed" value="true" />
+      <created>1742042045477</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1742042045477</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,7 +324,8 @@
     <MESSAGE value="add form for adding new room type" />
     <MESSAGE value="pagination" />
     <MESSAGE value="delete redundant comment and variables" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete redundant comment and variables" />
+    <MESSAGE value="use admin servlet to manage searching employees instead of SearchServlet" />
+    <option name="LAST_COMMIT_MESSAGE" value="use admin servlet to manage searching employees instead of SearchServlet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
