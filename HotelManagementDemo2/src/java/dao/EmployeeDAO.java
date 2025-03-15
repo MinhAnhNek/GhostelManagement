@@ -16,13 +16,15 @@ public class EmployeeDAO extends DBContext {
 
     public List<Employee> getAll(String sortType) {
         LinkedList<Employee> list = new LinkedList<>();
-        String sql ="select e.EmployeeID, e.Name, es.StatusName, er.RoleName, e.StartDate, h.Name, e.Mail, e.PhoneNum, e.Address, e.Salary " +
+        String sql ="select e.EmployeeID, e.Name, es.StatusName, er.RoleName, e.StartDate, h.Name, e.Mail, e.PhoneNum, e.Address, p.base_salary " +
                 "from Employee e " +
                 "left join EmployeeRole er on e.RoleID = er.RoleID " +
                 "left join Hotel h on e.HotelID = h.HotelID " +
-                "left join EmployeeStatus es on e.StatusID = es.StatusID ";
+                "left join EmployeeStatus es on e.StatusID = es.StatusID " +
+                "left join payroll p on e.EmployeeID = p.EmployeeID " +
+                "where month(getDate()) = p.salary_month ";
         if (!sortType.isEmpty()) {
-            sql += "order by " + convertTypeToColumnName(sortType) + " ";
+            sql += " order by " + convertTypeToColumnName(sortType) + " ";
             System.out.println(sql);
         }
         try {
@@ -49,12 +51,14 @@ public class EmployeeDAO extends DBContext {
     }
 
     public Employee getEmployeeById(int id) {
-        String sql = "select e.EmployeeID, e.Name, es.StatusName, er.RoleName, e.StartDate, h.Name, e.Mail, e.PhoneNum, e.Address, e.Salary " +
+        String sql ="select e.EmployeeID, e.Name, es.StatusName, er.RoleName, e.StartDate, h.Name, e.Mail, e.PhoneNum, e.Address, p.base_salary " +
                 "from Employee e " +
                 "left join EmployeeRole er on e.RoleID = er.RoleID " +
                 "left join Hotel h on e.HotelID = h.HotelID " +
                 "left join EmployeeStatus es on e.StatusID = es.StatusID " +
-                "where e.EmployeeID = ?";
+                "left join payroll p on e.EmployeeID = p.EmployeeID " +
+                "where month(getDate()) = p.salary_month " +
+                "and e.EmployeeID = ?";
 
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
@@ -92,21 +96,15 @@ public class EmployeeDAO extends DBContext {
 
     public Employee getEmployeeByUsername(String username) {
         StringBuilder sql = new StringBuilder(
-                "select e.EmployeeID, " +
-                        "e.Name, " +
-                        "es.StatusName, " +
-                        "er.RoleName, " +
-                        "e.StartDate, " +
-                        "h.Name, " +
-                        "e.Mail, " +
-                        "e.PhoneNum, " +
-                        "e.Address, " +
-                        "e.Salary " +
-                        "from Employee e " +
-                        "left join EmployeeRole er on e.RoleID = er.RoleID " +
-                        "left join Hotel h on e.HotelID = h.HotelID " +
-                        "left join EmployeeStatus es on e.StatusID = es.StatusID " +
-                        "where e.Mail like '%" + username + "%'");
+                "select e.EmployeeID, e.Name, es.StatusName, er.RoleName, e.StartDate, h.Name, e.Mail, e.PhoneNum, e.Address, p.base_salary " +
+                "from Employee e " +
+                "left join EmployeeRole er on e.RoleID = er.RoleID " +
+                "left join Hotel h on e.HotelID = h.HotelID " +
+                "left join EmployeeStatus es on e.StatusID = es.StatusID " +
+                "left join payroll p on e.EmployeeID = p.EmployeeID " +
+                "where month(getDate()) = p.salary_month " +
+                "and e.Mail like '%" + username + "%'"
+        );
         try {
             PreparedStatement pre = connection.prepareStatement(String.valueOf(sql));
             ResultSet rs = pre.executeQuery();
@@ -131,39 +129,36 @@ public class EmployeeDAO extends DBContext {
     }
 
     public String convertTypeToColumnName(String type) {
-        if (type.equals("minSalary") || type.equals("maxSalary")) {
-            return "e.salary";
-        }
-        return "e." + type;
+//        if (type.equals("minSalary") || type.equals("maxSalary")) {
+//            return "e.salary";
+//        }
+//        return "e." + type;
+        return switch (type) {
+            case "minSalary", "maxSalary" -> "p.base_salary";
+            default -> "e." + type;
+        };
     }
 
     public List<Employee> getEmployeesByTypes(Map<String, String> selected, String sortType) {
         StringBuilder sql = new StringBuilder(
-                "select e.EmployeeID, " +
-                "e.Name, " +
-                "es.StatusName, " +
-                "er.RoleName, " +
-                "e.StartDate, " +
-                "h.Name, " +
-                "e.Mail, " +
-                "e.PhoneNum, " +
-                "e.Address, " +
-                "e.Salary " +
-                "from Employee e " +
-                "left join EmployeeRole er on e.RoleID = er.RoleID " +
-                "left join Hotel h on e.HotelID = h.HotelID " +
-                "left join EmployeeStatus es on e.StatusID = es.StatusID " +
-                "where ");
+                "select e.EmployeeID, e.Name, es.StatusName, er.RoleName, e.StartDate, h.Name, e.Mail, e.PhoneNum, e.Address, p.base_salary " +
+                        "from Employee e " +
+                        "left join EmployeeRole er on e.RoleID = er.RoleID " +
+                        "left join Hotel h on e.HotelID = h.HotelID " +
+                        "left join EmployeeStatus es on e.StatusID = es.StatusID " +
+                        "left join payroll p on e.EmployeeID = p.EmployeeID " +
+                        "where month(getDate()) = p.salary_month " +
+                        "and ");
         boolean hasSalary = false;
         boolean appended = false;
         for (Map.Entry<String, String> entry : selected.entrySet()) {
             if (entry.getValue() != null && !entry.getValue().isEmpty() ) {
                 System.out.println(entry.getKey() + " = " + entry.getValue());
                 if (entry.getKey().equals("minSalary")) {
-                    sql.append(" e.Salary >= ").append(entry.getValue());
+                    sql.append(convertTypeToColumnName(entry.getKey())).append(" >= ").append(entry.getValue());
                     hasSalary = true;
                 } else if (entry.getKey().equals("maxSalary")) {
-                    sql.append("e.Salary <= ").append(entry.getValue());
+                    sql.append(convertTypeToColumnName(entry.getKey())).append(" <= ").append(entry.getValue());
                 } else {
                     sql.append(convertTypeToColumnName(entry.getKey())).append(" like '%").append(entry.getValue()).append("%'");
                 }
@@ -216,8 +211,8 @@ public class EmployeeDAO extends DBContext {
     // ===============================      ADD NEW EMPLOYEE    ===============================
 
     public void addNew(Employee e) {
-        String sql = "insert into Employee(Name, RoleID, Salary, StartDate, HotelID, Mail, PhoneNum, StatusID, Address) " +
-                "values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "insert into Employee(Name, RoleID, StartDate, HotelID, Mail, PhoneNum, StatusID, Address) " +
+                "values (?, ?, ?, ?, ?, ?, ?, ?);";
         try {
             EmployeeRoleDAO erDAO = new EmployeeRoleDAO();
             HotelDAO hotelDAO = new HotelDAO();
@@ -226,14 +221,15 @@ public class EmployeeDAO extends DBContext {
             pre.setString(1, e.getName());
             pre.setInt(2, erDAO.getEmployeeRoleIDByName(e.getRole()));
 //            System.out.println(e.getRole() + " " + erDAO.getEmployeeRoleIDByName(e.getRole()));
-            pre.setFloat(3, e.getSalary());
-            pre.setString(4, e.getStartDate());
-            pre.setInt(5, hotelDAO.getHotelIDByName(e.getHotelName()));
-            pre.setString(6, e.getMail());
-            pre.setString(7, e.getPhoneNum());
-            pre.setInt(8, esDAO.getEmployeeStatusByName(e.getStatus()));
-            pre.setString(9, e.getAddress());
+//            pre.setFloat(3, e.getSalary());
+            pre.setString(3, e.getStartDate());
+            pre.setInt(4, hotelDAO.getHotelIDByName(e.getHotelName()));
+            pre.setString(5, e.getMail());
+            pre.setString(6, e.getPhoneNum());
+            pre.setInt(7, esDAO.getEmployeeStatusByName(e.getStatus()));
+            pre.setString(8, e.getAddress());
             pre.executeUpdate();
+
         } catch (SQLException ex) {
             System.out.println("EmployeeDAO addNew(): " + ex.getMessage());
         }
@@ -245,8 +241,8 @@ public class EmployeeDAO extends DBContext {
 
     public void update(Employee e) {
         String sql = "update Employee " +
-                "set Name = ?, RoleID = ?, Salary = ?, StartDate = ?, HotelID = ?, Mail = ?, PhoneNum = ?, StatusID = ?, Address = ? " +
-                "where EmployeeID = ?";
+                "set Name = ?, RoleID = ?, StartDate = ?, HotelID = ?, Mail = ?, PhoneNum = ?, StatusID = ?, Address = ? " +
+                "where EmployeeID = ? ";
         try {
             EmployeeRoleDAO erDAO = new EmployeeRoleDAO();
             HotelDAO hotelDAO = new HotelDAO();
@@ -255,16 +251,17 @@ public class EmployeeDAO extends DBContext {
             pre.setString(1, e.getName());
             pre.setInt(2, erDAO.getEmployeeRoleIDByName(e.getRole()));
 //            System.out.println(e.getRole() + " " + erDAO.getEmployeeRoleIDByName(e.getRole()));
-            pre.setFloat(3, e.getSalary());
-            pre.setString(4, e.getStartDate());
-            pre.setInt(5, hotelDAO.getHotelIDByName(e.getHotelName()));
-            pre.setString(6, e.getMail());
-            pre.setString(7, e.getPhoneNum());
-            pre.setInt(8, esDAO.getEmployeeStatusByName(e.getStatus()));
-            System.out.println(e.getStatus() + " " + esDAO.getEmployeeStatusByName(e.getStatus()));
-            pre.setString(9, e.getAddress());
-            pre.setInt(10, e.getId());
+//            pre.setFloat(3, e.getSalary());
+            pre.setString(3, e.getStartDate());
+            pre.setInt(4, hotelDAO.getHotelIDByName(e.getHotelName()));
+            pre.setString(5, e.getMail());
+            pre.setString(6, e.getPhoneNum());
+            pre.setInt(7, esDAO.getEmployeeStatusByName(e.getStatus()));
+            pre.setString(8, e.getAddress());
+            pre.setInt(9, e.getId());
             pre.executeUpdate();
+            PayrollDAO pDAO = new PayrollDAO();
+            pDAO.updateSalary(e.getId(), e.getSalary());
         } catch (SQLException ex) {
             System.out.println("EmployeeDAO update(): " + ex.getMessage());
         }

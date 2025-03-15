@@ -26,7 +26,7 @@
                     <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Details</a>
+                    <a class="nav-link active" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/RoomManagement"><i class="bi bi-door-open me-2"></i>Room Details</a>
@@ -149,121 +149,38 @@
                                 <th>Actions</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="employeeTable">
                                 <c:forEach var="employee" items="${sessionScope.employees}">
                                     <tr>
                                         <td>${employee.getId()}</td>
                                         <c:forEach var="eStatus" items="${sessionScope.employeeStatuses}">
                                             <c:if test="${eStatus.getName() eq employee.getStatus()}">
-                                                <td class="status-${eStatus.getId()}">${employee.getStatus()}</td>
+                                                <td class="status-${eStatus.getId()}">${employee.getName()}</td>
                                             </c:if>
                                         </c:forEach>
 <%--                                        <td>--%>
-        <%--                                        <img src="https://images.unsplash.com/photo-1557862921-37829c790f19" class="employee-avatar me-2" alt="Employee">--%>
-<%--                                            ${employee.getName()}--%>
+<%--                                                <img src="https://images.unsplash.com/photo-1557862921-37829c790f19" class="employee-avatar me-2" alt="Employee">--%>
 <%--                                        </td>--%>
                                         <td>${employee.getRole()}</td>
                                         <td>${employee.getHotelName()}</td>
                                         <td>${employee.getMail()}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#viewEmployeeModal${employee.getId()}">
+                                            <button class="btn btn-sm btn-info me-2" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'admin?id=${employee.getId()}')">
                                                 <i class="bi bi-eye"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-warning">
-                                                <i class="bi bi-pencil"></i>
                                             </button>
                                         </td>
                                     </tr>
-                                    <!-- View Employee Modal -->
-                                    <div class="modal fade" id="viewEmployeeModal${employee.getId()}" tabindex="-1">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Employee Details</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                </div>
-                                                <form action="${pageContext.request.contextPath}/updateEmployee" method="POST" id="updateEmployeeForm${employee.getId()}">
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="col-md-4 text-center">
-                                                                <img src="https://images.unsplash.com/photo-1557862921-37829c790f19" class="img-fluid rounded-circle mb-3" alt="Employee">
-                                                                <button class="btn btn-sm btn-secondary">Change Photo</button>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <label class="form-label">Employee ID</label>
-                                                                        <input name="id" type="text" class="form-control" value="${employee.getId()}" readonly>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <label class="form-label">Full Name</label>
-                                                                        <input name="name" type="text" class="form-control" value="${employee.getName()}" >
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <label class="form-label">Email Address</label>
-                                                                        <input name="mail" type="email" class="form-control" value="${employee.getMail()}" >
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <label class="form-label">Phone Number</label>
-                                                                        <input name="phoneNum" type="tel" class="form-control" value="${employee.getPhoneNum()}" >
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <label class="form-label">Role</label>
-                                                                        <select class="form-select" name="role">
-                                                                            <option value="">Choose...</option>
-                                                                            <c:forEach var="role" items="${sessionScope.roles}">
-                                                                                <option value="${role.getRoleId()}" ${fn:contains(role.getRoleName(), employee.getRole()) ? "selected" : ""}>${role.getRoleName()}</option>
-                                                                            </c:forEach>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <label class="form-label">Hotel</label>
-                                                                        <select name="hotelName" class="form-select">
-                                                                            <option value="">Choose...</option>
-                                                                            <c:forEach var="hotel" items="${sessionScope.hotels}">
-                                                                                <option value="${hotel.getHotelId()}" ${fn:contains(hotel.getName(), employee.getHotelName()) ? "selected" : ""}> ${hotel.getName()}</option>
-                                                                            </c:forEach>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <label class="form-label">Status</label>
-                                                                        <select name="status" class="form-select">
-                                                                            <c:forEach var="status" items="${sessionScope.employeeStatuses}">
-                                                                                <option value="${status.getId()}" ${fn:contains(status.getName(), employee.getStatus()) ? "selected" : ""}>${status.getName()}</option>
-                                                                            </c:forEach>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <label class="form-label">Salary</label>
-                                                                        <input name="salary" type="number" class="form-control" value="${employee.getSalary()}">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <label class="form-label">Residential Address</label>
-                                                                        <textarea name="address" class="form-control" rows="3" minlength="10">${employee.getAddress()}</textarea>
-                                                                    </div>
-                                                               </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </c:forEach>
                             </tbody>
                         </table>
+                        <!-- Center-aligned -->
+                        <ul class="pagination justify-content-center" style="margin: 1.5rem 0 0 0">
+                            <c:forEach var="pageNumber" begin="1" end="7">
+                                <li class="page-item">
+                                    <button class="page-link ${requestScope.pageNo == pageNumber ? "active" : ""}" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'admin?pageNo=${pageNumber}')">${pageNumber}</button>
+                                </li>
+                            </c:forEach>
+                        </ul>
                     </div>
                 </div>
             </div>

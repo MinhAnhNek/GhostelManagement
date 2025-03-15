@@ -29,7 +29,7 @@
                 <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Details</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Dashboard</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="${pageContext.request.contextPath}/RoomManagement"><i class="bi bi-door-open me-2"></i>Room Details</a>
@@ -73,7 +73,7 @@
                                 </button>
                             </div>
                             <form action="${pageContext.request.contextPath}/RoomManagement" method="get">
-                                <div class="hidden" id="filterContainer">
+                                <div class="hidden" id="filterContainer" class="d-flex justify-content-between align-items-center">
                                     <div class="row g-3 d-flex">
                                         <div class="col-md-3 form-group">
                                             <label for="hotelName">Hotel Branch</label>
@@ -282,9 +282,18 @@
                         <div class="mb-3">
                             <label class="form-label">Add this Room Type for:</label>
                             <c:forEach var="hotel" items="${sessionScope.hotels}">
-                                <div class="form-check form-switch d-flex justify-content-between">
-                                    <input class="form-check-inline" type="checkbox" name="selectedHotels" value="${hotel.getHotelId()}">${hotel.getName()}
-                                    <input type="number" name="price" placeholder="Enter Price" class="form-control form-control-sm w-50" min="0" step="0.01" required>
+                                <div class="form-check form-switch d-flex">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input class="form-check-inline" type="checkbox" name="selectedHotels" value="${hotel.getHotelId()}" onclick="enablePrice('price${hotel.getHotelId()}')">
+                                            </td>
+                                            <td>${hotel.getName()}</td>
+                                            <td>
+                                                <input type="number" id="price${hotel.getHotelId()}" name="price" placeholder="Enter Price" class="form-control form-control-sm w-50 d-none" min="0" step="0.01">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </c:forEach>
                         </div>
@@ -295,8 +304,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" form="addRoomForm" class="btn btn-primary">Add Room</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <button type="submit" form="addRoomTypeForm" class="btn btn-primary">Add Room Type</button>
                 </div>
             </div>
         </div>

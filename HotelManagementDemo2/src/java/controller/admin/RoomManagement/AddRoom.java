@@ -37,6 +37,11 @@ public class AddRoom extends HttpServlet {
                 request.setAttribute("error", "Room" + roomNumber + " in " + hotelName + " already exists!");
             }
         } else if (type.equals("roomType")) {
+            String name = request.getParameter("roomTypeName");
+            String cap = request.getParameter("roomTypeCap");
+            String[] selectedHotel = request.getParameterValues("selectedHotels");
+            String[] p = request.getParameterValues("price");
+            String description = request.getParameter("description");
 
         }
 

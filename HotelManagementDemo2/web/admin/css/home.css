@@ -124,6 +124,16 @@ body {
     color: var(--primary-foreground);
 }
 
+.page-link {
+    color: var(--primary);
+}
+
+.page-link:hover, .page-link.active{
+    color: var(--primary-foreground);
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
 .gap-2 {
     gap: 0.5rem;
 }

@@ -24,7 +24,7 @@
         </ul>
         <div class="tab-content" id="authTabContent">
             <div class="tab-pane fade ${empty requestScope.toRegister and empty requestScope.toForgotPass ? "show active" : ""}" id="login">
-                <form action="login" method="post" class="needs-validation">
+                <form action="login" method="post">
                     <c:set var="invalidAcc" value="${requestScope.wrongAccount}"/>
                     <div class="mb-3">
                         <div class="btn-group w-100 mb-3" role="group">
@@ -34,11 +34,11 @@
                             <label class="btn btn-outline-primary" for="phoneLogin">Phone</label>
                         </div>
                         <div id="emailInput" class="login-input">
-                            <input name="user" value="${invalidAcc.getUsername()}" type="email" class="form-control" placeholder="Enter your email" >
+                            <input name="user" value="${invalidAcc.getUsername()}" type="email" class="form-control" placeholder="Enter your email" required>
 <%--                            <div class="invalid-feedback">Please enter a valid email</div>--%>
                         </div>
                         <div id="phoneInput" class="login-input d-none">
-                            <input name="phone" type="tel" class="form-control" placeholder="Enter your phone number" pattern="[0-9]{10}" >
+                            <input name="phone" type="tel" class="form-control" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
 <%--                            <div class="invalid-feedback">Please enter a valid phone number</div>--%>
                         </div>
                     </div>

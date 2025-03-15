@@ -28,3 +28,12 @@ function showButtons() {
         buttons.classList.add("d-none");
     }
 }
+
+function enablePrice(id) {
+    let price = document.getElementById(id);
+    if (price.classList.contains("d-none")) {
+        price.classList.remove("d-none");
+    } else {
+        price.classList.add("d-none");
+    }
+}

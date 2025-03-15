@@ -83,7 +83,7 @@
                     <select name="roomStatusID" class="form-select">
                         <c:forEach var="roomStatus" items="${sessionScope.roomStatuses}">
                             <option value="${roomStatus.getStatusID()} ${fn:contains(roomStatus.getStatusID(), requestScope.roomStatusID) ? "selected" : ""}">
-                                    ${roomStatus.getStatusName()}
+                                ${roomStatus.getStatusName()}
                             </option>
                         </c:forEach>
                     </select>
