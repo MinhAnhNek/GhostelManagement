@@ -1,5 +1,4 @@
 function showFilter() {
-    let filterBtn = document.getElementById('filterBtn');
     let filter = document.getElementById("filterContainer");
     if (filter.classList.contains("hidden")) {
         filter.classList.remove("hidden");
