@@ -6,7 +6,6 @@
 package controller.admin.RoomManagement;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -17,11 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Employee;
-import model.FilterType;
-import model.Room;
-import model.RoomStatus;
-
+import model.*;
 /**
  *
  * @author ADMIN
