@@ -4,21 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="fix login&#10;add search by capacity for room&#10;add sort for Room">
+    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="insert add buttons for adding new room type and hotel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeManagement/add.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeManagement/css/add.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/admin/RoomManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/RoomManagement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/js/home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/css/roomManagement.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/css/roomManagement.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/js/RoomManagement.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/RoomManagement/RoomServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/RoomManagement/RoomServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/RoomManagement/UpdateRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/RoomManagement/UpdateRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/PriceDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/PriceDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/RoomDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/RoomDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/RoomTypeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/RoomTypeDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/Room.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/RoomType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/RoomType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/RoomManagement/AddRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/RoomManagement/AddRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/RoomManagement/RoomServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/RoomManagement/RoomServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeManagement/add.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeManagement/css/add.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/web/admin/RoomManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/RoomManagement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/js/home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/css/roomManagement.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/css/roomManagement.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/js/RoomManagement.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,37 +86,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Smart Tomcat.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;get-bookings-from-database&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/SE/K4/PRJ301/Assignment/GhostelManagement/HotelManagementDemo2/build/web&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Smart Tomcat.Unnamed.executor": "Run",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "get-bookings-from-database",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/SE/K4/PRJ301/Assignment/GhostelManagement/HotelManagementDemo2/build/web/admin/RoomManagement",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Global Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.general",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlserver.localdb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlserver.localdb"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\SE\K4\PRJ301\Assignment\GhostelManagement\HotelManagementDemo2\build\web\admin\RoomManagement" />
       <recent name="D:\SE\K4\PRJ301\Assignment\HotelManagementDemo2\web\admin\js" />
       <recent name="D:\SE\K4\PRJ301\Assignment\HotelManagementDemo2\web" />
     </key>
@@ -184,7 +185,7 @@
       <workItem from="1741888437673" duration="419000" />
       <workItem from="1741926112225" duration="1536000" />
       <workItem from="1741930092218" duration="7944000" />
-      <workItem from="1741942724546" duration="7462000" />
+      <workItem from="1741942724546" duration="12569000" />
     </task>
     <task id="LOCAL-00001" summary="fix css">
       <option name="closed" value="true" />
@@ -258,7 +259,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741948028795</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="insert add buttons for adding new room type and hotel">
+      <option name="closed" value="true" />
+      <created>1741950452809</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1741950452809</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,7 +276,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix css" />
     <MESSAGE value="fix login&#10;add search by capacity for room&#10;add sort for Room" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix login&#10;add search by capacity for room&#10;add sort for Room" />
+    <MESSAGE value="insert add buttons for adding new room type and hotel" />
+    <option name="LAST_COMMIT_MESSAGE" value="insert add buttons for adding new room type and hotel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

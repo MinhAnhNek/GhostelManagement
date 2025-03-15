@@ -128,7 +128,7 @@
 
                                     </div>
                                     <div class="buttons">
-                                        <select name="type" class="form-select" style="width: 25%" id="type">
+                                        <select name="sortType" class="form-select" style="width: 25%" id="type">
                                             <option value="roomNumber" ${fn:contains(requestScope.type, "roomNumber") ? 'selected' : ''}>Sort by Room Number Ascending</option>
                                             <option value="roomNumber desc" ${fn:contains(requestScope.type, "roomNumber desc") ? 'selected' : ''}>Sort by Room Number Descending</option>
                                             <option value="price" ${fn:contains(requestScope.type, "price") ? 'selected' : ''}>Sort by Price Ascending</option>
@@ -144,7 +144,7 @@
                                     </div>
                                 </div>
                             </form>
-                       </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -182,13 +182,6 @@
                                         </div>
                                         <div class="mb-3 d-flex justify-content-between">
                                             <label class="form-label col-md-4">Room Type</label>
-<%--                                            <select name="roomType" class="form-select" disabled>--%>
-<%--                                                <c:forEach var="roomType" items="${sessionScope.roomTypes}">--%>
-<%--                                                    <option value="${roomType.getId()}" ${fn:contains(roomType.getId(), requestScope.roomTypeID) ? "selected" : ""}>--%>
-<%--                                                            ${roomType.getName()}--%>
-<%--                                                    </option>--%>
-<%--                                                </c:forEach>--%>
-<%--                                            </select>--%>
                                             <input type="text" class="form-control" value="${room.getRoomType()}" readonly>
                                         </div>
                                         <div class="mb-3 d-flex justify-content-between">
@@ -222,7 +215,7 @@
     </div>
 
     <!-- Add Room Modal -->
-    <div class="modal fade" id="addRoomModal" tabindex="-1">
+    <div class="modal fade ${requestScope.type eq "room" ? "show" : ""}" id="addRoomModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -230,7 +223,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="addRoomForm" action="${pageContext.request.contextPath}/AddRoom" method="post">
+                    <form id="addRoomForm" action="${pageContext.request.contextPath}/AddRoom?type=room" method="post">
                         <div class="mb-3">
                             <label class="form-label">Hotel Name</label>
                             <select name="hotelName" class="form-select" required>
@@ -253,8 +246,47 @@
                             <input name="roomNumber" type="number" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Price per Night</label>
-                            <input name="price" type="number" class="form-control" min="0" step="0.01" required>
+                            <label class="form-label">Description</label>
+                            <textarea name="description" class="form-control" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="addRoomForm" class="btn btn-primary">Add Room</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <%--    add new room type--%>
+    <div class="modal fade" id="addRoomTypeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Room Type</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addRoomTypeForm" action="${pageContext.request.contextPath}/AddRoom?type=roomType" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Room Type Name</label>
+                            <input name="roomTypeName" type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Capacity</label>
+                            <input name="capacity" type="number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Add this Room Type for:</label>
+                            <c:forEach var="hotel" items="${sessionScope.hotels}">
+                                <div class="form-check form-switch d-flex justify-content-between">
+                                    <input class="form-check-inline" type="checkbox" name="selectedHotels" value="${hotel.getHotelId()}">${hotel.getName()}
+                                    <input type="number" name="price" placeholder="Enter Price" class="form-control form-control-sm w-50" min="0" step="0.01" required>
+                                </div>
+                            </c:forEach>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Description</label>
@@ -269,6 +301,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

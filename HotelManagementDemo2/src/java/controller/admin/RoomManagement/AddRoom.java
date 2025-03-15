@@ -23,23 +23,30 @@ public class AddRoom extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        response.sendRedirect("/RoomManagement");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String hotelName = request.getParameter("hotelName");
-        String RoomType = request.getParameter("roomType");
-        String roomNumber = request.getParameter("roomNumber");
+        String type = request.getParameter("type");
+        if (type.equals("room")) {
+            String hotelName = request.getParameter("hotelName");
+            String RoomType = request.getParameter("roomType");
+            String roomNumber = request.getParameter("roomNumber");
 
-        RoomDAO roomDAO = new RoomDAO();
-        if (roomDAO.getByHotelNameAndRoomNumber(hotelName, roomNumber) == null) {
-            Room room = new Room(hotelName, roomNumber, RoomType);
-            roomDAO.add(room);
-        } else {
-            request.setAttribute("error", "Room" + roomNumber + " in " + hotelName + " already exists!");
+            RoomDAO roomDAO = new RoomDAO();
+            if (roomDAO.getByHotelNameAndRoomNumber(hotelName, roomNumber) == null) {
+                Room room = new Room(hotelName, roomNumber, RoomType);
+                roomDAO.add(room);
+            } else {
+                request.setAttribute("error", "Room" + roomNumber + " in " + hotelName + " already exists!");
+            }
+        } else if (type.equals("roomType")) {
+
         }
 
+        request.setAttribute("type", type);
         response.sendRedirect("RoomManagement");
     }
 

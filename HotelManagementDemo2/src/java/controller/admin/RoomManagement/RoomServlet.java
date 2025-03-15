@@ -51,11 +51,11 @@ public class RoomServlet extends HttpServlet {
             selected.put(filterType, request.getParameter(filterType));
             request.setAttribute(filterType, request.getParameter(filterType));
         }
-        String type = request.getParameter("type");
-        LinkedList<Room> list = (LinkedList<Room>) roomDAO.getRoomsByTypes(selected, type == null ? "" : type);
+        String sortType = request.getParameter("sortType");
+        LinkedList<Room> list = (LinkedList<Room>) roomDAO.getRoomsByTypes(selected, sortType == null ? "" : sortType);
 
 //        response.sendRedirect("admin/home.jsp");
-        request.setAttribute("type", type);
+        request.setAttribute("sortType", sortType);
         session.setAttribute("rooms", list);
 
 //        response.sendRedirect("admin/RoomManagement.jsp");

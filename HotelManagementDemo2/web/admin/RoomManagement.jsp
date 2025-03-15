@@ -44,7 +44,6 @@
     </div>
 
     <div class="main-content p-4 w-100">
-
         <div class="mb-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2 class="col-md-10">Room Management</h2>
@@ -61,9 +60,7 @@
                     <i class="bi bi-pencil me-2"></i>Add Hotel
                 </button>
             </div>
-
         </div>
-
         <div class="container-fluid py-4">
             <div class="row mb-4">
                 <div class="col-12">
@@ -128,25 +125,26 @@
                                             <label for="capacity">Capacity</label>
                                             <input type="number" name="capacity" id="capacity" class="form-control" placeholder="Capacity" value="${requestScope.capacity}">
                                         </div>
+
                                     </div>
                                     <div class="buttons">
-                                        <select name="type" class="form-select" style="width: 25%" id="type">
+                                        <select name="sortType" class="form-select" style="width: 25%" id="type">
                                             <option value="roomNumber" ${fn:contains(requestScope.type, "roomNumber") ? 'selected' : ''}>Sort by Room Number Ascending</option>
                                             <option value="roomNumber desc" ${fn:contains(requestScope.type, "roomNumber desc") ? 'selected' : ''}>Sort by Room Number Descending</option>
                                             <option value="price" ${fn:contains(requestScope.type, "price") ? 'selected' : ''}>Sort by Price Ascending</option>
                                             <option value="price desc" ${fn:contains(requestScope.type, "price desc") ? 'selected' : ''}>Sort by Price Descending</option>
                                             <option value="roomType" ${fn:contains(requestScope.type, "roomType") ? 'selected' : ''}>Sort by Room Type Ascending</option>
                                             <option value="roomType desc" ${fn:contains(requestScope.type, "roomType desc") ? 'selected' : ''}>Sort by Room Type Descending</option>
+                                            <option value="" ${empty requestScope.type ? 'selected' : ''}>Sort by Room ID</option>
                                             <option value="capacity" ${fn:contains(requestScope.type, "capacity") ? 'selected' : ''}>Sort by Capacity Ascending</option>
                                             <option value="capacity desc" ${fn:contains(requestScope.type, "capacity desc") ? 'selected' : ''}>Sort by Capacity Descending</option>
-                                            <option value="" ${empty requestScope.type ? 'selected' : ''}>Sort by Room ID</option
                                         </select>
                                         <button class="btn btn-secondary" type="button" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'RoomManagement')">Reset all Filters</button>
                                         <button class="btn btn-primary" type="submit" id="filterButton">Filter</button>
                                     </div>
                                 </div>
                             </form>
-                       </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -195,7 +193,7 @@
                                             <input type="text" class="form-control" value="${room.getRoomStatus()}" readonly>
                                         </div>
                                         <div class="mb-3 d-flex justify-content-between">
-                                            <label for="capacity">Capacity</label>
+                                            <label class="form-label col-md-4">Capacity</label>
                                             <input type="number" name="capacity" class="form-control" placeholder="Capacity" value="${room.getCapacity()}">
                                         </div>
                                         <div class="mb-3">
@@ -217,7 +215,7 @@
     </div>
 
     <!-- Add Room Modal -->
-    <div class="modal fade" id="addRoomModal" tabindex="-1">
+    <div class="modal fade ${requestScope.type eq "room" ? "show" : ""}" id="addRoomModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -225,7 +223,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="addRoomForm" action="${pageContext.request.contextPath}/AddRoom" method="post">
+                    <form id="addRoomForm" action="${pageContext.request.contextPath}/AddRoom?type=room" method="post">
                         <div class="mb-3">
                             <label class="form-label">Hotel Name</label>
                             <select name="hotelName" class="form-select" required>
@@ -248,8 +246,47 @@
                             <input name="roomNumber" type="number" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Price per Night</label>
-                            <input name="price" type="number" class="form-control" min="0" step="0.01" required>
+                            <label class="form-label">Description</label>
+                            <textarea name="description" class="form-control" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="addRoomForm" class="btn btn-primary">Add Room</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <%--    add new room type--%>
+    <div class="modal fade" id="addRoomTypeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Room Type</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addRoomTypeForm" action="${pageContext.request.contextPath}/AddRoom?type=roomType" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Room Type Name</label>
+                            <input name="roomTypeName" type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Capacity</label>
+                            <input name="capacity" type="number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Add this Room Type for:</label>
+                            <c:forEach var="hotel" items="${sessionScope.hotels}">
+                                <div class="form-check form-switch d-flex justify-content-between">
+                                    <input class="form-check-inline" type="checkbox" name="selectedHotels" value="${hotel.getHotelId()}">${hotel.getName()}
+                                    <input type="number" name="price" placeholder="Enter Price" class="form-control form-control-sm w-50" min="0" step="0.01" required>
+                                </div>
+                            </c:forEach>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Description</label>
@@ -264,6 +301,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
