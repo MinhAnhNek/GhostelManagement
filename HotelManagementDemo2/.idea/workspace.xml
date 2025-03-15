@@ -4,42 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="add form for adding new room type">
-      <change afterPath="$PROJECT_DIR$/src/java/dao/AttendanceDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/dao/PayrollDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/model/Attendance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/admin/css/employeeDetails.css" afterDir="false" />
+    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="delete redundant comment and variables">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/Login.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/SearchServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/SearchServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/RoomManagement/AddRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/RoomManagement/AddRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/RoomManagement/RoomServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/RoomManagement/RoomServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/RoomManagement/UpdateRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/RoomManagement/UpdateRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/AccountDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/AccountDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/PriceDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/PriceDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RoomDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RoomDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RoomTypeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RoomTypeDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Room.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/RoomType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/RoomType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeDetails.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/admin/RoomManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/RoomManagement.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/admin/UpdateRoom.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/UpdateRoom.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/css/home.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/admin/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/home.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/admin/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/js/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/login.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/HotelManagementDemo2.war" beforeDir="false" afterPath="$PROJECT_DIR$/dist/HotelManagementDemo2.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/RoomManagement/AddRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/RoomManagement/AddRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/RoomManagement/RoomServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/RoomManagement/RoomServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/EmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/EmployeeDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/RoomManagement/AddRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/RoomManagement/AddRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dao/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/EmployeeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/SearchServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/SearchServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/admin/RoomManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/RoomManagement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/UpdateRoom.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/UpdateRoom.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/admin/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/home.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/admin/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/js/home.js" afterDir="false" />
     </list>
@@ -216,7 +198,7 @@
       <workItem from="1742010094232" duration="9401000" />
       <workItem from="1742021939063" duration="585000" />
       <workItem from="1742025896153" duration="8979000" />
-      <workItem from="1742035151139" duration="3936000" />
+      <workItem from="1742035151139" duration="6814000" />
     </task>
     <task id="LOCAL-00001" summary="fix css">
       <option name="closed" value="true" />
@@ -314,7 +296,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742010389890</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="pagination">
+      <option name="closed" value="true" />
+      <created>1742039237183</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1742039237183</updated>
+    </task>
+    <task id="LOCAL-00014" summary="delete redundant comment and variables">
+      <option name="closed" value="true" />
+      <created>1742039338096</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1742039338096</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,7 +323,9 @@
     <MESSAGE value="fix login&#10;add search by capacity for room&#10;add sort for Room" />
     <MESSAGE value="insert add buttons for adding new room type and hotel" />
     <MESSAGE value="add form for adding new room type" />
-    <option name="LAST_COMMIT_MESSAGE" value="add form for adding new room type" />
+    <MESSAGE value="pagination" />
+    <MESSAGE value="delete redundant comment and variables" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete redundant comment and variables" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

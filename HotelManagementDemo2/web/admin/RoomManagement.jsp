@@ -139,7 +139,7 @@
                                             <option value="capacity" ${fn:contains(requestScope.type, "capacity") ? 'selected' : ''}>Sort by Capacity Ascending</option>
                                             <option value="capacity desc" ${fn:contains(requestScope.type, "capacity desc") ? 'selected' : ''}>Sort by Capacity Descending</option>
                                         </select>
-                                        <button class="btn btn-secondary" type="button" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'RoomManagement')">Reset all Filters</button>
+                                        <button class="btn btn-secondary" type="button" onclick="redirectToServlet('${pageContext.request.contextPath}', 'RoomManagement')">Reset all Filters</button>
                                         <button class="btn btn-primary" type="submit" id="filterButton">Filter</button>
                                     </div>
                                 </div>
@@ -203,7 +203,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'UpdateRoom?roomID=' + ${room.getRoomID()})">Update Information</button>
+                                        <button type="button" class="btn btn-primary" onclick="redirectToServlet('${pageContext.request.contextPath}', 'UpdateRoom?roomID=' + ${room.getRoomID()})">Update Information</button>
                                     </div>
                                 </div>
                             </div>

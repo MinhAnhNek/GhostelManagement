@@ -11,12 +11,23 @@ function showFilter() {
     }
 
 }
-// function redirectToSearchServlet(contextPath){
-//     window.location.href = contextPath + '/SearchEmployee';
-// }
-function redirectToSearchServlet(contextPath, servletName) {
+
+function redirectToServlet(contextPath, servletName) {
     // confirm("go to path " + contextPath + "/" + servletName + "?");
     window.location.href = contextPath + "/" + servletName;
+}
+
+function redirect(link, page) {
+    // hien danh sach search
+    if (link.includes("pageNo=")) {
+        window.location.href = link.substring(0, link.indexOf("pageNo=")) + page;
+    } else {
+        if (link.includes("?")) {
+            window.location.href = link + '&' + page;
+        } else {
+            window.location.href = link + '?' + page;
+        }
+    }
 }
 
 function showButtons() {

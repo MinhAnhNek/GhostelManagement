@@ -1,5 +1,7 @@
 package model;
 
+import java.util.LinkedList;
+
 public class Employee {
     private int id;
     private String name, status, role, startDate, hotelName, mail, phoneNum, address;
@@ -80,4 +82,13 @@ public class Employee {
         return salary;
     }
 
+
+    public static LinkedList<Employee> getPage(int pageNo, LinkedList<Employee> list) {
+        LinkedList<Employee> page = new LinkedList<>();
+        int max = pageNo * 6;
+        for (int i = (pageNo-1)*6; i < max && i < list.size(); i++) {
+            page.add(list.get(i));
+        }
+        return page;
+    }
 }

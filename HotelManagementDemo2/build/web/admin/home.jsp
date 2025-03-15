@@ -49,7 +49,7 @@
                         <i class="bi bi-plus-circle me-2"></i>Add New Employee
                     </button>
                 </div>
-                <form action="${pageContext.request.contextPath}/SearchEmployee" method="get">
+                <form action="${pageContext.request.contextPath}/admin" method="get">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h3>Filter Options</h3>
                         <button type="button" class="btn btn-primary" onclick="showFilter()" id="filterBtn">
@@ -116,16 +116,16 @@
                             </div>
                         </div>
                         <div class="buttons">
-                            <select name="type" class="form-select" style="width: 25%" id="type">
-                                <option value="name" ${fn:contains(requestScope.type, "name") ? 'selected' : ''}>Sort by Name Ascending</option>
-                                <option value="name desc" ${fn:contains(requestScope.type, "name desc") ? 'selected' : ''}>Sort by Name Descending</option>
-                                <option value="salary" ${fn:contains(requestScope.type, "salary") ? 'selected' : ''}>Sort by Salary Ascending</option>
-                                <option value="salary desc" ${fn:contains(requestScope.type, "salary desc") ? 'selected' : ''}>Sort by Salary Descending</option>
-                                <option value="startDate" ${fn:contains(requestScope.type, "startDate") ? 'selected' : ''}>Sort by Start Date Ascending</option>
-                                <option value="startDate desc" ${fn:contains(requestScope.type, "startDate desc") ? 'selected' : ''}>Sort by Start Date Descending</option>
-                                <option value="" ${empty requestScope.type ? 'selected' : ''}>Sort by Employee ID</option>
+                            <select name="sortType" class="form-select" style="width: 25%" id="type">
+                                <option value="name" ${fn:contains(requestScope.sortType, "name") ? 'selected' : ''}>Sort by Name Ascending</option>
+                                <option value="name desc" ${fn:contains(requestScope.sortType, "name desc") ? 'selected' : ''}>Sort by Name Descending</option>
+                                <option value="salary" ${fn:contains(requestScope.sortType, "salary") ? 'selected' : ''}>Sort by Salary Ascending</option>
+                                <option value="salary desc" ${fn:contains(requestScope.sortType, "salary desc") ? 'selected' : ''}>Sort by Salary Descending</option>
+                                <option value="startDate" ${fn:contains(requestScope.sortType, "startDate") ? 'selected' : ''}>Sort by Start Date Ascending</option>
+                                <option value="startDate desc" ${fn:contains(requestScope.sortType, "startDate desc") ? 'selected' : ''}>Sort by Start Date Descending</option>
+                                <option value="" ${empty requestScope.sortType ? 'selected' : ''}>Sort by Employee ID</option>
                             </select>
-                            <button class="btn btn-secondary" type="button" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'SearchRoom')">Reset all Filters</button>
+                            <button class="btn btn-secondary" type="button" onclick="redirectToServlet('${pageContext.request.contextPath}', 'admin')">Reset all Filters</button>
                             <button class="btn btn-primary" type="submit" id="filterButton">Filter</button>
                         </div>
                     </div>
@@ -165,7 +165,7 @@
                                         <td>${employee.getHotelName()}</td>
                                         <td>${employee.getMail()}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-info me-2" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'admin?id=${employee.getId()}')">
+                                            <button class="btn btn-sm btn-info me-2" onclick="redirectToServlet('${pageContext.request.contextPath}', 'admin?id=${employee.getId()}')">
                                                 <i class="bi bi-eye"></i>
                                             </button>
                                         </td>
@@ -175,9 +175,11 @@
                         </table>
                         <!-- Center-aligned -->
                         <ul class="pagination justify-content-center" style="margin: 1.5rem 0 0 0">
-                            <c:forEach var="pageNumber" begin="1" end="7">
+                            <c:forEach var="pageNumber" begin="1" end="${requestScope.maxPage}">
                                 <li class="page-item">
-                                    <button class="page-link ${requestScope.pageNo == pageNumber ? "active" : ""}" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'admin?pageNo=${pageNumber}')">${pageNumber}</button>
+                                    <button class="page-link ${requestScope.pageNo == pageNumber ? "active" : ""}" onclick="redirect(window.location.href, 'pageNo=${pageNumber}')">
+                                        ${pageNumber}
+                                    </button>
                                 </li>
                             </c:forEach>
                         </ul>

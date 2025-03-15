@@ -37,6 +37,7 @@ public class EmployeeServlet extends HttpServlet {
         session.setAttribute("attendance", attendanceDAO.getAll());
 
         EmployeeDAO employeeDAO = new EmployeeDAO();
+        // dieu huong sang trang EmployeeDetails.jsp de hien thi thong tin chi tiet cua nhan vien neu id khac null
         String id = request.getParameter("id");
         if (id != null) {
             LinkedList<Attendance> list = (LinkedList<Attendance>)  attendanceDAO.getByEmployeeID(Integer.parseInt(id));
@@ -47,33 +48,43 @@ public class EmployeeServlet extends HttpServlet {
             return;
         }
 
-        LinkedList<Employee> list = (LinkedList<Employee>)  employeeDAO.getAll("");
+
+        LinkedList<String> filterTypes = FilterType.getEmployeeFilterTypes();
+        Map<String, String> selected = new HashMap<>();
+        String minSalary = request.getParameter("minSalary");
+        if (minSalary != null && !minSalary.isEmpty()) {
+            filterTypes.add("minSalary");
+            filterTypes.add("maxSalary");
+        }               //FilterType.getFilterTypeMap();
+        for (String filterType : filterTypes) {
+            selected.put(filterType, request.getParameter(filterType));
+            session.setAttribute(filterType, request.getParameter(filterType));
+        }
+
+        String sortType = request.getParameter("sortType");
+        LinkedList<Employee> list = (LinkedList<Employee>) employeeDAO.getEmployeesByTypes(selected, sortType == null? "" : sortType);
+        request.setAttribute("maxPage", (list.size() % 6 == 0) ? (list.size() / 6) : (list.size() / 6 + 1));
+        request.setAttribute("sortType", sortType);
+
+        // phan trang danh sach tat ca nhan vien, dieu huong den cac page tuong ung
         String pageNo = request.getParameter("pageNo");
-        if (pageNo == null || pageNo.isEmpty() || Integer.parseInt(pageNo) <= 1) {
-            session.setAttribute("employees", getPage(1, list));
+        if (pageNo == null || pageNo.isEmpty() || Integer.parseInt(pageNo) < 1) {
+            session.setAttribute("employees", Employee.getPage(1, list));
             request.setAttribute("pageNo", 1);
         } else {
-            session.setAttribute("employees", getPage(Integer.parseInt(pageNo), list));
+            session.setAttribute("employees", Employee.getPage(Integer.parseInt(pageNo), list));
             request.setAttribute("pageNo", Integer.parseInt(pageNo));
         }
         request.getRequestDispatcher("admin/home.jsp").forward(request, response);
     }
 
-    public LinkedList<Employee> getPage(int pageNo, LinkedList<Employee> list) {
-        LinkedList<Employee> page = new LinkedList<>();
-        int max = pageNo * 6;
-        for (int i = (pageNo-1)*6; i < max && i < list.size(); i++) {
-            page.add(list.get(i));
-        }
-        return page;
-    }
+
 
 
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-
     }
 
 

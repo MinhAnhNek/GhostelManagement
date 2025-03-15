@@ -40,7 +40,7 @@
     <div class="mb-4">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Employee Management</h2>
-        <button class="btn btn-primary" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'admin')">
+        <button class="btn btn-primary" onclick="redirectToServlet('${pageContext.request.contextPath}', 'admin')">
           Back to Dashboard
         </button>
       </div>

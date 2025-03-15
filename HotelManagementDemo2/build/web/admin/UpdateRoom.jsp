@@ -48,7 +48,7 @@
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 class="col-md-10">Room Management</h2>
-                    <button class="btn btn-primary w-100" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'RoomManagement')">
+                    <button class="btn btn-primary w-100" onclick="redirectToServlet('${pageContext.request.contextPath}', 'RoomManagement')">
                         Back
                     </button>
                 </div>
