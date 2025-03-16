@@ -229,37 +229,31 @@ body {
     background-color: var(--secondary);
 }
 
-.modal {
-    --bs-modal-width: 80vw;
-    --bs-modal-height: 90vh;
+.form-group {
+    margin: 0.5rem 0;
 }
 
-.custom-modal {
-    max-height: 95vh;
-    display: flex;
-    flex-direction: column;
+.modal-content {
+    max-height: 90vh;
 }
 
-.custom-modal .modal-header,
-.custom-modal .modal-footer {
+.modal-body {
+    overflow-y: auto; /* Enable vertical scrolling for the modal body if needed */
+    max-height: 80vh; /* Set a fixed max height for the modal body */
+}
+
+.table-responsive {
+    max-height: 60vh; /* Set a max height for the table container */
+    overflow-y: auto; /* Enable scrolling within the table container */
+    display: block; /* Ensure the table container behaves as a block element */
+}
+
+/* Optional: Ensure the table header stays fixed while scrolling */
+.table-responsive thead th {
     position: sticky;
-    background-color: white;
-    z-index: 1050;
-}
-
-.custom-modal .modal-header {
     top: 0;
-    border-bottom: 1px solid #dee2e6;
-}
-
-.custom-modal .modal-footer {
-    bottom: 0;
-    border-top: 1px solid #dee2e6;
-}
-
-.custom-modal .modal-body {
-    overflow-y: auto;
-    flex-grow: 1;
+    background-color: #fff; /* Match your table header background */
+    z-index: 1;
 }
 
 

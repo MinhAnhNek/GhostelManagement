@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Employee Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="admin/css/employeeDetails.css">
 </head>
 
@@ -55,7 +57,7 @@
   <div class="container-fluid py-4">
     <div class="row g-4">
       <div class="col-12 col-lg-4">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm" id="profile">
           <div class="card-body text-center">
             <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d" alt="Employee Profile" class="rounded-circle mb-3" width="120">
             <h5 class="card-title mb-1">${emp.getName()}</h5>
@@ -71,30 +73,133 @@
               </div>
               <div>
                 <h6>Status</h6>
-                <span class="badge bg-success">${emp.getStatus()}</span>
+                <span class="badge bg-success"></span>
+
+                <c:if test="${emp.getStatus() eq 'Active'}">
+                  <span class="badge bg-success">${emp.getStatus()}</span>
+                </c:if>
+                <c:if test="${emp.getStatus() eq 'Currently on Vacation'}">
+                  <span class="badge bg-warning">${emp.getStatus()}</span>
+                </c:if>
+                <c:if test="${emp.getStatus() eq 'Deactive'}">
+                  <span class="badge bg-danger">${emp.getStatus()}</span>
+                </c:if>
+              </div>
+            </div>
+            <div class="mt-4">
+              <h6>Contact</h6>
+              <div>
+                <i class="bi bi-envelope-fill"></i>
+                <span>${emp.getMail()}</span>
+              </div>
+              <div>
+                <i class="bi bi-telephone-fill"></i>
+                <span>${emp.getPhoneNum()}</span>
+              </div>
+            </div>
+            <div class="mt-4">
+              <h6>Address</h6>
+              <span>${emp.getAddress()}</span>
+            </div>
+            <div class="mt-4">
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update">Update Info</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="update">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Update Information</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <form action="${pageContext.request.contextPath}/updateEmployee" method="get">
+                  <div class="row d-flex justify-content-between">
+                    <div class="col-md-6 form-group">
+                      <label for="avatar" class="col-md-4">Avatar</label>
+                      <%--                    <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d" alt="Employee Profile" class="rounded-circle mb-3" width="120">--%>
+                      <input type="file" id="avatar" accept="image/jpeg, image/jpg, image/png" name="image">
+                    </div>
+                  </div>
+                  <div class="row d-flex justify-content-between">
+                    <div class="col-md-6 d-flex form-group">
+                      <label for="id" class="col-md-4">Employee ID</label>
+                      <input type="number" class="form-control" name="id" id="id" value="${emp.getId()}" readonly>
+                    </div>
+                    <div class="col-md-6  d-flex justify-content-between form-group">
+                      <label for="name" class="col-md-4">Name</label>
+                      <input type="text" class="form-control" id="name" name="name" value="${emp.getName()}">
+                    </div>
+                  </div>
+                  <div class="row d-flex justify-content-between">
+                    <div class="col-md-6 d-flex justify-content-between form-group">
+                      <label for="role" class="col-md-4">Role</label>
+                      <select name="role" class="form-select" id="role">
+                        <c:forEach var="role" items="${sessionScope.roles}">
+                          <option value="${role.getRoleName()}" ${emp.getRole() eq role.getRoleName() ? "selected" : ""}>${role.getRoleName()}</option>
+                        </c:forEach>
+                      </select>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-between form-group">
+                      <label for="status" class="col-md-4">Status</label>
+                      <select name="status" class="form-select" id="status">
+                        <c:forEach var="status" items="${sessionScope.employeeStatuses}">
+                          <option value="${status.getName()}" ${emp.getStatus() eq status.getName() ? "selected" : ""}>${status.getName()}</option>
+                        </c:forEach>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row d-flex justify-content-between">
+                    <div class="col-md-6 d-flex justify-content-between form-group">
+                      <label for="salary" class="col-md-4">Base Salary</label>
+                      <input type="text" class="form-control" id="salary" name="salary" value="${emp.getSalary()}">
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-between form-group">
+                      <label for="overtime_pay" class="col-md-4">Overtime Pay</label>
+                      <input type="number" class="form-control" id="overtime_pay" name="overtime_pay" value="${sessionScope.payroll.getFirst().getOvertimePay()}">
+                    </div>
+                  </div>
+                  <div class="row d-flex justify-content-between">
+                    <div class="col-md-6 d-flex justify-content-between form-group">
+                      <label for="startDate" class="col-md-4">Start Date</label>
+                      <input type="date" class="form-control" id="startDate" name="startDate" value="${emp.getStartDate()}">
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-between form-group">
+                      <label for="hotel" class="col-md-4">Hotel Branch</label>
+                      <select class="form-select" id="hotel" name="hotelName">
+                        <c:forEach var="hotel" items="${sessionScope.hotels}">
+                          <option value=" ${hotel.getName()}" ${emp.getHotelName() eq hotel.getName() ? "selected" : ""}>${hotel.getName()}</option>
+                        </c:forEach>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row d-flex justify-content-between">
+                    <div class="col-md-6 d-flex justify-content-between form-group">
+                      <label for="phoneNum" class="col-md-4">Phone Number</label>
+                      <input type="tel" class="form-control" id="phoneNum" name="phoneNum" value="${emp.getPhoneNum()}">
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-between form-group">
+                      <label for="mail" class="col-md-4">Email</label>
+                      <input type="email" class="form-control" id="mail" name="mail" value="${emp.getMail()}">
+                    </div>
+                  </div>
+                  <div class="row d-flex justify-content-between">
+                    <div class="col-md-6 d-flex justify-content-between form-group">
+                      <label for="address" class="col-md-4">Address</label>
+                      <textarea class="form-control" id="address" name="address" rows="2">${emp.getAddress()}</textarea>
+                    </div>
+                  </div>
+                  <div class="buttons d-flex justify-content-between">
+                    <button type="reset" class="btn btn-secondary">Update</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
-        <div class="card shadow-sm mt-4">
-          <div class="card-body">
-            <h5 class="card-title">Today's Status</h5>
-            <div class="mt-3">
-              <div class="d-flex justify-content-between mb-2">
-                <span>Clock In</span>
-                <span class="text-success">09:00 AM</span>
-              </div>
-              <div class="d-flex justify-content-between">
-                <span>Clock Out</span>
-                <span class="text-danger">-- : --</span>
-              </div>
-              <div class="progress mt-3" style="height: 8px">
-                <div class="progress-bar" role="progressbar" style="width: 65%"></div>
-              </div>
-              <small class="text-muted d-block text-center mt-2">5.2 hrs / 8 hrs</small>
-            </div>
-          </div>
-        </div>
+>
       </div>
       <div class="col-12 col-lg-8">
         <div class="card shadow-sm">
@@ -164,13 +269,13 @@
               <div class="col-md-4">
                 <div class="border rounded p-3">
                   <h6 class="text-muted">Overtime</h6>
-                  <h4>----</h4>
+                  <h4>$${sessionScope.payroll.getFirst().getOvertimePay()}</h4>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="border rounded p-3">
                   <h6 class="text-muted">Total</h6>
-                  <h4>----</h4>
+                  <h4>$${sessionScope.payroll.getFirst().getTotalSalary()}</h4>
                 </div>
               </div>
             </div>
@@ -183,55 +288,53 @@
 </div>
 
 <div class="modal fade" id="viewAttendanceModal${emp.getId()}">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">View Employee Attendance</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <div class="row">
-          <div class="table-responsive mt-3">
-            <table class="table table-hover">
-              <thead>
+        <div class="table-responsive mt-3">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>Date</th>
+              <th>Clock In</th>
+              <th>Clock Out</th>
+              <th>Hours</th>
+              <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="att" items="${sessionScope.attendance}">
               <tr>
-                <th>Date</th>
-                <th>Clock In</th>
-                <th>Clock Out</th>
-                <th>Hours</th>
-                <th>Status</th>
-              </tr>
-              </thead>
-              <tbody>
-              <c:forEach var="att" items="${sessionScope.attendance}">
-                <tr>
-                  <td>${att.getDate()}</td>
-                  <td>
+                <td>${att.getDate()}</td>
+                <td>
                     ${empty att.getCheckInTime() ? "--:--:--" : att.getCheckInTime()}
-                  </td>
-                  <td>
+                </td>
+                <td>
                     ${empty att.getCheckOutTime() ? "--:--:--" : att.getCheckOutTime()}
-                  </td>
-                  <td>${att.getTotalHours()}</td>
-                  <td>
-                    <c:if test="${att.getStatus() eq 'Present'}">
-                      <span class="badge bg-success">Present</span>
-                    </c:if>
-                    <c:if test="${att.getStatus() eq 'Late'}">
-                      <span class="badge bg-warning">Late</span>
-                    </c:if>
-                    <c:if test="${att.getStatus() eq 'Absent'}">
-                      <span class="badge bg-danger">Absent</span>
-                    </c:if>
-                    <c:if test="${att.getStatus() eq 'Day Off'}">
-                      <span class="badge bg-info">Day Off</span>
-                    </c:if>
-                  </td>
-                </tr>
-              </c:forEach>
-              </tbody>
-            </table>
-          </div>
+                </td>
+                <td>${att.getTotalHours()}</td>
+                <td>
+                  <c:if test="${att.getStatus() eq 'Present'}">
+                    <span class="badge bg-success">Present</span>
+                  </c:if>
+                  <c:if test="${att.getStatus() eq 'Late'}">
+                    <span class="badge bg-warning">Late</span>
+                  </c:if>
+                  <c:if test="${att.getStatus() eq 'Absent'}">
+                    <span class="badge bg-danger">Absent</span>
+                  </c:if>
+                  <c:if test="${att.getStatus() eq 'Day Off'}">
+                    <span class="badge bg-info">Day Off</span>
+                  </c:if>
+                </td>
+              </tr>
+            </c:forEach>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -240,7 +343,7 @@
 
 
 <div class="modal fade" id="viewSalaryModal${emp.getId()}">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">View Employee Salary</h5>

@@ -152,6 +152,26 @@ body {
     border: 1px solid var(--border);
 }
 
+.progress {
+    height: 1.5rem;
+    background: var(--muted);
+}
+
+.wrapper {
+    min-height: 100vh;
+}
+
+.dropdown-menu {
+    color: var(--primary);
+    background: var(--background);
+    border-color: var(--border);
+}
+
+.dropdown-item {
+    color: var(--popover-foreground);
+}
+
+
 .form-control,
 .form-select {
     background-color: var(--primary-foreground);
@@ -177,7 +197,7 @@ body {
 }
 
 .row {
-    margin-top: 0.1rem;
+    margin: 2rem 0;
 }
 
 .hidden {

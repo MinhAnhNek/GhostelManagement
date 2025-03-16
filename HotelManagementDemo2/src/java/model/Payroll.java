@@ -3,9 +3,10 @@ package model;
 public class Payroll {
     private int payrollID, employeeID, salaryMonth, salaryYear, totalWorkingDays;
     private float totalHours, overtimeHours, baseSalary, totalSalary, overtimePay;
+    private String status;
     public Payroll() {}
 
-    public Payroll(int payrollID, int employeeID, int salaryMonth, int salaryYear, int totalWorkingDays, float totalHours, float overtimeHours, float baseSalary, float overtimePay, float totalSalary) {
+    public Payroll(int payrollID, int employeeID, int salaryMonth, int salaryYear, int totalWorkingDays, float totalHours, float overtimeHours, float baseSalary, float overtimePay, float totalSalary, String status) {
         this.payrollID = payrollID;
         this.employeeID = employeeID;
         this.salaryMonth = salaryMonth;
@@ -16,6 +17,15 @@ public class Payroll {
         this.baseSalary = baseSalary;
         this.overtimePay = overtimePay;
         this.totalSalary = totalSalary;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public float getOvertimePay() {

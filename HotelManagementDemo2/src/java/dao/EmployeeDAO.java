@@ -207,12 +207,28 @@ public class EmployeeDAO extends DBContext {
         return list;
     }
 
+    public int countEmployeesByStatus(String status) {
+        String sql = "select count(*) from Employee e left join EmployeeStatus es on e.StatusID = es.StatusID" +
+                " where es.statusName like '" + status + "'";
+
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("EmployeeDAO countEmployeesByStatus: " + e.getMessage());
+        }
+        return -1;
+    }
+
 
     // ===============================      ADD NEW EMPLOYEE    ===============================
 
-    public void addNew(Employee e) {
+    public void addNew(Employee e, float overtime_pay) {
         String sql = "insert into Employee(Name, RoleID, StartDate, HotelID, Mail, PhoneNum, StatusID, Address) " +
-                "values (?, ?, ?, ?, ?, ?, ?, ?);";
+                "values (?, ?, cast (getDate() as date), ?, ?, ?, 1, ?);";
         try {
             EmployeeRoleDAO erDAO = new EmployeeRoleDAO();
             HotelDAO hotelDAO = new HotelDAO();
@@ -222,14 +238,16 @@ public class EmployeeDAO extends DBContext {
             pre.setInt(2, erDAO.getEmployeeRoleIDByName(e.getRole()));
 //            System.out.println(e.getRole() + " " + erDAO.getEmployeeRoleIDByName(e.getRole()));
 //            pre.setFloat(3, e.getSalary());
-            pre.setString(3, e.getStartDate());
-            pre.setInt(4, hotelDAO.getHotelIDByName(e.getHotelName()));
-            pre.setString(5, e.getMail());
-            pre.setString(6, e.getPhoneNum());
-            pre.setInt(7, esDAO.getEmployeeStatusByName(e.getStatus()));
-            pre.setString(8, e.getAddress());
+//            pre.setString(3, e.getStartDate());
+            pre.setInt(3, hotelDAO.getHotelIDByName(e.getHotelName()));
+            pre.setString(4, e.getMail());
+            pre.setString(5, e.getPhoneNum());
+//            pre.setInt(6, esDAO.getEmployeeStatusByName(e.getStatus()));
+            pre.setString(6, e.getAddress());
             pre.executeUpdate();
 
+            PayrollDAO pDAO = new PayrollDAO();
+            pDAO.add(e.getId(), e.getSalary(), overtime_pay);
         } catch (SQLException ex) {
             System.out.println("EmployeeDAO addNew(): " + ex.getMessage());
         }
@@ -239,7 +257,7 @@ public class EmployeeDAO extends DBContext {
 
     // ===============================      UPDATE EMPLOYEE INFORMATION     ===============================
 
-    public void update(Employee e) {
+    public void update(Employee e, float overtime_pay) {
         String sql = "update Employee " +
                 "set Name = ?, RoleID = ?, StartDate = ?, HotelID = ?, Mail = ?, PhoneNum = ?, StatusID = ?, Address = ? " +
                 "where EmployeeID = ? ";
@@ -261,7 +279,7 @@ public class EmployeeDAO extends DBContext {
             pre.setInt(9, e.getId());
             pre.executeUpdate();
             PayrollDAO pDAO = new PayrollDAO();
-            pDAO.updateSalary(e.getId(), e.getSalary());
+            pDAO.updateSalary(e.getId(), e.getSalary(), overtime_pay);
         } catch (SQLException ex) {
             System.out.println("EmployeeDAO update(): " + ex.getMessage());
         }

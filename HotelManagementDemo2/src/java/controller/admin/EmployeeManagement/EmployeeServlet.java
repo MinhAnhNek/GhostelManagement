@@ -6,6 +6,7 @@
 package controller.admin.EmployeeManagement;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.*;
 
 import dao.*;
@@ -30,23 +31,35 @@ public class EmployeeServlet extends HttpServlet {
         EmployeeStatusDAO esDAO = new EmployeeStatusDAO();
         HotelDAO hotelDAO = new HotelDAO();
         AttendanceDAO attendanceDAO = new AttendanceDAO();
+        PayrollDAO payrollDAO = new PayrollDAO();
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+
         HttpSession session = request.getSession();
         session.setAttribute("roles", erDAO.getAll());
         session.setAttribute("employeeStatuses", esDAO.getAll());
         session.setAttribute("hotels", hotelDAO.getAll());
         session.setAttribute("attendance", attendanceDAO.getAll());
+        session.setAttribute("totalEmp", employeeDAO.getAll(""));
+        session.setAttribute("activeEmp", employeeDAO.countEmployeesByStatus("active"));
+        session.setAttribute("deactiveEmp", employeeDAO.countEmployeesByStatus("deactive"));
+        session.setAttribute("onVacation", employeeDAO.countEmployeesByStatus("Currently on Vacation"));
+        session.setAttribute("lateEmp", attendanceDAO.countByDateAndStatus("", "late"));
+        session.setAttribute("presentEmp", attendanceDAO.getByDateAndStatus("", "present"));
+        session.setAttribute("absentEmp", attendanceDAO.getByDateAndStatus("", "absent"));
+        session.setAttribute("dayoff", attendanceDAO.getByDateAndStatus("", "Day Off"));
+        session.setAttribute("payrolls", payrollDAO.getByMonth("", ""));
+        System.out.println( payrollDAO.getByMonth("", "").size());
 
-        EmployeeDAO employeeDAO = new EmployeeDAO();
+
         // dieu huong sang trang EmployeeDetails.jsp de hien thi thong tin chi tiet cua nhan vien neu id khac null
         String id = request.getParameter("id");
         if (id != null) {
             LinkedList<Attendance> list = (LinkedList<Attendance>)  attendanceDAO.getByEmployeeID(Integer.parseInt(id));
-            System.out.println(list.isEmpty());
-            PayrollDAO pDAO = new PayrollDAO();
+//            System.out.println(list.isEmpty());
             session.setAttribute("attendance", list);
             session.setAttribute("emp", employeeDAO.getEmployeeById(Integer.parseInt(id)));
             String month = request.getParameter("month");
-            session.setAttribute("payroll", pDAO.getByEmpIDAndMonth(Integer.parseInt(id), month == null ? "" : month));
+            session.setAttribute("payroll", payrollDAO.getByEmpIDAndMonth(Integer.parseInt(id), month == null ? "" : month));
             request.getRequestDispatcher("admin/EmployeeDetails.jsp").forward(request, response);
             return;
         }

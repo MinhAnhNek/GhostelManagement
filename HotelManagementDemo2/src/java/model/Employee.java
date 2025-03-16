@@ -43,6 +43,16 @@ public class Employee {
         this.salary = salary;
     }
 
+    public Employee(String name, String role, String hotelName, String mail, String phoneNum, String address, float salary) {
+        this.name = name;
+        this.role = role;
+        this.hotelName = hotelName;
+        this.mail = mail;
+        this.phoneNum = phoneNum;
+        this.address = address;
+        this.salary = salary;
+    }
+
     public int getId() {
         return id;
     }

@@ -22,11 +22,7 @@ public class UpdateEmployee extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
         String name = request.getParameter("name");
         String role = request.getParameter("role");
         String startDate = request.getParameter("startDate");
@@ -37,8 +33,14 @@ public class UpdateEmployee extends HttpServlet {
         String address = request.getParameter("address");
         Employee newEmp = new Employee(Integer.parseInt(request.getParameter("id")), name, status, role, startDate,hotelName, mail, phoneNum, address, Float.parseFloat(request.getParameter("salary")));
         EmployeeDAO eDAO = new EmployeeDAO();
-        eDAO.update(newEmp);
-        response.sendRedirect("admin");
+        eDAO.update(newEmp, Float.parseFloat(request.getParameter("overtime_pay")));
+        response.sendRedirect("admin?id=" + newEmp.getId());
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+
     }
 
     /** 

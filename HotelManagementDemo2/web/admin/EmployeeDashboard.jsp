@@ -19,7 +19,9 @@
     <div class="d-flex">
         <div class="sidebar bg-dark p-3">
             <div class="logo mb-4">
-                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d" alt="Hotel Logo" class="img-fluid rounded-circle">
+                <a href="">
+                    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d" alt="Hotel Logo" class="img-fluid rounded-circle">
+                </a>
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
@@ -49,9 +51,141 @@
                         <i class="bi bi-plus-circle me-2"></i>Add New Employee
                     </button>
                 </div>
+
+<%--                Dash board --%>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2">Total Employees</h6>
+                                <h2 class="card-title mb-0 text-center">${sessionScope.totalEmp.size()}</h2>
+                                <div class="mt-3">
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: ${sessionScope.activeEmp * 100 / sessionScope.totalEmp.size()}%" aria-valuenow="${sessionScope.activeEmp}" aria-valuemin="0" aria-valuemax="100">${sessionScope.activeEmp}</div>
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: ${sessionScope.onVacation * 100 / sessionScope.totalEmp.size()}%">${sessionScope.onVacation}</div>
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: ${sessionScope.deactiveEmp * 100 / sessionScope.totalEmp.size()}%">${sessionScope.deactiveEmp}</div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 d-flex justify-content-between">
+                                    <div class="badge rounded-pill bg-success">Active</div>
+                                    <div class="badge rounded-pill bg-warning">On Vacation</div>
+                                    <div class="badge rounded-pill bg-danger">Deactive</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2">Today Status</h6>
+                                <h2 class="card-title mb-0 text-center">${sessionScope.activeEmp}</h2>
+                                <div class="mt-3">
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: ${sessionScope.presentEmp.size() * 100 / sessionScope.activeEmp}%" aria-valuenow="${sessionScope.presentEmp.size()}" aria-valuemin="0" aria-valuemax="100">${sessionScope.presentEmp.size()}</div>
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: ${sessionScope.lateEmp * 100 / sessionScope.activeEmp}%">${sessionScope.lateEmp}</div>
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: ${sessionScope.absentEmp.size() * 100 / sessionScope.activeEmp}%">${sessionScope.absentEmp.size()}</div>
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: ${sessionScope.dayoff.size() * 100 / sessionScope.activeEmp}%">${sessionScope.dayoff.size()}</div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 d-flex justify-content-between">
+                                    <span class="badge rounded-pill bg-success">Present</span>
+                                    <span class="badge rounded-pill bg-warning">Late</span>
+                                    <span class="badge rounded-pill bg-danger">Absent</span>
+                                    <span class="badge rounded-pill bg-info">Day Off</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Top Salary this Month</h5>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-secondary" type="button">
+                                        View All
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Employee</th>
+                                            <th>Hotel</th>
+                                            <th>Salary</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach var="pay" items="${sessionScope.payrolls}" begin="1" step="1" end="3">
+                                            <c:set var="emp" value="${sessionScope.totalEmp.get(pay.getEmployeeID())}"/>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e" class="rounded-circle me-2" width="32" height="32" alt="">
+                                                        <div>${emp.getName()}</div>
+                                                    </div>
+                                                </td>
+                                                <td>${emp.getHotelName()}</td>
+                                                <td>${pay.getTotalSalary()}</td>
+                                                <td>
+                                                    <c:if test="${pay.getStatus() eq 'Paid'}">
+                                                        <span class="badge bg-success">${pay.getStatus()}</span>
+                                                    </c:if>
+                                                    <c:if test="${pay.getStatus() eq 'Pending'}">
+                                                        <span class="badge bg-warning">${pay.getStatus()}</span>
+                                                    </c:if>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Leave Requests</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-start mb-3">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" class="rounded-circle me-2" width="32" height="32" alt="">
+                                    <div class="flex-grow-1">
+                                        <small class="float-end text-navy">Today</small>
+                                        <strong>Alex Thompson</strong> requested sick leave<br>
+                                        <small class="text-muted">2 days</small>
+                                        <div class="mt-2">
+                                            <button class="btn btn-sm btn-success me-1">Approve</button>
+                                            <button class="btn btn-sm btn-danger">Reject</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-start mb-3">
+                                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e" class="rounded-circle me-2" width="32" height="32" alt="">
+                                    <div class="flex-grow-1">
+                                        <small class="float-end text-navy">Yesterday</small>
+                                        <strong>Rachel Kim</strong> requested vacation<br>
+                                        <small class="text-muted">5 days</small>
+                                        <div class="mt-2">
+                                            <button class="btn btn-sm btn-success me-1">Approve</button>
+                                            <button class="btn btn-sm btn-danger">Reject</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <form action="${pageContext.request.contextPath}/admin" method="get">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h3>Filter Options</h3>
+                        <h3>Employee List</h3>
                         <button type="button" class="btn btn-primary" onclick="showFilter()" id="filterBtn">
                             <i class="bi bi-plus-circle me-2"></i>Show Filters
                         </button>
@@ -117,13 +251,13 @@
                         </div>
                         <div class="buttons">
                             <select name="sortType" class="form-select" style="width: 25%" id="type">
-                                <option value="name" ${fn:contains(requestScope.sortType, "name") ? 'selected' : ''}>Sort by Name Ascending</option>
-                                <option value="name desc" ${fn:contains(requestScope.sortType, "name desc") ? 'selected' : ''}>Sort by Name Descending</option>
-                                <option value="salary" ${fn:contains(requestScope.sortType, "salary") ? 'selected' : ''}>Sort by Salary Ascending</option>
-                                <option value="salary desc" ${fn:contains(requestScope.sortType, "salary desc") ? 'selected' : ''}>Sort by Salary Descending</option>
-                                <option value="startDate" ${fn:contains(requestScope.sortType, "startDate") ? 'selected' : ''}>Sort by Start Date Ascending</option>
-                                <option value="startDate desc" ${fn:contains(requestScope.sortType, "startDate desc") ? 'selected' : ''}>Sort by Start Date Descending</option>
-                                <option value="" ${empty requestScope.sortType ? 'selected' : ''}>Sort by Employee ID</option>
+                                <option value="name" ${requestScope.sortType eq "name" ? "selected" : ""}>Sort by Name Ascending</option>
+                                <option value="name desc" ${requestScope.sortType eq "name desc" ? 'selected' : ''}>Sort by Name Descending</option>
+                                <option value="salary" ${requestScope.sortType eq "salary" ? 'selected' : ''}>Sort by Salary Ascending</option>
+                                <option value="salary desc" ${requestScope.sortType eq "salary desc" ? "selected" : ""}>Sort by Salary Descending</option>
+                                <option value="startDate" ${requestScope.sortType eq "startDate" ? "selected" : ""}>Sort by Start Date Ascending</option>
+                                <option value="startDate desc" ${requestScope.sortType eq "startDate desc" ? "selected" : ""}>Sort by Start Date Descending</option>
+                                <option value="" ${empty requestScope.sortType ? "selected" : ""}>Sort by Employee ID</option>
                             </select>
                             <button class="btn btn-secondary" type="button" onclick="redirectToServlet('${pageContext.request.contextPath}', 'admin')">Reset all Filters</button>
                             <button class="btn btn-primary" type="submit" id="filterButton">Filter</button>
@@ -193,93 +327,70 @@
     <div class="modal fade" id="addEmployeeModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="container py-5">
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-lg-10">
-                            <div class="card shadow-lg border-0">
-                                <div class="card-header bg-transparent border-0 pt-4">
-                                    <div class="d-flex align-items-center">
+                <div class="modal-header">
+                    <div class="card-header bg-transparent border-0 pt-4 justify-content-center">
+                        <div class="d-flex align-items-center">
 <%--                                        <a href="#" class="btn btn-outline-primary me-3">--%>
 <%--                                            <i class="bi bi-arrow-left"></i> Back--%>
 <%--                                        </a>--%>
-                                        <h1 class="mb-0">Add New Hotel Employee</h1>
-                                    </div>
-                                </div>
-                                <div class="card-body p-4">
-                                    <form action="${pageContext.request.contextPath}/addEmployee" method="post" class="needs-validation" novalidate>
-                                        <div class="row g-4">
-                                            <div class="col-12 col-md-6">
-                                                <label class="form-label">Full Name</label>
-                                                <input type="text" name="name" class="form-control" required minlength="2" maxlength="50" placeholder="Enter full name">
-                                                <div class="invalid-feedback">Please enter a valid name (2-50 characters)</div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <label class="form-label">Role</label>
-                                                <select class="form-select" name="role" required>
-                                                    <option value="">Choose...</option>
-                                                    <c:forEach var="role" items="${sessionScope.roles}">
-                                                        <option value="${role.getRoleName()}">${role.getRoleName()}</option>
-                                                    </c:forEach>
-                                                </select>
-                                                <div class="invalid-feedback">Please select a role</div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <label class="form-label">Monthly Salary</label>
-                                                <input name="salary" type="number" class="form-control" min="0" required placeholder="Enter monthly salary">
-                                                <div class="invalid-feedback">Please enter a valid salary amount</div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <label class="form-label">Start Date</label>
-                                                <input name="startDate" type="date" class="form-control" required max="2025-12-31">
-                                                <div class="invalid-feedback">Please select a valid start date</div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <label class="form-label">Hotel</label>
-                                                <select name="hotelName" class="form-select" required>
-                                                    <option value="">Choose...</option>
-                                                    <c:forEach var="hotel" items="${sessionScope.hotels}">
-                                                        <option value="${hotel.getName()}">${hotel.getName()}</option>
-                                                    </c:forEach>
-                                                </select>
-                                                <div class="invalid-feedback">Please select a hotel</div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <label class="form-label">Email Address</label>
-                                                <input name="mail" type="email" class="form-control" required placeholder="Enter email address">
-                                                <div class="invalid-feedback">Please enter a valid email address</div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <label class="form-label">Phone Number</label>
-                                                <input name="phoneNum" type="tel" class="form-control" required pattern="[+][0-9]{1,3}\s?[(]?[0-9]{3}[)]?[-\s]?[0-9]{3}[-\s]?[0-9]{4}" placeholder="+1 (123) 456-7890">
-                                                <div class="invalid-feedback">Please enter a valid phone number</div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <label class="form-label">Status</label>
-                                                <select name="status" class="form-select" required>
-                                                    <c:forEach var="status" items="${sessionScope.employeeStatus}">
-                                                        <option value="${status.getName()}">${status.getName()}</option>
-                                                    </c:forEach>
-                                                </select>
-                                                <div class="invalid-feedback">Please select a status</div>
-                                            </div>
-                                            <div class="col-12">
-                                                <label class="form-label">Residential Address</label>
-                                                <textarea name="address" class="form-control" rows="3" required minlength="10" placeholder="Enter full residential address"></textarea>
-                                                <div class="invalid-feedback">Please enter a valid address (minimum 10 characters)</div>
-                                            </div>
-                                            <div class="col-12 d-flex gap-2 justify-content-end mt-4">
-                                                <button type="reset" class="btn btn-outline-secondary">Clear Form</button>
-                                                <button type="submit" class="btn btn-primary" id="submitBtn">
-                                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                                                    Submit
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                            <h1 class="mb-0">Add New Hotel Employee</h1>
                         </div>
                     </div>
+                </div>
+                <div class="modal-body">
+                    <form action="${pageContext.request.contextPath}/addEmployee" method="get">
+                        <div class="row g-4">
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" name="name" class="form-control" required minlength="2" maxlength="50" placeholder="Enter full name">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Role</label>
+                                <select class="form-select" name="role" required>
+                                    <option value="">Choose...</option>
+                                    <c:forEach var="role" items="${sessionScope.roles}">
+                                        <option value="${role.getRoleName()}">${role.getRoleName()}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Monthly Salary</label>
+                                <input name="salary" type="number" class="form-control" min="0" required placeholder="Enter monthly salary">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Overtime pay (per hour)</label>
+                                <input name="overtime_pay" type="number" class="form-control" min="0" placeholder="Enter overtime pay" required>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Hotel</label>
+                                <select name="hotelName" class="form-select" required>
+                                    <c:forEach var="hotel" items="${sessionScope.hotels}">
+                                        <option value="${hotel.getName()}">${hotel.getName()}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Email Address</label>
+                                <input name="mail" type="email" class="form-control" required placeholder="Enter email address">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Phone Number</label>
+                                <input name="phoneNum" type="tel" class="form-control" required pattern="[+][0-9]{1,3}\s?[(]?[0-9]{3}[)]?[-\s]?[0-9]{3}[-\s]?[0-9]{4}" placeholder="+1 (123) 456-7890">
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Residential Address</label>
+                                <textarea name="address" class="form-control" rows="3" required minlength="10" placeholder="Enter full residential address"></textarea>
+                            </div>
+                            <div class="col-12 d-flex gap-2 justify-content-end mt-4">
+                                <button type="reset" class="btn btn-outline-secondary">Clear Form</button>
+                                <button type="submit" class="btn btn-primary" id="submitBtn">
+                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

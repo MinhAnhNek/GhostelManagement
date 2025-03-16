@@ -47,3 +47,4 @@ function enablePrice(id) {
         price.classList.add("d-none");
     }
 }
+
