@@ -4,42 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="show salary by month for each employee">
+    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="finish viewing and adding employee at EmployeeDashboard.jsp">
+      <change afterPath="$PROJECT_DIR$/web/admin/css/employeeSalaryDetail.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/AddEmployee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/AddEmployee.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/SearchServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/SearchServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/UpdateEmployee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/UpdateEmployee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/AttendanceDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/AttendanceDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/SearchServlet.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/PayrollDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/PayrollDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeDetails.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/css/employeeDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/css/employeeDetails.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/home.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/js/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/manager/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/manager/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/HotelManagementDemo2.war" beforeDir="false" afterPath="$PROJECT_DIR$/dist/HotelManagementDemo2.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/AddEmployee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/AddEmployee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/SearchServlet.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/UpdateEmployee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/UpdateEmployee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/AttendanceDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/AttendanceDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/EmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/EmployeeDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/PayrollDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/PayrollDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/Employee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/AddEmployee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/AddEmployee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/UpdateEmployee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/UpdateEmployee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dao/AttendanceDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/AttendanceDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/dao/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/EmployeeDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/dao/PayrollDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/PayrollDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/model/Payroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/Payroll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/css/employeeDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/css/employeeDetails.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/js/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/manager/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/manager/home.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,8 +39,8 @@
       <list>
         <option value="JavaScript File" />
         <option value="Jsp File" />
-        <option value="CSS File" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -98,7 +83,7 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="Security Analysis" />
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -111,35 +96,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Smart Tomcat.Unnamed.executor": "Run",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "get-bookings-from-database",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/SE/K4/PRJ301/Assignment/GhostelManagement/HotelManagementDemo2/build/web/admin/RoomManagement",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Global Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.general",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Smart Tomcat.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;get-bookings-from-database&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/SE/K4/PRJ301/Assignment/GhostelManagement/HotelManagementDemo2/build/web/admin/RoomManagement&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlserver.localdb"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlserver.localdb&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\SE\K4\PRJ301\Assignment\GhostelManagement\HotelManagementDemo2\build\web\admin\RoomManagement" />
@@ -215,7 +200,8 @@
       <workItem from="1742021939063" duration="585000" />
       <workItem from="1742025896153" duration="8979000" />
       <workItem from="1742035151139" duration="21522000" />
-      <workItem from="1742098637582" duration="29752000" />
+      <workItem from="1742098637582" duration="37792000" />
+      <workItem from="1742174238648" duration="10805000" />
     </task>
     <task id="LOCAL-00001" summary="fix css">
       <option name="closed" value="true" />
@@ -345,7 +331,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742051203030</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="finish viewing and adding employee at EmployeeDashboard.jsp">
+      <option name="closed" value="true" />
+      <created>1742143995812</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1742143995812</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,7 +354,8 @@
     <MESSAGE value="delete redundant comment and variables" />
     <MESSAGE value="use admin servlet to manage searching employees instead of SearchServlet" />
     <MESSAGE value="show salary by month for each employee" />
-    <option name="LAST_COMMIT_MESSAGE" value="show salary by month for each employee" />
+    <MESSAGE value="finish viewing and adding employee at EmployeeDashboard.jsp" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish viewing and adding employee at EmployeeDashboard.jsp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

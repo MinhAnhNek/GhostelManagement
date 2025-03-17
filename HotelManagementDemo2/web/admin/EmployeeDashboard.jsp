@@ -102,7 +102,7 @@
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="card-title mb-0">Top Salary this Month</h5>
                                 <div class="dropdown">
-                                    <button class="btn btn-sm btn-secondary" type="button">
+                                    <button class="btn btn-sm btn-secondary" type="button" onclick="redirectToServlet('${pageContext.request.contextPath}', 'EmployeeSalaryDetail')">
                                         View All
                                     </button>
                                 </div>
@@ -149,8 +149,11 @@
 
                     <div class="col-lg-4">
                         <div class="card h-100">
-                            <div class="card-header">
+                            <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="card-title mb-0">Leave Requests</h5>
+                                <button type="button" class="btn btn-primary" onclick="redirectToServlet()">
+                                    View All
+                                </button>
                             </div>
                             <div class="card-body">
                                 <div class="d-flex align-items-start mb-3">
@@ -264,11 +267,8 @@
                         </div>
                     </div>
                 </form>
-
-
             </div>
 
-<%--            <c:set var="employees" value="${sessionScope.employees}"/>--%>
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">

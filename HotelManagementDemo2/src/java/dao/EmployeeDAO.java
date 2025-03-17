@@ -1,6 +1,7 @@
 package dao;
 
 import model.Employee;
+import model.Payroll;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -160,7 +161,7 @@ public class EmployeeDAO extends DBContext {
                 } else if (entry.getKey().equals("maxSalary")) {
                     sql.append(convertTypeToColumnName(entry.getKey())).append(" <= ").append(entry.getValue());
                 } else {
-                    sql.append(convertTypeToColumnName(entry.getKey())).append(" like '%").append(entry.getValue()).append("%'");
+                    sql.append(convertTypeToColumnName(entry.getKey())).append(" like '").append(entry.getValue()).append("'");
                 }
                 sql.append(" and ");
                 appended = true;
@@ -257,7 +258,7 @@ public class EmployeeDAO extends DBContext {
 
     // ===============================      UPDATE EMPLOYEE INFORMATION     ===============================
 
-    public void update(Employee e, float overtime_pay) {
+    public void update(Employee e, float overtime_pay, int month) {
         String sql = "update Employee " +
                 "set Name = ?, RoleID = ?, StartDate = ?, HotelID = ?, Mail = ?, PhoneNum = ?, StatusID = ?, Address = ? " +
                 "where EmployeeID = ? ";
@@ -279,7 +280,7 @@ public class EmployeeDAO extends DBContext {
             pre.setInt(9, e.getId());
             pre.executeUpdate();
             PayrollDAO pDAO = new PayrollDAO();
-            pDAO.updateSalary(e.getId(), e.getSalary(), overtime_pay);
+            pDAO.updateSalary(e.getId(), e.getSalary(), overtime_pay, month);
         } catch (SQLException ex) {
             System.out.println("EmployeeDAO update(): " + ex.getMessage());
         }

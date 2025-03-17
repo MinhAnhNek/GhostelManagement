@@ -56,6 +56,10 @@
         <servlet-name>ForgotPasswordServlet</servlet-name>
         <servlet-class>controller.ForgotPasswordServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EmployeeSalaryDetail</servlet-name>
+        <servlet-class>controller.admin.EmployeeManagement.EmployeeSalaryDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -95,5 +99,9 @@
     <servlet-mapping>
         <servlet-name>ForgotPasswordServlet</servlet-name>
         <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeSalaryDetail</servlet-name>
+        <url-pattern>/EmployeeSalaryDetail</url-pattern>
     </servlet-mapping>
 </web-app>
