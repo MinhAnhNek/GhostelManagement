@@ -26,22 +26,26 @@
             </a>
         </div>
         <ul class="nav flex-column">
+<%--            <li class="nav-item">--%>
+<%--                <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>--%>
+<%--            </li>--%>
             <li class="nav-item">
-                <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Dashboard</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);">
+                    <i class="bi bi-people me-2"></i>
+                    Employee Dashboard
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/RoomManagement"><i class="bi bi-door-open me-2"></i>Room Details</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeSalaryDetail"><i class="bi bi-calendar-check me-2"></i>Employee Salary Detail</a>
+                <a class="nav-link active" href="${pageContext.request.contextPath}/EmployeeSalaryDetail" style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);">
+                    <i class="bi bi-calendar-check me-2"></i>Employee Salary Detail
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"  style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);"><i class="bi bi-graph-up me-2"></i>Finance Overview</a>
-            </li>
-
+<%--            <li class="nav-item">--%>
+<%--                <a class="nav-link" href="#"  style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);"><i class="bi bi-graph-up me-2"></i>Finance Overview</a>--%>
+<%--            </li>--%>
         </ul>
     </div>
 
@@ -95,38 +99,18 @@
                                     <i class="bi bi-building me-2"></i>${hotel.getName()}
                                 </a>
                             </c:forEach>
-
-<%--                            <button class="nav-link text-start mb-3" data-bs-toggle="pill" data-bs-target="#hotel2">--%>
-<%--                                <i class="bi bi-building me-2"></i>Sunset Resort--%>
-<%--                            </button>--%>
-<%--                            <button class="nav-link text-start mb-3" data-bs-toggle="pill" data-bs-target="#hotel3">--%>
-<%--                                <i class="bi bi-building me-2"></i>Ocean View Inn--%>
-<%--                            </button>--%>
-<%--                            <button class="nav-link text-start mb-3" data-bs-toggle="pill" data-bs-target="#hotel4">--%>
-<%--                                <i class="bi bi-building me-2"></i>Mountain Lodge--%>
-<%--                            </button>--%>
-<%--                            <button class="nav-link text-start mb-3" data-bs-toggle="pill" data-bs-target="#hotel5">--%>
-<%--                                <i class="bi bi-building me-2"></i>City Comfort Hotel--%>
-<%--                            </button>--%>
                         </div>
 
-<%--                        <c:forEach var="hotel" items="${sessionScope.hotels}">--%>
-<%--                            <c:set var="employees" value="${sessionScope.empListByHotel.get(hotel.getHotelId()-1)}"/>--%>
-<%--                            <c:set var="payrolls" value="${sessionScope.payListByHotel.get(hotel.getHotelId())}"/>--%>
-
-                        <c:set var="hotel" value="${requestScope.hotelID}"/>
                         <div class="tab-content flex-grow-1">
                             <div class="tab-pane fade show active" id="hotel">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <h4 class="mb-0">${sessionScope.hotels.get(hotel).getName()}</h4>
-                                    <div>
-                                        <button class="btn btn-primary me-2"><i class="bi bi-download"></i> Export</button>
-                                        <button class="btn btn-secondary"><i class="bi bi-printer"></i> Print</button>
+<%--                                <div class="d-flex justify-content-between align-items-center mb-4">--%>
+<%--                                    <h4 class="mb-0">${sessionScope.hotels.get(hotel).getName()}</h4>--%>
+<%--                                    <div>--%>
+<%--                                        <button class="btn btn-primary me-2"><i class="bi bi-download"></i> Export</button>--%>
+<%--                                        <button class="btn btn-secondary"><i class="bi bi-printer"></i> Print</button>--%>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                        <%--                                    <div class="card">--%>
-                                        <%--                                        <div class="card-body">--%>
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item">
                                             <a class="nav-link active" data-bs-toggle="tab" href="#monthly">View by Month</a>
@@ -287,8 +271,8 @@
                                                 <div class="col-md-3">
                                                     <select class="form-select">
                                                         <option>2025</option>
-                                                        <option>2024</option>
-                                                        <option>2023</option>
+<%--                                                        <option>2024</option>--%>
+<%--                                                        <option>2023</option>--%>
                                                     </select>
                                                 </div>
                                             </div>
@@ -298,48 +282,52 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Name</th>
-                                                        <th>Total Hours</th>
-                                                        <th>Total Days</th>
-                                                        <th>Total OT</th>
-                                                        <th>Total Salary</th>
+                                                        <th>Hours</th>
+                                                        <th>Days</th>
+                                                        <th>OT Hours</th>
+                                                        <th>Base Salary</th>
+                                                        <th>OT Pay</th>
                                                         <th>Status</th>
-                                                        <th>Actions</th>
+                                                        <%--                                                            <th>Deductions</th>--%>
+                                                        <%--                                                            <th>Bonus</th>--%>
+                                                        <th>Net Salary</th>
+<%--                                                        <th>Actions</th> --%>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>EMP001</td>
-                                                        <td>John Doe</td>
-                                                        <td>2112</td>
-                                                        <td>264</td>
-                                                        <td>144</td>
-                                                        <td>$58,320</td>
-                                                        <td><span class="badge bg-success">Complete</span></td>
-                                                        <td>
-                                                            <button class="btn btn-sm btn-info"><i class="bi bi-eye"></i></button>
-                                                            <button class="btn btn-sm btn-primary"><i class="bi bi-download"></i></button>
-                                                        </td>
-                                                    </tr>
+                                                    <c:forEach var="payroll" items="${sessionScope.payrolls2}">
+                                                        <c:set var="emp" value="${sessionScope.totalEmp.get(payroll.getEmployeeID())}"/>
+                                                        <tr>
+                                                            <td>${emp.getId()}</td>
+                                                            <td>${emp.getName()}</td>
+                                                            <td>${payroll.getTotalHours()}</td>
+                                                            <td>${payroll.getTotalWorkingDays()}</td>
+                                                            <td>${payroll.getOvertimeHours()}</td>
+                                                            <td>${payroll.getBaseSalary()}</td>
+                                                            <td>$${payroll.getOvertimePay()}</td>
+                                                            <td>
+                                                                    <span class="badge  ${payroll.getStatus() eq 'Paid' ? 'bg-success' : 'bg-warning'}">
+                                                                            ${payroll.getStatus()}
+                                                                    </span>
+                                                            </td>
+                                                                <%--                                                                <td>$200</td>--%>
+                                                                <%--                                                                <td>$300</td>--%>
+                                                            <td>$${payroll.getTotalSalary()}</td>
+
+                                                        </tr>
+                                                    </c:forEach>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
                                     </div>
-                                        <%--                                        </div>--%>
-                                        <%--                                    </div>--%>
                                 </div>
                             </div>
                         </div>
-<%--                        </c:forEach>--%>
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-
-</div>
 
 <script src="admin/js/home.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

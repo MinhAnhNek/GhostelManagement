@@ -24,23 +24,28 @@
                 </a>
             </div>
             <ul class="nav flex-column">
+                <%--            <li class="nav-item">--%>
+                <%--                <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>--%>
+                <%--            </li>--%>
                 <li class="nav-item">
-                    <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Dashboard</a>
+                    <a class="nav-link active" href="${pageContext.request.contextPath}/admin" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);">
+                        <i class="bi bi-people me-2"></i>
+                        Employee Dashboard
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/RoomManagement"><i class="bi bi-door-open me-2"></i>Room Details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-calendar-check me-2"></i>Booking Details</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeSalaryDetail" style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);">
+                        <i class="bi bi-calendar-check me-2"></i>Employee Salary Detail
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"  style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);"><i class="bi bi-graph-up me-2"></i>Finance Overview</a>
-                </li>
-
+                <%--            <li class="nav-item">--%>
+                <%--                <a class="nav-link" href="#"  style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);"><i class="bi bi-graph-up me-2"></i>Finance Overview</a>--%>
+                <%--            </li>--%>
             </ul>
+
         </div>
 
         <div class="main-content p-4 w-100">

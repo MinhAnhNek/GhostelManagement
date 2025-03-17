@@ -55,9 +55,11 @@ public class EmployeeSalaryDetail extends HttpServlet {
         HashMap<String, String> map = new HashMap<>();
         map.put("hotelID", hotelID);
         LinkedList<Payroll> payrolls = (LinkedList<Payroll>) payrollDAO.getByHotelAndMonth(hotelID, month);
+        LinkedList<Payroll> payrolls2 = ( LinkedList<Payroll>) payrollDAO.getByYear(hotelID, year);
 
         session.setAttribute("hotelID", hotelID);
         session.setAttribute("payrolls", payrolls);
+        session.setAttribute("payrolls2", payrolls2);
         request.setAttribute("month", month);
         request.setAttribute("year", year);
         request.getRequestDispatcher("admin/EmployeeSalaryDetail.jsp").forward(request, response);

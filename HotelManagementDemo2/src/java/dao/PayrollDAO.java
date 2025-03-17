@@ -42,6 +42,36 @@ public class PayrollDAO extends DBContext {
         return list;
     }
 
+    public List<Payroll> getByYear(String hotelID, String year) {
+        if (year.isEmpty()) year = "year(getdate())";
+        String sql = "select p.EmployeeID, salary_year, sum(total_working_days), sum(total_hours), sum(overtime_hours), sum(base_salary), sum(overtime_pay), sum(total_salary) " +
+                "from payroll p left join Employee e on e.EmployeeID = p.EmployeeID " +
+                "where e.HotelID like '%" + hotelID + "%' and salary_year like " + year +
+                "group by p.EmployeeID, salary_year ";
+        List<Payroll> list = new LinkedList<>();
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Payroll(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getFloat(4),
+                        rs.getFloat(5),
+                        rs.getFloat(6),
+                        rs.getFloat(7),
+                        rs.getFloat(8),
+                        "Pending"
+//                        rs.getString(9)
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("PayrollDAO getByYear: " + e.getMessage());
+        }
+        return list;
+    }
+
     public List<Payroll> getByHotelAndMonth(String id, String month) {
         List<Payroll> list = new LinkedList<>();
         String sql = "select * from Payroll p " +

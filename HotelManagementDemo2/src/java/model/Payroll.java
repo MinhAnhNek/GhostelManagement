@@ -6,6 +6,18 @@ public class Payroll {
     private String status;
     public Payroll() {}
 
+    public Payroll(int employeeID, int salaryYear, int totalWorkingDays, float totalHours, float overtimeHours, float baseSalary, float totalSalary, float overtimePay, String status) {
+        this.employeeID = employeeID;
+        this.salaryYear = salaryYear;
+        this.totalWorkingDays = totalWorkingDays;
+        this.totalHours = totalHours;
+        this.overtimeHours = overtimeHours;
+        this.baseSalary = baseSalary;
+        this.totalSalary = totalSalary;
+        this.overtimePay = overtimePay;
+        this.status = status;
+    }
+
     public Payroll(int payrollID, int employeeID, int salaryMonth, int salaryYear, int totalWorkingDays, float totalHours, float overtimeHours, float baseSalary, float overtimePay, float totalSalary, String status) {
         this.payrollID = payrollID;
         this.employeeID = employeeID;
@@ -19,6 +31,7 @@ public class Payroll {
         this.totalSalary = totalSalary;
         this.status = status;
     }
+
 
     public String getStatus() {
         return status;

@@ -86,6 +86,27 @@ body {
     border-bottom: none;
 }
 
+.stat-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    height: 100%;
+}
+
+.stat-card h4 {
+    font-size: 1rem;
+    color: var(--card-foreground);
+    margin-bottom: 1rem;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+}
+
 .btn-primary {
     background-color: var(--primary);
     border-color: var(--primary);
