@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="comment register">
+      <change afterPath="$PROJECT_DIR$/src/java/dao/RequestDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/dao/RequestTypeDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/model/Request.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/model/RequestType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/admin/EmployeeRequests.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/admin/css/employeeRequest.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/.netbeans_automatic_build" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/.netbeans_update_resources" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/ForgotPasswordServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/ForgotPasswordServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/Login.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/AddEmployee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/AddEmployee.class" afterDir="false" />
@@ -34,20 +42,24 @@
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/EmployeeRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/EmployeeRole.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/EmployeeStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/EmployeeStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/FilterType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/FilterType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Hotel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Hotel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Payroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Payroll.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Price.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Price.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Room.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/RoomStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/RoomStatus.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/RoomType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/RoomType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/HotelManagementDemo2.war" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeSalaryDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeSalaryDetail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeSalaryDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeSalaryDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dao/PayrollDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/PayrollDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeDashboard.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeDetails.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/filter/LoginFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/filter/LoginFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/FilterType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/FilterType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/filter/LoginFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/filter/LoginFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../introduce.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/FilterType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/FilterType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,8 +74,8 @@
       <list>
         <option value="JavaScript File" />
         <option value="Jsp File" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -225,7 +237,11 @@
       <workItem from="1742035151139" duration="21522000" />
       <workItem from="1742098637582" duration="37792000" />
       <workItem from="1742174238648" duration="13386000" />
-      <workItem from="1742187908333" duration="137000" />
+      <workItem from="1742187908333" duration="361000" />
+      <workItem from="1742191572585" duration="4470000" />
+      <workItem from="1742209339649" duration="3669000" />
+      <workItem from="1742216315196" duration="2289000" />
+      <workItem from="1742225517936" duration="7610000" />
     </task>
     <task id="LOCAL-00001" summary="fix css">
       <option name="closed" value="true" />
@@ -395,7 +411,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742187447575</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="comment register">
+      <option name="closed" value="true" />
+      <created>1742188068297</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1742188068298</updated>
+    </task>
+    <task id="LOCAL-00023" summary="comment register">
+      <option name="closed" value="true" />
+      <created>1742188074678</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1742188074678</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

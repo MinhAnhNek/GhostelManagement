@@ -159,11 +159,11 @@
                   <div class="row d-flex justify-content-between">
                     <div class="col-md-6 d-flex justify-content-between form-group">
                       <label for="salary" class="col-md-4">Base Salary</label>
-                      <input type="text" class="form-control" id="salary" name="salary" value="${emp.getSalary()}">
+                      <input type="number" min="0" class="form-control" id="salary" name="salary" value="${emp.getSalary()}">
                     </div>
                     <div class="col-md-6 d-flex justify-content-between form-group">
                       <label for="overtime_pay" class="col-md-4">Overtime Pay</label>
-                      <input type="number" class="form-control" id="overtime_pay" name="overtime_pay" value="${sessionScope.payroll.getFirst().getOvertimePay()}">
+                      <input type="number" min="0" class="form-control" id="overtime_pay" name="overtime_pay" value="${sessionScope.payroll.getFirst().getOvertimePay()}">
                     </div>
                   </div>
                   <div class="row d-flex justify-content-between">
@@ -197,7 +197,7 @@
                     </div>
                   </div>
                   <div class="buttons d-flex justify-content-between">
-                    <button type="reset" class="btn btn-secondary">Update</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                   </div>
                 </form>

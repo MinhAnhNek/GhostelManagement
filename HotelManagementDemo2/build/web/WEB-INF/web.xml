@@ -49,16 +49,16 @@
         <servlet-class>controller.admin.RoomManagement.UpdateRoom</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchServlet</servlet-name>
-        <servlet-class>controller.admin.EmployeeManagement.SearchServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ForgotPasswordServlet</servlet-name>
         <servlet-class>controller.ForgotPasswordServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EmployeeSalaryDetail</servlet-name>
         <servlet-class>controller.admin.EmployeeManagement.EmployeeSalaryDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeRequest</servlet-name>
+        <servlet-class>controller.admin.EmployeeManagement.EmployeeRequest</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -93,15 +93,15 @@
         <url-pattern>/UpdateRoom</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/SearchEmployee</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ForgotPasswordServlet</servlet-name>
         <url-pattern>/ForgotPassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EmployeeSalaryDetail</servlet-name>
         <url-pattern>/EmployeeSalaryDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeRequest</servlet-name>
+        <url-pattern>/EmployeeRequest</url-pattern>
     </servlet-mapping>
 </web-app>

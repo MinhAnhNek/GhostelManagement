@@ -1,0 +1,155 @@
+:root {
+    --primary: #0a8c6d;
+    --primary-foreground: #ffffff;
+    --secondary: #f5f5f5;
+    --secondary-foreground: #111;
+    --background: #cccaca;
+    --foreground: #111;
+    --card: #ffffff;
+    --card-foreground: #111;
+    --border: #109f7c;
+    --input: #ffffff;
+    --ring: #0a8c6d;
+
+    --radius: 0.5rem;
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+body {
+    background-color: var(--secondary);
+    color: var(--foreground);
+}
+
+
+.sidebar {
+    width: 280px;
+    min-height: 100vh;
+    background: var(--card) !important;
+    border-right: 1px solid var(--border);
+}
+
+.sidebar .logo {
+    height: 80px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.sidebar .logo img {
+    max-height: 100%;
+    width: auto;
+}
+
+.sidebar .nav-link {
+    color: var(--primary);
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+}
+
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+}
+
+.main-content {
+    background-color: var(--secondary);
+    display: block;
+}
+
+.card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.form-control, .form-select {
+    border-color: var(--border);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--ring);
+    box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--primary-foreground);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary);
+    filter: brightness(90%);
+}
+
+.table {
+    background-color: var(--card);
+}
+
+.table thead th {
+    border-bottom: 2px solid var(--border);
+}
+
+.modal-content {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border);
+}
+
+.pagination .page-link {
+    color: var(--primary);
+    border-color: var(--border);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--primary-foreground);
+}
+
+.badge {
+    padding: 0.5em 0.75em;
+}
+
+.table-responsive {
+    min-height: 400px;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-tabs .nav-link {
+    color: var(--foreground);
+    border: none;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: -1px;
+}
+
+.nav-tabs .nav-link:hover {
+    /*border-color: transparent;*/
+    background-color: var(--background);
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--primary-foreground);
+    border: 2px solid var(--primary);
+    background-color: var(--primary);
+}
+
+.table-responsive {
+    min-height: 400px;
+}
+
+.tab-content {
+    padding-top: 1.5rem;
+}
