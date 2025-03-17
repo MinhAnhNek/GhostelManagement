@@ -34,7 +34,7 @@ public class Login extends HttpServlet {
         AccountDAO accountDAO = new AccountDAO();
         HttpSession session = request.getSession();
         if (accountDAO.checkLogin(username, password)) {
-            session.setAttribute("username", username);
+            session.setAttribute("account", accountDAO.getAccount(username));
             int roleId = accountDAO.getAccount(username).getRoleId();
             if (roleId == 0) {
                 session.setAttribute("role", "admin");

@@ -64,32 +64,33 @@
 <%--                    </div>--%>
                 </form>
             </div>
-            <div class="tab-pane fade ${not empty requestScope.toRegister ? "show active" : ""}" id="register">
-                <form class="needs-validation">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Full Name" required>
-                        <div class="invalid-feedback">Please enter your name</div>
-                    </div>
-                    <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Email Address" required>
-                        <div class="invalid-feedback">Please enter a valid email</div>
-                    </div>
-                    <div class="mb-3 password-field">
-                        <input type="password" class="form-control" placeholder="Password" required>
-                        <div class="invalid-feedback">Password is required</div>
-                    </div>
-                    <div class="mb-3 password-field">
-                        <input type="password" class="form-control" placeholder="Confirm Password" required>
-                        <div class="invalid-feedback">Passwords must match</div>
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" required>
-                        <label class="form-check-label">I agree to Terms & Conditions</label>
-                        <div class="invalid-feedback">You must agree before submitting</div>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Register</button>
-                </form>
-            </div>
+<%--            <div class="tab-pane fade ${not empty requestScope.toRegister ? "show active" : ""}" id="register">--%>
+<%--                <form class="needs-validation">--%>
+<%--                    <div class="mb-3">--%>
+<%--                        <input type="text" class="form-control" placeholder="Full Name" required>--%>
+<%--                        <div class="invalid-feedback">Please enter your name</div>--%>
+<%--                    </div>--%>
+<%--                    <div class="mb-3">--%>
+<%--                        <input type="email" class="form-control" placeholder="Email Address" required>--%>
+<%--                        <div class="invalid-feedback">Please enter a valid email</div>--%>
+<%--                    </div>--%>
+<%--                    <div class="mb-3 password-field">--%>
+<%--                        <input type="password" class="form-control" placeholder="Password" required>--%>
+<%--                        <div class="invalid-feedback">Password is required</div>--%>
+<%--                    </div>--%>
+<%--                    <div class="mb-3 password-field">--%>
+<%--                        <input type="password" class="form-control" placeholder="Confirm Password" required>--%>
+<%--                        <div class="invalid-feedback">Passwords must match</div>--%>
+<%--                    </div>--%>
+<%--                    <div class="mb-3 form-check">--%>
+<%--                        <input type="checkbox" class="form-check-input" required>--%>
+<%--                        <label class="form-check-label">I agree to Terms & Conditions</label>--%>
+<%--                        <div class="invalid-feedback">You must agree before submitting</div>--%>
+<%--                    </div>--%>
+<%--                    <button type="submit" class="btn btn-primary w-100">Register</button>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+
             <div class="tab-pane fade ${not empty requestScope.toForgotPass ? "show active" : ""}" id="forgot">
                 <form action="${pageContext.request.contextPath}/ForgotPassword" method="post" class="needs-validation">
                     <div class="mb-3">

@@ -46,7 +46,7 @@ public class PayrollDAO extends DBContext {
         if (year.isEmpty()) year = "year(getdate())";
         String sql = "select p.EmployeeID, salary_year, sum(total_working_days), sum(total_hours), sum(overtime_hours), sum(base_salary), sum(overtime_pay), sum(total_salary) " +
                 "from payroll p left join Employee e on e.EmployeeID = p.EmployeeID " +
-                "where e.HotelID like '%" + hotelID + "%' and salary_year like " + year +
+                "where e.HotelID like '%" + hotelID + "%' and salary_year like " + year + " " +
                 "group by p.EmployeeID, salary_year ";
         List<Payroll> list = new LinkedList<>();
         try {

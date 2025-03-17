@@ -76,7 +76,7 @@ public class EmployeeSalaryDetail extends HttpServlet {
         String month = request.getParameter("month");
         String hotelID = (String) session.getAttribute("hotelID");
         PayrollDAO payrollDAO = new PayrollDAO();
-        Payroll payroll = payrollDAO.getByEmpIDAndMonth(Integer.parseInt(employeeID), month).getFirst();
+        Payroll payroll = ((LinkedList<Payroll>)payrollDAO.getByEmpIDAndMonth(Integer.parseInt(employeeID), month)).getFirst();
 
 //        if ( request.getParameter("totalSalary") != null) payroll.setTotalSalary(Float.parseFloat( request.getParameter("totalSalary")));
         if(request.getParameter("totalWorkingDays") != null) payroll.setTotalWorkingDays(Integer.parseInt(request.getParameter("totalWorkingDays")));
