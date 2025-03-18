@@ -60,9 +60,10 @@ public class EmployeeSalaryDetail extends HttpServlet {
         session.setAttribute("hotelID", hotelID);
         session.setAttribute("payrolls", payrolls);
         session.setAttribute("payrolls2", payrolls2);
+        session.setAttribute("avgPaidSalary", payrollDAO.getAvgPaidSalary());
         request.setAttribute("month", month);
         request.setAttribute("year", year);
-        request.getRequestDispatcher("admin/EmployeeSalaryDetail.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/EmployeeSalaryDashboard.jsp").forward(request, response);
 
     }
 

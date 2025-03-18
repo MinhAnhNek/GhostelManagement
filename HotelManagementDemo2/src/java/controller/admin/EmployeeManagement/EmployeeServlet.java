@@ -31,8 +31,10 @@ public class EmployeeServlet extends HttpServlet {
         EmployeeStatusDAO esDAO = new EmployeeStatusDAO();
         HotelDAO hotelDAO = new HotelDAO();
         AttendanceDAO attendanceDAO = new AttendanceDAO();
+        RequestTypeDAO requestTypeDAO = new RequestTypeDAO();
         PayrollDAO payrollDAO = new PayrollDAO();
         EmployeeDAO employeeDAO = new EmployeeDAO();
+        RequestDAO requestDAO = new RequestDAO();
 
         HttpSession session = request.getSession();
         session.setAttribute("roles", erDAO.getAll());
@@ -44,11 +46,16 @@ public class EmployeeServlet extends HttpServlet {
         session.setAttribute("deactiveEmp", employeeDAO.countEmployeesByStatus("deactive"));
         session.setAttribute("onVacation", employeeDAO.countEmployeesByStatus("Currently on Vacation"));
         session.setAttribute("lateEmp", attendanceDAO.countByDateAndStatus("", "late"));
-        session.setAttribute("presentEmp", attendanceDAO.getByDateAndStatus("", "present"));
+        session.setAttribute("presentEmp", attendanceDAO.countByDateAndStatus("", "present"));
         session.setAttribute("absentEmp", attendanceDAO.getByDateAndStatus("", "absent"));
         session.setAttribute("dayoff", attendanceDAO.getByDateAndStatus("", "Day Off"));
         session.setAttribute("payrolls", payrollDAO.getByMonth("", ""));
-        System.out.println( payrollDAO.getByMonth("", "").size());
+        session.setAttribute("pendingRequests", requestDAO.getByStatus("Pending"));
+//        System.out.println(requestDAO.getByStatus("Pending").getFirst().getStatus());
+        session.setAttribute("requestTypes", requestTypeDAO.getAll());
+
+
+//        System.out.println( payrollDAO.getByMonth("", "").size());
 
 
         // dieu huong sang trang EmployeeDetails.jsp de hien thi thong tin chi tiet cua nhan vien neu id khac null
@@ -79,16 +86,17 @@ public class EmployeeServlet extends HttpServlet {
 
         String sortType = request.getParameter("sortType");
         LinkedList<Employee> list = (LinkedList<Employee>) employeeDAO.getEmployeesByTypes(selected, sortType == null? "" : sortType);
-        request.setAttribute("maxPage", (list.size() % 6 == 0) ? (list.size() / 6) : (list.size() / 6 + 1));
+        int pageSize = 6;
+        request.setAttribute("maxPage", (list.size() % pageSize == 0) ? (list.size() / pageSize) : (list.size() / pageSize + 1));
         request.setAttribute("sortType", sortType);
 
         // phan trang danh sach tat ca nhan vien, dieu huong den cac page tuong ung
         String pageNo = request.getParameter("pageNo");
         if (pageNo == null || pageNo.isEmpty() || Integer.parseInt(pageNo) < 1) {
-            session.setAttribute("employees", Employee.getPage(1, list));
+            session.setAttribute("employees", Employee.getPage(1, list, pageSize));
             request.setAttribute("pageNo", 1);
         } else {
-            session.setAttribute("employees", Employee.getPage(Integer.parseInt(pageNo), list));
+            session.setAttribute("employees", Employee.getPage(Integer.parseInt(pageNo), list, pageSize));
             request.setAttribute("pageNo", Integer.parseInt(pageNo));
         }
         request.getRequestDispatcher("admin/EmployeeDashboard.jsp").forward(request, response);

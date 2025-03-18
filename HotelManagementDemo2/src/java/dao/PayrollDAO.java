@@ -172,6 +172,20 @@ public class PayrollDAO extends DBContext {
         return list;
     }
 
+    public double getAvgPaidSalary() {
+        String sql = "select avg(total_salary) from Payroll";
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("PayrollDAO getAvgPaidSalary: " + e.getMessage());
+        }
+        return -1;
+    }
+
 
 
     // =========================    ADD NEW PAYROLL   ============================

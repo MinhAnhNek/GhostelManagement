@@ -4,62 +4,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="comment register">
-      <change afterPath="$PROJECT_DIR$/src/java/dao/RequestDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/dao/RequestTypeDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/model/Request.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/model/RequestType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/admin/EmployeeRequests.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/admin/css/employeeRequest.css" afterDir="false" />
+    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="change reading infor on EmployeeRequests.jsp">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/.netbeans_automatic_build" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/.netbeans_update_resources" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/ForgotPasswordServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/ForgotPasswordServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/Login.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/AddEmployee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/AddEmployee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/DeleteEmployee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/DeleteEmployee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeSalaryDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeSalaryDetail.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/UpdateEmployee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/UpdateEmployee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/RoomManagement/AddRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/RoomManagement/AddRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/RoomManagement/RoomServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/RoomManagement/RoomServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/RoomManagement/UpdateRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/RoomManagement/UpdateRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/AccountDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/AccountDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/AttendanceDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/AttendanceDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeRoleDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeRoleDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeStatusDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeStatusDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/HotelDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/HotelDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/PayrollDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/PayrollDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/PriceDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/PriceDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RoomDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RoomDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RoomStatusDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RoomStatusDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RoomTypeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RoomTypeDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/filter/Authorization.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/filter/Authorization.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/filter/LoginFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/filter/LoginFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Account.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Attendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Attendance.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/EmployeeRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/EmployeeRole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/EmployeeStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/EmployeeStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RequestDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RequestDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/FilterType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/FilterType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Hotel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Hotel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Payroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Payroll.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Price.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Price.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Room.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/RoomStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/RoomStatus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/RoomType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/RoomType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeDashboard.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeDetails.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/filter/LoginFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/filter/LoginFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/FilterType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/FilterType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/filter/LoginFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/filter/LoginFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/model/FilterType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/FilterType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeRequests.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeSalaryDetail.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/RoomManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/RoomManagement.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/UpdateRoom.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/UpdateRoom.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/css/employeeRequest.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/css/employeeRequest.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeSalaryDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeSalaryDetail.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/EmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/EmployeeDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/RequestDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/RequestDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/Employee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/Request.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/model/Request.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeSalaryDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeSalaryDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/EmployeeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/PayrollDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/PayrollDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/RequestDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/RequestDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/Request.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeRequests.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeSalaryDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeSalaryDashboard.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/RoomManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/RoomManagement.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/UpdateRoom.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/UpdateRoom.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/css/employeeRequest.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/css/employeeRequest.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,7 +223,11 @@
       <workItem from="1742191572585" duration="4470000" />
       <workItem from="1742209339649" duration="3669000" />
       <workItem from="1742216315196" duration="2289000" />
-      <workItem from="1742225517936" duration="7610000" />
+      <workItem from="1742225517936" duration="8371000" />
+      <workItem from="1742261788409" duration="222000" />
+      <workItem from="1742265511816" duration="19072000" />
+      <workItem from="1742286103407" duration="2945000" />
+      <workItem from="1742294719769" duration="1361000" />
     </task>
     <task id="LOCAL-00001" summary="fix css">
       <option name="closed" value="true" />
@@ -427,7 +413,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742188074678</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="change reading infor on EmployeeRequests.jsp">
+      <option name="closed" value="true" />
+      <created>1742238037869</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1742238037869</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -445,7 +439,8 @@
     <MESSAGE value="finish viewing and adding employee at EmployeeDashboard.jsp" />
     <MESSAGE value="finish displaying and changing employeeSalary" />
     <MESSAGE value="comment register" />
-    <option name="LAST_COMMIT_MESSAGE" value="comment register" />
+    <MESSAGE value="change reading infor on EmployeeRequests.jsp" />
+    <option name="LAST_COMMIT_MESSAGE" value="change reading infor on EmployeeRequests.jsp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

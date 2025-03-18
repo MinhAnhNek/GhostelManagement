@@ -60,6 +60,10 @@
         <servlet-name>EmployeeRequest</servlet-name>
         <servlet-class>controller.admin.EmployeeManagement.EmployeeRequest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateRequest</servlet-name>
+        <servlet-class>controller.admin.EmployeeManagement.UpdateRequest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -103,5 +107,9 @@
     <servlet-mapping>
         <servlet-name>EmployeeRequest</servlet-name>
         <url-pattern>/EmployeeRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRequest</servlet-name>
+        <url-pattern>/UpdateRequest</url-pattern>
     </servlet-mapping>
 </web-app>

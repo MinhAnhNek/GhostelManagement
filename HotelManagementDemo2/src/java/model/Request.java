@@ -2,6 +2,7 @@ package model;
 
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Request {
     private int id, typeID, employeeID;
@@ -40,4 +41,12 @@ public class Request {
         return appliedDate;
     }
 
+    public static List<Request> getPage(int pageNo, List<Request> requestList, int pageSize) {
+        LinkedList<Request> page = new LinkedList<Request>();
+        int max = pageNo * pageSize;
+        for (int i = max - pageSize; i < max && i < requestList.size(); i++) {
+            page.add(requestList.get(i));
+        }
+        return page;
+    }
 }

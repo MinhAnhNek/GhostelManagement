@@ -28,24 +28,28 @@
                 <%--                <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>--%>
                 <%--            </li>--%>
                 <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/admin" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);">
+                    <a class="nav-link active" href="${pageContext.request.contextPath}/admin" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius); border-bottom: none;">
                         <i class="bi bi-people me-2"></i>
                         Employee Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/RoomManagement"><i class="bi bi-door-open me-2"></i>Room Details</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeSalaryDetail" style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);">
-                        <i class="bi bi-calendar-check me-2"></i>Employee Salary Detail
+                    <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeSalaryDetail" style="border-bottom: none;">
+                        <i class="bi bi-calendar-check me-2"></i>Employee Salary Dashboard
                     </a>
                 </li>
-                <%--            <li class="nav-item">--%>
-                <%--                <a class="nav-link" href="#"  style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);"><i class="bi bi-graph-up me-2"></i>Finance Overview</a>--%>
-                <%--            </li>--%>
-            </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeRequest" style="border-bottom: none;">
+                        <i class="bi bi-graph-up me-2"></i>Employee Request Dashboard
+                    </a>
+                </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/RoomManagement" style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);">
+                        <i class="bi bi-door-open me-2"></i>Room Details
+                    </a>
+                </li>
+            </ul>
         </div>
 
         <div class="main-content p-4 w-100">
@@ -82,14 +86,15 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="card h-100">
                             <div class="card-body">
+                                <c:set var="atworkEmp" value="${sessionScope.presentEmp + sessionScope.lateEmp}"/>
                                 <h6 class="card-subtitle mb-2">Today Status</h6>
-                                <h2 class="card-title mb-0 text-center">${sessionScope.activeEmp}</h2>
+                                <h2 class="card-title mb-0 text-center">${atworkEmp}</h2>
                                 <div class="mt-3">
                                     <div class="progress mt-2">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: ${sessionScope.presentEmp.size() * 100 / sessionScope.activeEmp}%" aria-valuenow="${sessionScope.presentEmp.size()}" aria-valuemin="0" aria-valuemax="100">${sessionScope.presentEmp.size()}</div>
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: ${sessionScope.lateEmp * 100 / sessionScope.activeEmp}%">${sessionScope.lateEmp}</div>
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: ${sessionScope.absentEmp.size() * 100 / sessionScope.activeEmp}%">${sessionScope.absentEmp.size()}</div>
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: ${sessionScope.dayoff.size() * 100 / sessionScope.activeEmp}%">${sessionScope.dayoff.size()}</div>
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: ${sessionScope.presentEmp * 100 / atworkEmp}%" aria-valuenow="${sessionScope.presentEmp}" aria-valuemin="0" aria-valuemax="100">${sessionScope.presentEmp}</div>
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: ${sessionScope.lateEmp * 100 / atworkEmp}%">${sessionScope.lateEmp}</div>
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: ${sessionScope.absentEmp.size() * 100 / atworkEmp}%">${sessionScope.absentEmp.size()}</div>
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: ${sessionScope.dayoff.size() * 100 / atworkEmp}%">${sessionScope.dayoff.size()}</div>
                                     </div>
                                 </div>
                                 <div class="mt-3 d-flex justify-content-between">
@@ -155,37 +160,32 @@
                     <div class="col-lg-4">
                         <div class="card h-100">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Leave Requests</h5>
+                                <h5 class="card-title mb-0">Recently Pending Requests</h5>
                                 <button type="button" class="btn btn-primary" onclick="redirectToServlet('${pageContext.request.contextPath}', 'EmployeeRequest')">
                                     View All
                                 </button>
                             </div>
                             <div class="card-body">
-                                <div class="d-flex align-items-start mb-3">
-                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" class="rounded-circle me-2" width="32" height="32" alt="">
-                                    <div class="flex-grow-1">
-                                        <small class="float-end text-navy">Today</small>
-                                        <strong>Alex Thompson</strong> requested sick leave<br>
-                                        <small class="text-muted">2 days</small>
-                                        <div class="mt-2">
-                                            <button class="btn btn-sm btn-success me-1">Approve</button>
-                                            <button class="btn btn-sm btn-danger">Reject</button>
+                                <c:if test="${not empty sessionScope.pendingRequests}">
+                                    <c:forEach items="${sessionScope.pendingRequests}" var="request" begin="0" end="1" step="1">
+                                        <div class="d-flex align-items-start mb-3">
+                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" class="rounded-circle me-2" width="32" height="32" alt="">
+                                            <div class="flex-grow-1">
+                                                <small class="float-end text-navy">${request.getAppliedDate().substring(0,10)}</small>
+                                                <div><strong>${request.employeeID} - ${sessionScope.totalEmp.get(request.getEmployeeID()).getName()}</strong></div>
+                                                <div>${sessionScope.requestTypes.get(request.getTypeID() - 1).getName()}</div>
+                                                    <%--                                            <small class="text-muted">${request.get}</small>--%>
+                                                <div class="mt-2">
+                                                    <button type="submit" class="btn btn-sm btn-success me-1" onclick="redirectToServlet('${pageContext.request.contextPath}', 'UpdateRequest?requestID=${request.getId()}&to=admin&status=Approved')">Approve</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="redirectToServlet('${pageContext.request.contextPath}', 'UpdateRequest?requestID=${request.getId()}&to=admin&status=Rejected')">Reject</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex align-items-start mb-3">
-                                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e" class="rounded-circle me-2" width="32" height="32" alt="">
-                                    <div class="flex-grow-1">
-                                        <small class="float-end text-navy">Yesterday</small>
-                                        <strong>Rachel Kim</strong> requested vacation<br>
-                                        <small class="text-muted">5 days</small>
-                                        <div class="mt-2">
-                                            <button class="btn btn-sm btn-success me-1">Approve</button>
-                                            <button class="btn btn-sm btn-danger">Reject</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${empty sessionScope.pendingRequests}">
+                                    <div class="alert alert-success" role="alert">There are no recently pending request left</div>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -304,9 +304,11 @@
                                         <td>${employee.getHotelName()}</td>
                                         <td>${employee.getMail()}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-info me-2" onclick="redirectToServlet('${pageContext.request.contextPath}', 'admin?id=${employee.getId()}')">
-                                                <i class="bi bi-eye"></i>
-                                            </button>
+                                            <c:if test="${emp.getRole() != 'Admin'}">
+                                                <button class="btn btn-sm btn-info me-2" onclick="redirectToServlet('${pageContext.request.contextPath}', 'admin?id=${employee.getId()}')">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                            </c:if>
                                         </td>
                                     </tr>
                                 </c:forEach>

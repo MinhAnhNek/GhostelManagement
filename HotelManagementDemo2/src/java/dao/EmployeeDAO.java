@@ -161,7 +161,7 @@ public class EmployeeDAO extends DBContext {
                 } else if (entry.getKey().equals("maxSalary")) {
                     sql.append(convertTypeToColumnName(entry.getKey())).append(" <= ").append(entry.getValue());
                 } else {
-                    sql.append(convertTypeToColumnName(entry.getKey())).append(" like '").append(entry.getValue()).append("'");
+                    sql.append(convertTypeToColumnName(entry.getKey())).append(" like '%").append(entry.getValue()).append("%'");
                 }
                 sql.append(" and ");
                 appended = true;

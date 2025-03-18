@@ -6,7 +6,6 @@
 package controller.admin.EmployeeManagement;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -47,6 +46,14 @@ public class EmployeeRequest extends HttpServlet {
         for (String filterType : filterTypes) {
             filter.put(filterType, request.getParameter(filterType));
         }
+
+        session.setAttribute("requestTypesDistribution", requestDAO.getRequestDistributionBy("RequestTypeID", "", ""));
+        session.setAttribute("requestStatusDistribution", requestDAO.getRequestDistributionBy("status","", ""));
+        session.setAttribute("totalRequest", requestDAO.getAll());
+        session.setAttribute("hotelRequestDistribution", requestDAO.getRequestDistributionBy("e.HotelID", "left join Employee e on e.EmployeeID = r.EmployeeID", ""));
+        session.setAttribute("todayRequest", requestDAO.getRequestDistributionBy("cast (applied_at as date)", "", "having getdate() = cast (applied_at as date)"));
+        session.setAttribute("requestStatusDistributionToday", requestDAO.getRequestDistributionBy("status, cast (applied_at as date) ","", "having getdate() = cast (applied_at as date)"));
+
 
         LinkedList<String> requestStatus = new LinkedList<>();
         requestStatus.add("Approved");

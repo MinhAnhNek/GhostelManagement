@@ -1,6 +1,7 @@
 package model;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class Employee {
     private int id;
@@ -93,11 +94,11 @@ public class Employee {
     }
 
 
-    public static LinkedList<Employee> getPage(int pageNo, LinkedList<Employee> list) {
+    public static List<Employee> getPage(int pageNo, LinkedList<Employee> empList, int empDisplayedPerPage) {
         LinkedList<Employee> page = new LinkedList<>();
-        int max = pageNo * 6;
-        for (int i = (pageNo-1)*6; i < max && i < list.size(); i++) {
-            page.add(list.get(i));
+        int max = pageNo * empDisplayedPerPage;
+        for (int i = (pageNo-1)*empDisplayedPerPage; i < max && i < empList.size(); i++) {
+            page.add(empList.get(i));
         }
         return page;
     }
