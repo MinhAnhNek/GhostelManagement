@@ -324,7 +324,7 @@
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <h6>Request Details</h6>
-                                                                    <textarea class="form-control" rows="2">${request.getReason()}</textarea>
+                                                                    <textarea class="form-control" rows="2" readonly>${request.getReason()}</textarea>
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label class="form-label">Admin Feedback</label>
@@ -454,7 +454,7 @@
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <h6>Request Details</h6>
-                                                                            <textarea class="form-control" rows="2">${request.getReason()}</textarea>
+                                                                            <textarea class="form-control" rows="2" readonly>${request.getReason()}</textarea>
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label class="form-label">Admin Feedback</label>

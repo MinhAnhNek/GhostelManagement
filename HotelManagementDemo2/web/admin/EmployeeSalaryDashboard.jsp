@@ -66,7 +66,7 @@
             <div class="col-md-3 mb-3">
                 <div class="stat-card">
                     <h4>Total Employees</h4>
-                    <p class="stat-number">${sessionScope.totalEmp.size()}</p>
+                    <p class="stat-number">${sessionScope.hotelEmp.size()}</p>
                 </div>
             </div>
             <div class="col-md-3 mb-3">

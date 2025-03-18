@@ -93,6 +93,45 @@ public class Employee {
         return salary;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setSalary(float salary) {
+        this.salary = salary;
+    }
 
     public static List<Employee> getPage(int pageNo, LinkedList<Employee> empList, int empDisplayedPerPage) {
         LinkedList<Employee> page = new LinkedList<>();

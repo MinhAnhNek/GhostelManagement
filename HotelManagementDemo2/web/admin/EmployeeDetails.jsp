@@ -148,7 +148,7 @@
                       <label for="role" class="col-md-4">Role</label>
                       <select name="role" class="form-select" id="role">
                         <c:forEach var="role" items="${sessionScope.roles}">
-                          <option value="${role.getRoleName()}" ${emp.getRole() eq role.getRoleName() ? "selected" : ""}>${role.getRoleName()}</option>
+                          <option value="${role.getRoleName()}" ${emp.getRole() eq role.getRoleName() ? "selected" : ""}  ${role.getRoleName() eq 'Admin' ? 'disabled' : ''}>${role.getRoleName()}</option>
                         </c:forEach>
                       </select>
                     </div>
@@ -210,7 +210,6 @@
             </div>
           </div>
         </div>
->
       </div>
       <div class="col-12 col-lg-8">
         <div class="card shadow-sm">
@@ -270,6 +269,7 @@
                 View All Salary
               </button>
             </div>
+            <c:set var="payroll" value="${sessionScope.payroll.getFirst()}"/>
             <div class="row g-4 mt-2">
               <div class="col-md-4">
                 <div class="border rounded p-3">
@@ -279,14 +279,14 @@
               </div>
               <div class="col-md-4">
                 <div class="border rounded p-3">
-                  <h6 class="text-muted">Overtime</h6>
-                  <h4>$${sessionScope.payroll.getFirst().getOvertimePay()}</h4>
+                  <h6 class="text-muted">Overtime <span class="text-sm-end" style="font-size: 0.8rem;">$${payroll.getOvertimePay()} * ${payroll.getOvertimeHours()}</span></h6>
+                  <h4>$${payroll.getOvertimePay() * payroll.getOvertimeHours()}</h4>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="border rounded p-3">
                   <h6 class="text-muted">Total</h6>
-                  <h4>$${sessionScope.payroll.getFirst().getTotalSalary()}</h4>
+                  <h4>$${payroll.getTotalSalary()}</h4>
                 </div>
               </div>
             </div>

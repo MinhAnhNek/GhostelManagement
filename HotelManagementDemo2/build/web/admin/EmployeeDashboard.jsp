@@ -234,7 +234,7 @@
                             </div>
                             <div class="col-md-3 form-group">
                                 <label for="Phone">Phone Number</label>
-                                <input name="phoneNum" type="text" class="form-control" id="Phone" placeholder="Enter Phone" value="${sessionScope.phoneNum}">
+                                <input name="phoneNum" type="tel" class="form-control" id="Phone" placeholder="Enter Phone" value="${sessionScope.phoneNum}">
                             </div>
                             <div class="col-md-3 form-group">
                                 <label for="salary">Salary</label>
@@ -354,9 +354,9 @@
                             <div class="col-12 col-md-6">
                                 <label class="form-label">Role</label>
                                 <select class="form-select" name="role" required>
-                                    <option value="">Choose...</option>
+                                    <option value="">Choose Role</option>
                                     <c:forEach var="role" items="${sessionScope.roles}">
-                                        <option value="${role.getRoleName()}">${role.getRoleName()}</option>
+                                        <option value="${role.getRoleName()}" ${role.getRoleName() eq 'Admin' ? 'disabled' : ''}>${role.getRoleName()}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -371,6 +371,7 @@
                             <div class="col-12 col-md-6">
                                 <label class="form-label">Hotel</label>
                                 <select name="hotelName" class="form-select" required>
+                                    <option value="">Choose Hotel</option>
                                     <c:forEach var="hotel" items="${sessionScope.hotels}">
                                         <option value="${hotel.getName()}">${hotel.getName()}</option>
                                     </c:forEach>
@@ -382,7 +383,7 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label">Phone Number</label>
-                                <input name="phoneNum" type="tel" class="form-control" required pattern="[+][0-9]{1,3}\s?[(]?[0-9]{3}[)]?[-\s]?[0-9]{3}[-\s]?[0-9]{4}" placeholder="+1 (123) 456-7890">
+                                <input name="phoneNum" type="tel" class="form-control" required placeholder="+1 (123) 456-7890">
                             </div>
 
                             <div class="col-12">

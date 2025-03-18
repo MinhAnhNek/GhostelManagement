@@ -26,10 +26,11 @@ public class EmployeeDAO extends DBContext {
                 "where month(getDate()) = p.salary_month ";
         if (!sortType.isEmpty()) {
             sql += " order by " + convertTypeToColumnName(sortType) + " ";
-            System.out.println(sql);
+//            System.out.println(sql);
         }
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
+//            System.out.println(sql);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 list.add(new Employee(
@@ -178,7 +179,7 @@ public class EmployeeDAO extends DBContext {
         LinkedList<Employee> list = new LinkedList<>();
         try {
             PreparedStatement pre = connection.prepareStatement(sql2);
-            System.out.println(sql2);
+//            System.out.println(sql2);
             for (Map.Entry<String, String> entry : selected.entrySet()) {
                 if (entry.getValue() != null && !entry.getValue().isEmpty() ) {
                     System.out.println(entry.getValue() + " " + entry.getKey() + " ");
@@ -233,7 +234,7 @@ public class EmployeeDAO extends DBContext {
         try {
             EmployeeRoleDAO erDAO = new EmployeeRoleDAO();
             HotelDAO hotelDAO = new HotelDAO();
-            EmployeeStatusDAO esDAO = new EmployeeStatusDAO();
+//            EmployeeStatusDAO esDAO = new EmployeeStatusDAO();
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setString(1, e.getName());
             pre.setInt(2, erDAO.getEmployeeRoleIDByName(e.getRole()));
@@ -246,6 +247,8 @@ public class EmployeeDAO extends DBContext {
 //            pre.setInt(6, esDAO.getEmployeeStatusByName(e.getStatus()));
             pre.setString(6, e.getAddress());
             pre.executeUpdate();
+
+            e.setId(getAll("").size());
 
             PayrollDAO pDAO = new PayrollDAO();
             pDAO.add(e.getId(), e.getSalary(), overtime_pay);

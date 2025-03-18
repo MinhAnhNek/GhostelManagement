@@ -133,8 +133,12 @@ public class PayrollDAO extends DBContext {
     }
 
 
-    public double getTotalPaidSalary() {
-        String sql = "select sum(total_salary) from Payroll";
+    public double getTotalPaidSalary(String hotelID) {
+        String sql = "select sum(r.total_salary) from Payroll r ";
+        if (!hotelID.isEmpty()) {
+            sql += "left join Employee e on e.EmployeeID = r.EmployeeID " +
+                    "where e.HotelID like '" + hotelID + "'";
+        }
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
@@ -145,8 +149,12 @@ public class PayrollDAO extends DBContext {
         return -1;
     }
 
-    public List<Payroll> getByStatus(String status) {
-        String sql = "select * from Payroll where status like '" + status + "'";
+    public List<Payroll> getByStatus(String status, String hotelID) {
+        String sql = "select * from Payroll r ";
+        if (!hotelID.isEmpty()) {
+            sql += "left join Employee e on e.EmployeeID = r.EmployeeID " +
+                    "where e.HotelID = '" + hotelID + "' and status like '" + status + "'";
+        } else sql += "where r.status like '" + status + "'";
         List<Payroll> list = new LinkedList<>();
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
@@ -172,13 +180,17 @@ public class PayrollDAO extends DBContext {
         return list;
     }
 
-    public double getAvgPaidSalary() {
-        String sql = "select avg(total_salary) from Payroll";
+    public float getAvgPaidSalary(String hotelID) {
+        String sql = "select avg(total_salary) from Payroll r ";
+        if (!hotelID.isEmpty()) {
+            sql += "left join Employee e on e.EmployeeID = r.EmployeeID " +
+                    "where e.HotelID = '" + hotelID + "'";
+        }
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
             if (rs.next()) {
-                return rs.getDouble(1);
+                return rs.getFloat(1);
             }
         } catch (SQLException e) {
             System.out.println("PayrollDAO getAvgPaidSalary: " + e.getMessage());
@@ -190,12 +202,11 @@ public class PayrollDAO extends DBContext {
 
     // =========================    ADD NEW PAYROLL   ============================
     public void add(int employeeID, float base_salary, float overtime_pay) {
-        String sql = "insert into Payroll (EmployeeID, base_salary, overtime_pay) values (?, ?, ?)";
+        String sql = "insert into Payroll (EmployeeID, base_salary, overtime_pay) values " +
+                "(" + employeeID + ", " + base_salary + ", " + overtime_pay + ")";
+//        System.out.println(sql);
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
-            pre.setInt(1, employeeID);
-            pre.setFloat(2, base_salary);
-            pre.setFloat(3, overtime_pay);
             pre.executeUpdate();
         } catch (SQLException e) {
             System.out.println("PayrollDAO add: " + e.getMessage());

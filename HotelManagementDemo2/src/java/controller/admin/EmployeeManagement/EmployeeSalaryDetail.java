@@ -7,10 +7,7 @@ package controller.admin.EmployeeManagement;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import dao.EmployeeDAO;
 import dao.HotelDAO;
@@ -37,21 +34,24 @@ public class EmployeeSalaryDetail extends HttpServlet {
         EmployeeDAO employeeDAO = new EmployeeDAO();
         HotelDAO hotelDAO = new HotelDAO();
 
-        String hotelID = request.getParameter("hotelID");
+        String hotelID = request.getParameter("hotelID") == null ? "" : request.getParameter("hotelID");
         String month = request.getParameter("month") == null ? "" : request.getParameter("month");
         String year = request.getParameter("year") == null ? "" : request.getParameter("year");
+
 
         HttpSession session = request.getSession();
         session.setAttribute("hotels",hotelDAO.getAll());
 
-        session.setAttribute("totalPaidSalary", payrollDAO.getTotalPaidSalary());
-        session.setAttribute("totalPayrolls", payrollDAO.getByMonth(month, year));
-        session.setAttribute("totalEmp", employeeDAO.getAll(""));
-        session.setAttribute("pendingPayrolls", payrollDAO.getByStatus("pending"));
 
-        if (hotelID == null) {
-            hotelID = "";
-        }
+        session.setAttribute("totalPaidSalary", payrollDAO.getTotalPaidSalary(hotelID));
+        session.setAttribute("totalPayrolls", payrollDAO.getByMonth(month, year));
+        Map<String, String> empSearchMap = new HashMap<>();
+        empSearchMap.put("hotelID", hotelID);
+        session.setAttribute("totalEmp", employeeDAO.getAll(""));
+        session.setAttribute("hotelEmp", employeeDAO.getEmployeesByTypes(empSearchMap, ""));
+        session.setAttribute("pendingPayrolls", payrollDAO.getByStatus("pending", hotelID));
+
+
         HashMap<String, String> map = new HashMap<>();
         map.put("hotelID", hotelID);
         LinkedList<Payroll> payrolls = (LinkedList<Payroll>) payrollDAO.getByHotelAndMonth(hotelID, month);
@@ -60,7 +60,7 @@ public class EmployeeSalaryDetail extends HttpServlet {
         session.setAttribute("hotelID", hotelID);
         session.setAttribute("payrolls", payrolls);
         session.setAttribute("payrolls2", payrolls2);
-        session.setAttribute("avgPaidSalary", payrollDAO.getAvgPaidSalary());
+        session.setAttribute("avgPaidSalary", payrollDAO.getAvgPaidSalary(hotelID));
         request.setAttribute("month", month);
         request.setAttribute("year", year);
         request.getRequestDispatcher("admin/EmployeeSalaryDashboard.jsp").forward(request, response);

@@ -324,7 +324,7 @@
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <h6>Request Details</h6>
-                                                                    <textarea class="form-control" rows="2">${request.getReason()}</textarea>
+                                                                    <textarea class="form-control" rows="2" readonly>${request.getReason()}</textarea>
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label class="form-label">Admin Feedback</label>
@@ -454,7 +454,7 @@
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <h6>Request Details</h6>
-                                                                            <textarea class="form-control" rows="2">${request.getReason()}</textarea>
+                                                                            <textarea class="form-control" rows="2" readonly>${request.getReason()}</textarea>
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label class="form-label">Admin Feedback</label>
@@ -463,7 +463,7 @@
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="submit" name="status" value="approved" class="btn btn-success"  ${request.getStatus() eq 'Pending' ? '' : 'disabled'}><i class="bi bi-check-lg"></i> Approve</button>
-                                                                        <button type="submit" name="status" value="rejected" class="btn btn-danger"  ${request.getStatus() eq 'Pending' ? '' : 'disabled'}><i class="bi bi-x-lg"></i> Reject</button>
+                                                                        <button type="submit" name="status" value="rejected" class="btn btn-danger"  ${request.getStatus() eq 'Pending' ? '' : 'disabled'}<i class="bi bi-x-lg"></i> Reject</button>
                                                                     </div>
                                                                 </form>
                                                             </div>

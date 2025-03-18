@@ -97,6 +97,7 @@ public class EmployeeServlet extends HttpServlet {
             request.setAttribute("pageNo", 1);
         } else {
             session.setAttribute("employees", Employee.getPage(Integer.parseInt(pageNo), list, pageSize));
+//            System.out.println(Employee.getPage(Integer.parseInt(pageNo), list, pageSize).getLast().getId());
             request.setAttribute("pageNo", Integer.parseInt(pageNo));
         }
         request.getRequestDispatcher("admin/EmployeeDashboard.jsp").forward(request, response);
