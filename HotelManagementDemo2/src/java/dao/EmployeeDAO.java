@@ -1,5 +1,6 @@
 package dao;
 
+import model.Account;
 import model.Employee;
 import model.Payroll;
 
@@ -226,9 +227,10 @@ public class EmployeeDAO extends DBContext {
     }
 
 
+
     // ===============================      ADD NEW EMPLOYEE    ===============================
 
-    public void addNew(Employee e, float overtime_pay) {
+    public void addNew(Employee e, float overtime_pay, String accPassword) {
         String sql = "insert into Employee(Name, RoleID, StartDate, HotelID, Mail, PhoneNum, StatusID, Address) " +
                 "values (?, ?, cast (getDate() as date), ?, ?, ?, 1, ?);";
         try {
@@ -249,7 +251,12 @@ public class EmployeeDAO extends DBContext {
             pre.executeUpdate();
 
             e.setId(getAll("").size());
+            // insert into account table
+            Account account = new Account(e.getMail(), accPassword, erDAO.getEmployeeRoleIDByName(e.getRole()), 1);
+            AccountDAO accountDAO = new AccountDAO();
+            accountDAO.add(account);
 
+            // insert into payroll table
             PayrollDAO pDAO = new PayrollDAO();
             pDAO.add(e.getId(), e.getSalary(), overtime_pay);
         } catch (SQLException ex) {
@@ -284,6 +291,10 @@ public class EmployeeDAO extends DBContext {
             pre.executeUpdate();
             PayrollDAO pDAO = new PayrollDAO();
             pDAO.updateSalary(e.getId(), e.getSalary(), overtime_pay, month);
+            if (e.getStatus().equals("Deactive")) {
+                AccountDAO accountDAO = new AccountDAO();
+                accountDAO.updateAccountStatus(e.getMail(), 2);
+            }
         } catch (SQLException ex) {
             System.out.println("EmployeeDAO update(): " + ex.getMessage());
         }

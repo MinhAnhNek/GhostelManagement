@@ -28,7 +28,7 @@ public class AccountDAO extends DBContext {
     }
 
     public Account getAccount(String user) {
-        String sql = "select * from Account where username like '%" + user + "%'";
+        String sql = "select * from Account where username like '" + user + "'";
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
@@ -36,7 +36,8 @@ public class AccountDAO extends DBContext {
                 return new Account(
                         rs.getString(1),
                         rs.getString(2),
-                        rs.getInt(3)
+                        rs.getInt(3),
+                        rs.getInt(4)
                 );
             }
         } catch (SQLException e) {
@@ -60,7 +61,15 @@ public class AccountDAO extends DBContext {
         return false;
     }
 
-
+    public void add(Account a) {
+        String sql = "insert into Account values('" + a.getUsername() + "', '" + a.getPassword() + "' ," + a.getRoleId() + " )";
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("AccountDAO.add(): " + e.getMessage());
+        }
+    }
 
     public void updateAccount(Account account) {
         String sql = "update Account " +
@@ -71,6 +80,16 @@ public class AccountDAO extends DBContext {
             pre.executeUpdate();
         } catch (SQLException e) {
             System.out.println("AccountDAO updateAccount: " + e.getMessage());
+        }
+    }
+
+    public void updateAccountStatus(String username, int status) {
+        String sql = "update Account set StatusID = " + status + " where username = '" + username + "'";
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("AccountDAO updateAccountStatus: " + e.getMessage());
         }
     }
 }

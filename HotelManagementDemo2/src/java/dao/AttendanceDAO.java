@@ -32,8 +32,9 @@ public class AttendanceDAO extends DBContext {
         return list;
     }
 
-    public List<Attendance> getByEmployeeID(int empId) {
-        String sql = "select * from attendance where EmployeeID = ? order by date desc";
+    public List<Attendance> getByEmployeeID(int empId, String month) {
+        month = month.isEmpty() ? "'%%'" : month;
+        String sql = "select * from attendance where EmployeeID = ? and month(date) like " + month + " order by date desc";
         List<Attendance> list = new LinkedList<>();
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
@@ -93,6 +94,21 @@ public class AttendanceDAO extends DBContext {
         else sql = "select count(*) from attendance " +
                 "where date like " + "'%" + date + "%'" +
                 "and status like '%" + status + "%'";
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) return rs.getInt(1);
+        } catch (SQLException e) {
+            System.out.println("AttendanceDAO countByDateAndStatus(): " + e.getMessage());
+        }
+        return -1;
+    }
+
+    public int countByEmployeeID(int empId, String status) {
+        status = status.isEmpty() ? "'%%'" : status;
+        String sql = "select count(status) total, EmployeeID from attendance " +
+                "where status = '" + status + "' " +
+                "group by EmployeeID having EmployeeID = " + empId;
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();

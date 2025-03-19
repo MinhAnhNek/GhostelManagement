@@ -56,6 +56,11 @@
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2>Employee Management</h2>
+                    <c:if test="${not empty requestScope.error}">
+                        <div class="alert alert-warning" role="alert">
+                                ${requestScope.error}
+                        </div>
+                    </c:if>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
                         <i class="bi bi-plus-circle me-2"></i>Add New Employee
                     </button>
@@ -160,7 +165,7 @@
                     <div class="col-lg-4">
                         <div class="card h-100">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Recently Pending Requests</h5>
+                                <h5 class="card-title mb-0">Recent Pending Requests</h5>
                                 <button type="button" class="btn btn-primary" onclick="redirectToServlet('${pageContext.request.contextPath}', 'EmployeeRequest')">
                                     View All
                                 </button>
@@ -174,8 +179,10 @@
                                                 <small class="float-end text-navy">${request.getAppliedDate().substring(0,10)}</small>
                                                 <div><strong>${request.employeeID} - ${sessionScope.totalEmp.get(request.getEmployeeID()).getName()}</strong></div>
                                                 <div>${sessionScope.requestTypes.get(request.getTypeID() - 1).getName()}</div>
+<%--                                                <div>${sessionScope.requestTypes.get(request.getTypeID() - 1).getName()}</div>--%>
                                                     <%--                                            <small class="text-muted">${request.get}</small>--%>
                                                 <div class="mt-2">
+                                                    <% session.setAttribute("to", "admin"); %>
                                                     <button type="submit" class="btn btn-sm btn-success me-1" onclick="redirectToServlet('${pageContext.request.contextPath}', 'UpdateRequest?requestID=${request.getId()}&to=admin&status=Approved')">Approve</button>
                                                     <button type="submit" class="btn btn-sm btn-danger" onclick="redirectToServlet('${pageContext.request.contextPath}', 'UpdateRequest?requestID=${request.getId()}&to=admin&status=Rejected')">Reject</button>
                                                 </div>
@@ -189,7 +196,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><br>
 
                 <form action="${pageContext.request.contextPath}/admin" method="get">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -330,68 +337,80 @@
         </div>
     </div>
 
-
-    <div class="modal fade" id="addEmployeeModal" tabindex="-1">
+    <div class="modal fade " id="addEmployeeModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <div class="card-header bg-transparent border-0 pt-4 justify-content-center">
-                        <div class="d-flex align-items-center">
+                <div class="modal-header d-flex justify-content-between align-items-center">
+<%--                    <div class="card-header bg-transparent border-0 pt-4 justify-content-center">--%>
+<%--                        <div class="">--%>
 <%--                                        <a href="#" class="btn btn-outline-primary me-3">--%>
 <%--                                            <i class="bi bi-arrow-left"></i> Back--%>
 <%--                                        </a>--%>
                             <h1 class="mb-0">Add New Hotel Employee</h1>
-                        </div>
-                    </div>
+
+                            <c:if test="${not empty requestScope.error}">
+                                <div class="alert alert-warning" role="alert">
+                                        ${requestScope.error}
+                                </div>
+                            </c:if>
+                            <button class="btn btn-close btn-warning" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </div>
                 <div class="modal-body">
-                    <form action="${pageContext.request.contextPath}/addEmployee" method="get">
+                    <form action="${pageContext.request.contextPath}/admin" method="post">
                         <div class="row g-4">
                             <div class="col-12 col-md-6">
                                 <label class="form-label">Full Name</label>
-                                <input type="text" name="name" class="form-control" required minlength="2" maxlength="50" placeholder="Enter full name">
+                                <input type="text" name="name" class="form-control" required minlength="2" maxlength="50" placeholder="Enter full name" value="${requestScope.name}">
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label">Role</label>
                                 <select class="form-select" name="role" required>
                                     <option value="">Choose Role</option>
                                     <c:forEach var="role" items="${sessionScope.roles}">
-                                        <option value="${role.getRoleName()}" ${role.getRoleName() eq 'Admin' ? 'disabled' : ''}>${role.getRoleName()}</option>
+                                        <option value="${role.getRoleName()}" ${role.getRoleName() eq 'Admin' ? 'disabled' : ''} ${requestScope.role eq role.getRoleName() ? 'selected' : ''}>${role.getRoleName()}</option>
                                     </c:forEach>
                                 </select>
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label">Monthly Salary</label>
-                                <input name="salary" type="number" class="form-control" min="0" required placeholder="Enter monthly salary">
+                                <input name="salary" type="number" class="form-control" min="0" value="${requestScope.salary}" required placeholder="Enter monthly salary">
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label">Overtime pay (per hour)</label>
-                                <input name="overtime_pay" type="number" class="form-control" min="0" placeholder="Enter overtime pay" required>
+                                <input name="overtime_pay" type="number" class="form-control" min="0" placeholder="Enter overtime pay" value="${requestScope.overtime_pay}" required>
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label">Hotel</label>
                                 <select name="hotelName" class="form-select" required>
                                     <option value="">Choose Hotel</option>
                                     <c:forEach var="hotel" items="${sessionScope.hotels}">
-                                        <option value="${hotel.getName()}">${hotel.getName()}</option>
+                                        <option value="${hotel.getName()}" ${requestScope.hotelName eq hotel.getName() ? 'selected' : ''}>${hotel.getName()}</option>
                                     </c:forEach>
                                 </select>
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label">Email Address</label>
-                                <input name="mail" type="email" class="form-control" required placeholder="Enter email address">
+                                <input name="mail" type="email" class="form-control" required placeholder="Enter email address" value="${requestScope.mail}">
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label">Phone Number</label>
-                                <input name="phoneNum" type="tel" class="form-control" required placeholder="+1 (123) 456-7890">
+                                <input name="phoneNum" type="number" class="form-control" required placeholder="+1 (123) 456-7890" value="${requestScope.phoneNum}">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Temporary Password</label>
+                                <input name="password" type="text" class="form-control" required placeholder="Enter temporary password" value="${requestScope.password}">
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label">Residential Address</label>
-                                <textarea name="address" class="form-control" rows="3" required minlength="10" placeholder="Enter full residential address"></textarea>
+                                <textarea name="address" class="form-control" rows="3" required minlength="10" placeholder="Enter full residential address">${requestScope.address}</textarea>
                             </div>
+                        </div>
+                        <div class="modal-footer">
                             <div class="col-12 d-flex gap-2 justify-content-end mt-4">
-                                <button type="reset" class="btn btn-outline-secondary">Clear Form</button>
+<%--                                <button type="reset" class="btn btn-outline-secondary">Clear Form</button>--%>
                                 <button type="submit" class="btn btn-primary" id="submitBtn">
                                     <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                                     Submit

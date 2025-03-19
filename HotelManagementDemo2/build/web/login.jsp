@@ -15,9 +15,9 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link ${empty requestScope.toRegister and empty requestScope.toForgotPass ? "active" : ""}" data-bs-toggle="pill" data-bs-target="#login" type="button">Login</button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link ${not empty requestScope.toRegister ? "active" : ""}" data-bs-toggle="pill" data-bs-target="#register" type="button">Register</button>
-            </li>
+<%--            <li class="nav-item" role="presentation">--%>
+<%--                <button class="nav-link ${not empty requestScope.toRegister ? "active" : ""}" data-bs-toggle="pill" data-bs-target="#register" type="button">Register</button>--%>
+<%--            </li>--%>
             <li class="nav-item" role="presentation">
                 <button class="nav-link ${not empty requestScope.toForgotPass ? "active" : ""}" data-bs-toggle="pill" data-bs-target="#forgot" type="button">Forgot Password</button>
             </li>
@@ -34,12 +34,16 @@
                             <label class="btn btn-outline-primary" for="phoneLogin">Phone</label>
                         </div>
                         <div id="emailInput" class="login-input">
-                            <input name="user" value="${invalidAcc.getUsername()}" type="email" class="form-control" placeholder="Enter your email" required>
-<%--                            <div class="invalid-feedback">Please enter a valid email</div>--%>
+                            <input name="user" value="${invalidAcc.getUsername()}" type="email" class="form-control" placeholder="Enter your email" >
+                            <c:if test="${not empty requestScope.noUsername}">
+                                <div class="alert alert-warning">Please enter a valid email</div>
+                            </c:if>
                         </div>
                         <div id="phoneInput" class="login-input d-none">
-                            <input name="phone" type="tel" class="form-control" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
-<%--                            <div class="invalid-feedback">Please enter a valid phone number</div>--%>
+                            <input name="phone" type="tel" class="form-control" placeholder="Enter your phone number" pattern="[0-9]{10}" >
+                            <c:if test="${not empty requestScope.noNumber}">
+                                <div class="alert alert-warning">Please enter a valid phone Number</div>
+                            </c:if>
                         </div>
                     </div>
                     <div class="mb-3 password-field">

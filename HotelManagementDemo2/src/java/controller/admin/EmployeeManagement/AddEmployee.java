@@ -7,11 +7,13 @@ package controller.admin.EmployeeManagement;
 
 import java.io.IOException;
 
+import dao.AccountDAO;
 import dao.EmployeeDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Employee;
 
 /**
@@ -23,16 +25,10 @@ public class AddEmployee extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String role = request.getParameter("role");
-        String hotelName = request.getParameter("hotelName");
-        String mail = request.getParameter("mail");
-        String phoneNum = request.getParameter("phoneNum");
-        String address = request.getParameter("address");
-        Employee newEmp = new Employee(name, role, hotelName, mail, phoneNum, address, Float.parseFloat(request.getParameter("salary")));
-        EmployeeDAO eDAO = new EmployeeDAO();
-        eDAO.addNew(newEmp, Float.parseFloat(request.getParameter("overtime_pay")));
+
+
         response.sendRedirect("admin");
+//        request.getRequestDispatcher("admin").forward(request, response);
     }
 
 

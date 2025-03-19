@@ -30,6 +30,10 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String username = request.getParameter("user");
+        if (username == null) {
+            request.setAttribute("noUsername", "Username is required!");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
         String password = request.getParameter("password");
         AccountDAO accountDAO = new AccountDAO();
         HttpSession session = request.getSession();

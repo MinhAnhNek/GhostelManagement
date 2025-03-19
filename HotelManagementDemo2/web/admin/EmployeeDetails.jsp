@@ -230,6 +230,9 @@
                 </tr>
                 </thead>
                 <tbody>
+                <c:if test="${empty sessionScope.attendance}">
+                  <div class="alert alert-warning" role="alert">This Employee hasn't got any attendance yet</div>
+                </c:if>
                 <c:forEach var="att" items="${sessionScope.attendance}" begin="1" end="3" step="1">
                   <tr>
                     <td>${att.getDate()}</td>
@@ -318,6 +321,9 @@
             </tr>
             </thead>
             <tbody>
+            <c:if test="${empty sessionScope.attendance}">
+              <div class="alert alert-warning" role="alert">This Employee hasn't got any attendance yet</div>
+            </c:if>
             <c:forEach var="att" items="${sessionScope.attendance}">
               <tr>
                 <td>${att.getDate()}</td>

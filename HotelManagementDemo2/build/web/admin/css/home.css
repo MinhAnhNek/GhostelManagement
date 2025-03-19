@@ -139,17 +139,19 @@ body {
 }
 
 .modal-dialog {
-    max-width: 80vw;
+    max-width: 60vw;
     max-height: 90vh;
-}
-.modal {
-    --bs-modal-width: 80vw;
-    --bs-modal-height: 90vh;
 }
 
 .modal-content {
     background: var(--card);
     border: 1px solid var(--border);
+    max-height: 80vh;
+}
+
+.modal-body {
+    overflow-y: auto; /* Enable vertical scrolling for the modal body if needed */
+    max-height: 80vh; /* Set a fixed max height for the modal body */
 }
 
 .progress {
@@ -191,13 +193,8 @@ body {
     box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
 }
 
-.search-row {
-    margin-top: 0.2rem;
-    width: 100%;
-}
-
-.row {
-    margin: 2rem 0;
+.modal-header .btn-close {
+    margin-left: 0;
 }
 
 .hidden {

@@ -29,11 +29,13 @@ public class FilterType {
 
     public static LinkedList<String> getRequestFilterTypes() {
         LinkedList<String> list = new LinkedList<>();
-        list.add("RequestID");
-        list.add("EmployeeID");
+//        list.add("RequestID");
+        list.add("Name");
+//        list.add("EmployeeID");
         list.add("RequestTypeID");
-        list.add("status");
-        list.add("reason");
+        list.add("HotelID");
+//        list.add("status");
+//        list.add("reason");
         return list;
     }
 }

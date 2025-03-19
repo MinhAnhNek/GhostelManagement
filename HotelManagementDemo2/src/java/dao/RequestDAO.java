@@ -23,7 +23,10 @@ public class RequestDAO extends DBContext {
                         rs.getInt(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getString(6)
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8)
+
                 ));
             }
         } catch (SQLException e) {
@@ -32,16 +35,23 @@ public class RequestDAO extends DBContext {
         return list;
     }
 
+    public String convertToColumnName(String name) {
+        return switch (name) {
+            case "HotelID", "Name" -> "e." + name;
+            default -> "r." + name;
+        };
+    }
+
     public List<Request> getRequestsByFilter(Map<String, String> selected) {
         StringBuilder sql = new StringBuilder(
-                "select * from Request " +
+                "select * from Request r left join Employee e on r.EmployeeID = e.EmployeeID " +
                 "where "
         );
         Boolean appended = false;
         for (Map.Entry<String, String> entry : selected.entrySet()) {
             if (entry.getValue() != null && !entry.getValue().isEmpty() ) {
                 System.out.println(entry.getKey() + " = " + entry.getValue());
-                sql.append(entry.getKey()).append(" like '").append(entry.getValue()).append("'");
+                sql.append(convertToColumnName(entry.getKey())).append(" like '%").append(entry.getValue()).append("%'");
                 sql.append(" and ");
                 appended = true;
             }
@@ -70,7 +80,10 @@ public class RequestDAO extends DBContext {
                         rs.getInt(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getString(6)
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8)
+
                 ));
             }
         } catch (SQLException e) {
@@ -79,8 +92,8 @@ public class RequestDAO extends DBContext {
         return list;
     }
 
-    public List<Request> getByStatus(String status) {
-        String sql = "select * from Request where status like '" + status +"' order by applied_at desc";
+    public List<Request> getRequestsByType(String typeName, String value) {
+        String sql = "select * from Request where " + typeName + " like '" + value +"' order by applied_at desc";
         LinkedList<Request> list = new LinkedList<>();
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
@@ -92,17 +105,19 @@ public class RequestDAO extends DBContext {
                         rs.getInt(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getString(6)
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8)
                 ));
             }
         } catch (SQLException e) {
-            System.out.println("RequestDAO getByStatus: " + e.getMessage());
+            System.out.println("RequestDAO getRequestsByType: " + e.getMessage());
         }
         return list;
     }
 
     public List<Integer> getRequestDistributionBy(String groupByType, String additionalTable, String condition) {
-        String sql = "select count(r.RequestID) " +
+        String sql = "select count(r.RequestID), " + groupByType +" " +
                 "from Request r " + additionalTable + " " +
                 "group by " + groupByType + " " +
                 condition;
@@ -122,24 +137,24 @@ public class RequestDAO extends DBContext {
         return list;
     }
 
-//    public List<Integer> getRequestDistributionByHotel() {
-//        String sql = "select count(r.RequestID) from Request r " +
-//                "left join Employee e on r.EmployeeID = e.EmployeeID " +
-//                "group by e.HotelID ";
-//        LinkedList<Integer> list = new LinkedList<>();
-//        try {
-//            PreparedStatement pre = connection.prepareStatement(sql);
-//            ResultSet rs = pre.executeQuery();
-//            while (rs.next()) {
-//                list.add(
-//                        rs.getInt(1)
-//                );
-//            }
-//        } catch (SQLException e) {
-//            System.out.println("RequestDAO getRequestDistributionByHotel: " + e.getMessage());
-//        }
-//        return list;
-//    }
+
+
+
+    // =================================    ADD REQUEST  =================================
+    public void add(int employeeID, int requestTypeID, String reason) {
+        String sql = "insert into Request(EmployeeID, RequestTypeID, reason) values " +
+                "(" + employeeID + ", " + requestTypeID + ", '" + reason + "')";
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("RequestDAO add: " + e.getMessage());
+        }
+    }
+
+
+
+
 
 
     // =================================    UPDATE REQUEST  =================================

@@ -7,14 +7,17 @@ import java.util.List;
 public class Request {
     private int id, typeID, employeeID;
     private String status, reason, appliedDate;
+    private String repliedDate, feedback;
 
-    public Request(int id, int employeeID, int typeID, String status, String reason, String appliedDate) {
+    public Request(int id, int employeeID, int typeID, String status, String reason, String appliedDate, String repliedDate, String feedback) {
         this.id = id;
-        this.employeeID = employeeID;
         this.typeID = typeID;
+        this.employeeID = employeeID;
         this.status = status;
         this.reason = reason;
         this.appliedDate = appliedDate;
+        this.repliedDate = repliedDate;
+        this.feedback = feedback;
     }
 
     public int getId() {
@@ -41,10 +44,18 @@ public class Request {
         return appliedDate;
     }
 
+    public String getRepliedDate() {
+        return repliedDate;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
     public static List<Request> getPage(int pageNo, List<Request> requestList, int pageSize) {
-        LinkedList<Request> page = new LinkedList<Request>();
+        LinkedList<Request> page = new LinkedList<>();
         int max = pageNo * pageSize;
-        for (int i = max - pageSize; i < max && i < requestList.size(); i++) {
+        for (int i = (pageNo-1) * pageSize; i < max && i < requestList.size(); i++) {
             page.add(requestList.get(i));
         }
         return page;

@@ -67,14 +67,25 @@
 
                                 <div class="progress">
                                     <div class="progress-bar bg-success" style="width: ${sessionScope.requestStatusDistribution.get(0) / sessionScope.totalRequest.size() * 100}%" aria-valuemin="0" aria-valuemax="100">
-                                        ${sessionScope.requestStatusDistribution.get(0)}
+<%--                                        <c:if test="${not empty sessionScope.requestStatusDistribution.get(0)}">--%>
+                                            ${sessionScope.requestStatusDistribution.get(0)}
+<%--                                        </c:if>--%>
                                     </div>
                                     <div class="progress-bar bg-warning" style="width: ${sessionScope.requestStatusDistribution.get(1) / sessionScope.totalRequest.size() * 100}%">
-                                        ${sessionScope.requestStatusDistribution.get(1)}
+                                        <c:if test="${sessionScope.requestStatusDistribution.size() >= 2}">
+                                            ${sessionScope.requestStatusDistribution.get(1)}
+                                        </c:if>
                                     </div>
                                     <div class="progress-bar bg-danger" style="width: ${sessionScope.requestStatusDistribution.get(2) / sessionScope.totalRequest.size() * 100}%">
-                                        ${sessionScope.requestStatusDistribution.get(2)}
+                                        <c:if test="${sessionScope.requestStatusDistribution.size() >= 3}">
+                                            ${sessionScope.requestStatusDistribution.get(2)}
+                                        </c:if>
                                     </div>
+                                </div>
+                                <div class="mt-3 d-flex justify-content-between">
+                                    <div class="badge rounded-pill bg-success">Accepted</div>
+                                    <div class="badge rounded-pill bg-warning">Pending</div>
+                                    <div class="badge rounded-pill bg-danger">Rejected</div>
                                 </div>
                             </div>
                         </div>
@@ -83,20 +94,35 @@
                         <div class="card shadow-sm h-100">
                             <div class="card-body">
                                 <h6 class="card-subtitle mb-2 text-muted">Today's Requests</h6>
-                                <h2 class="card-title mb-3">${sessionScope.todayRequest.size()}</h2>
                                 <c:if test="${sessionScope.todayRequest.size() != 0}">
+                                    <h2 class="card-title mb-3">${sessionScope.todayRequest.get(0)}</h2>
                                     <div class="progress">
                                         <div class="progress-bar bg-success" style="width: ${sessionScope.requestStatusDistributionToday.get(0) / sessionScope.todayRequest.size() * 100}%">
+<%--                                            <c:if test="${sessionScope.requestStatusDistributionToday.get(0)}">--%>
                                                 ${sessionScope.requestStatusDistributionToday.get(0)}
+<%--                                            </c:if>--%>
                                         </div>
                                         <div class="progress-bar bg-warning" style="width: ${sessionScope.requestStatusDistributionToday.get(1) / sessionScope.todayRequest.size() * 100}%">
+                                            <c:if test="${sessionScope.requestStatusDistributionToday.size() >= 2}">
                                                 ${sessionScope.requestStatusDistributionToday.get(1)}
+                                            </c:if>
                                         </div>
                                         <div class="progress-bar bg-danger" style="width: ${sessionScope.requestStatusDistributionToday.get(2) / sessionScope.todayRequest.size() * 100}%">
+                                            <c:if test="${sessionScope.requestStatusDistributionToday.size() >= 3}">
                                                 ${sessionScope.requestStatusDistributionToday.get(2)}
+                                            </c:if>
                                         </div>
                                     </div>
                                 </c:if>
+
+                                <c:if test="${sessionScope.todayRequest.size() == 0}">
+                                    <h2 class="card-title mb-3">${sessionScope.todayRequest.size()}</h2>
+                                </c:if>
+                                <div class="mt-3 d-flex justify-content-between">
+                                    <div class="badge rounded-pill bg-success">Accepted</div>
+                                    <div class="badge rounded-pill bg-warning">Pending</div>
+                                    <div class="badge rounded-pill bg-danger">Rejected</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -118,7 +144,7 @@
                                     <c:forEach var="count" items="${sessionScope.requestTypesDistribution}">
                                         yValues.push('${count / sessionScope.totalRequest.size() * 100}');
                                     </c:forEach>
-                                    var barColors = ["red", "green","blue","orange","brown", "violet"];
+                                    var barColors = ["red", "green","blue","orange","brown", "violet", "yellow"];
 
                                     new Chart("requestTypeChart", {
                                         type: "bar",
@@ -187,25 +213,25 @@
                         <form action="${pageContext.request.contextPath}/EmployeeRequest" method="get">
                             <div class="row g-3">
                                 <div class="col-md-4">
-                                    <select class="form-select" id="requestType">
+                                    <select name="RequestTypeID" class="form-select" id="requestType">
                                         <option value="">All Request Type</option>
                                         <c:forEach var="type" items="${sessionScope.requestTypes}">
-                                            <option value="${type.getId()}">${type.getName()}</option>
+                                            <option value="${type.getId()}" ${requestScope.RequestTypeID == type.getId() ? 'selected' : ''}>${type.getName()}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <select class="form-select" id="hotelBranch">
+                                    <select class="form-select" id="hotelBranch" name="HotelID">
                                         <option value="">All Hotel Branch</option>
                                         <c:forEach var="hotel" items="${sessionScope.hotels}">
-                                            <option value="${hotel.getHotelId()}">${hotel.getName()}</option>
+                                            <option value="${hotel.getHotelId()}" ${requestScope.HotelID == hotel.getHotelId() ? 'selected' : ''}>${hotel.getName()}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-search"></i></span>
-                                        <input type="text" class="form-control" placeholder="Search by Employee Name">
+                                        <input type="text" class="form-control" placeholder="Search by Employee Name" name="Name" value="${requestScope.Name}">
                                     </div>
                                 </div>
                             </div>
@@ -237,6 +263,9 @@
 
                         <div class="tab-content" id="requestTabContent">
                             <div class="tab-pane fade show active" id="all" role="tabpanel">
+                                <c:if test="${empty sessionScope.requests}">
+                                    <div class="alert alert-warning" role="alert">There is no such request</div>
+                                </c:if>
                                 <div class="table-responsive">
                                     <table class="table table-hover align-middle">
                                         <thead>
@@ -257,7 +286,7 @@
                                                 <td>${request.getEmployeeID()}</td>
                                                 <td>${sessionScope.employees.get(request.getEmployeeID()).getName()}</td>
                                                 <td>${sessionScope.requestTypes.get(request.getTypeID() - 1).getName()}</td>
-                                                <td>${request.getAppliedDate()}</td>
+                                                <td>${request.getAppliedDate().substring(0,19)}</td>
                                                 <td>
                                                     <c:if test="${request.getStatus() == 'Approved'}">
                                                         <span class="badge bg-success">${request.getStatus()}</span>
@@ -274,7 +303,7 @@
                                             <div class="modal fade" id="requestModal${request.getId()}" tabindex="-1">
                                                 <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
-                                                        <form action="${pageContext.request.contextPath}/UpdateRequest?to=EmployeeRequest" method="get">
+                                                        <form action="${pageContext.request.contextPath}/UpdateRequest" method="get">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title">Request Details</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -284,7 +313,7 @@
                                                                     <div class="col-md-6">
                                                                         <p class="d-flex">
                                                                             <strong class="col-md-6">Request ID:</strong>
-                                                                            <input type="text" class="form-control" value="${request.getId()}" readonly>
+                                                                            <input type="text" name="requestID" class="form-control" value="${request.getId()}" readonly>
                                                                         </p>
                                                                         <p class="d-flex">
                                                                             <strong class="col-md-6">Employee ID:</strong>
@@ -306,7 +335,7 @@
                                                                         </p>
                                                                         <p class="d-flex">
                                                                             <strong class="col-md-6">Submission Date:</strong>
-                                                                            <input type="text" class="form-control" value="${request.getAppliedDate()}" readonly>
+                                                                            <input type="text" class="form-control" value="${request.getAppliedDate().substring(0,19)}" readonly>
                                                                         </p>
                                                                         <p class="d-flex">
                                                                             <strong class="col-md-6">Request Status:</strong>
@@ -320,6 +349,10 @@
                                                                                 <span class="badge bg-warning">${request.getStatus()}</span>
                                                                             </c:if>
                                                                         </p>
+                                                                        <p class="d-flex">
+                                                                            <strong class="col-md-6">Replied Date:</strong>
+                                                                            <input type="text" class="form-control" value="${request.getRepliedDate() == null ? 'Not Yet' : request.getRepliedDate().substring(0,19)}" readonly>
+                                                                        </p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="mb-3">
@@ -332,8 +365,9 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="submit" name="status" value="approved" class="btn btn-success" ${request.getStatus() eq 'Pending' ? '' : 'disabled'}><i class="bi bi-check-lg"></i> Approve</button>
-                                                                <button type="submit" name="status" value="rejected" class="btn btn-danger" ${request.getStatus() eq 'Pending' ? '' : 'disabled'}><i class="bi bi-x-lg"></i> Reject</button>
+                                                                <% session.setAttribute("to", "EmployeeRequest"); %>
+                                                                <button type="submit" name="status" value="Approved" class="btn btn-success" ${request.getStatus() eq 'Pending' ? '' : 'disabled'}><i class="bi bi-check-lg"></i> Approve</button>
+                                                                <button type="submit" name="status" value="Rejected" class="btn btn-danger" ${request.getStatus() eq 'Pending' ? '' : 'disabled'}><i class="bi bi-x-lg"></i> Reject</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -348,7 +382,7 @@
                                         <%--                                <li class="page-item disabled"><a class="page-link" href="${pageContext.request.contextPath}/EmployeeRequest?pageNo=">Previous</a></li>--%>
                                         <c:forEach var="pageNo" begin="1" end="${requestScope.maxPage}" step="1">
                                             <li class="page-item">
-                                                <a class="page-link ${requestScope.currentPage == pageNo ? 'active' : ''}" href="${pageContext.request.contextPath}/EmployeeRequest?pageNo=${pageNo}">
+                                                <a class="page-link ${requestScope.pageNo == pageNo ? 'active' : ''}" href="${pageContext.request.contextPath}/EmployeeRequest?pageNo=${pageNo}">
                                                         ${pageNo}
                                                 </a>
                                             </li>
@@ -360,6 +394,9 @@
 
                             <c:forEach var="requestStatus" items="${sessionScope.requestStatuses}">
                                 <div class="tab-pane fade" id="${requestStatus}" role="tabpanel">
+                                    <c:if test="${empty sessionScope.requests}">
+                                        <div class="alert alert-warning" role="alert">There is no such request</div>
+                                    </c:if>
                                     <div class="table-responsive">
                                         <table class="table table-hover align-middle">
                                             <thead>
@@ -382,7 +419,7 @@
                                                         <td>${request.getEmployeeID()}</td>
                                                         <td>${sessionScope.employees.get(request.getEmployeeID()).getName()}</td>
                                                         <td>${sessionScope.requestTypes.get(request.getTypeID() - 1).getName()}</td>
-                                                        <td>${request.getAppliedDate()}</td>
+                                                        <td>${request.getAppliedDate().substring(0,19)}</td>
                                                         <td>
                                                             <c:if test="${request.getStatus() == 'Approved'}">
                                                                 <span class="badge bg-success">${request.getStatus()}</span>
@@ -414,7 +451,7 @@
                                                                             <div class="col-md-6">
                                                                                 <p class="d-flex">
                                                                                     <strong class="col-md-6">Request ID:</strong>
-                                                                                    <input type="text" class="form-control" value="${request.getId()}" readonly>
+                                                                                    <input type="text" name="requestID" class="form-control" value="${request.getId()}" readonly>
                                                                                 </p>
                                                                                 <p class="d-flex">
                                                                                     <strong class="col-md-6">Employee ID:</strong>
@@ -436,7 +473,7 @@
                                                                                 </p>
                                                                                 <p class="d-flex">
                                                                                     <strong class="col-md-6">Submission Date:</strong>
-                                                                                    <input type="text" class="form-control" value="${request.getAppliedDate()}" readonly>
+                                                                                    <input type="text" class="form-control" value="${request.getAppliedDate().substring(0,19)}" readonly>
                                                                                 </p>
                                                                                 <p class="d-flex">
                                                                                     <strong class="col-md-6">Request Status:</strong>
@@ -458,7 +495,7 @@
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label class="form-label">Admin Feedback</label>
-                                                                            <textarea class="form-control" rows="3" name="AdminFeedback"></textarea>
+                                                                            <textarea class="form-control" rows="3" name="AdminFeedback" required></textarea>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">

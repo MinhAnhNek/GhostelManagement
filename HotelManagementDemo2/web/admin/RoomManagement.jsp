@@ -68,9 +68,9 @@
                 <button class="btn btn-primary w-100" style="margin: 2rem 0" data-bs-toggle="modal" data-bs-target="#addRoomTypeModal">
                     <i class="bi bi-plus-circle me-2"></i>Add Room Type
                 </button>
-                <button class="btn btn-primary w-100" style="margin-left: 2rem" data-bs-toggle="modal" data-bs-target="#addHotelModal">
-                    <i class="bi bi-pencil me-2"></i>Add Hotel
-                </button>
+<%--                <button class="btn btn-primary w-100" style="margin-left: 2rem" data-bs-toggle="modal" data-bs-target="#addHotelModal">--%>
+<%--                    <i class="bi bi-pencil me-2"></i>Add Hotel--%>
+<%--                </button>--%>
             </div>
         </div>
         <div class="container-fluid py-4">

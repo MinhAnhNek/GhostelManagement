@@ -6,7 +6,6 @@
 package controller.admin.EmployeeManagement;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.*;
 
 import dao.*;
@@ -50,8 +49,8 @@ public class EmployeeServlet extends HttpServlet {
         session.setAttribute("absentEmp", attendanceDAO.getByDateAndStatus("", "absent"));
         session.setAttribute("dayoff", attendanceDAO.getByDateAndStatus("", "Day Off"));
         session.setAttribute("payrolls", payrollDAO.getByMonth("", ""));
-        session.setAttribute("pendingRequests", requestDAO.getByStatus("Pending"));
-//        System.out.println(requestDAO.getByStatus("Pending").getFirst().getStatus());
+        session.setAttribute("pendingRequests", requestDAO.getRequestsByType("status", "Pending"));
+//        System.out.println(requestDAO.getRequestsByType("Pending").getFirst().getStatus());
         session.setAttribute("requestTypes", requestTypeDAO.getAll());
 
 
@@ -61,7 +60,7 @@ public class EmployeeServlet extends HttpServlet {
         // dieu huong sang trang EmployeeDetails.jsp de hien thi thong tin chi tiet cua nhan vien neu id khac null
         String id = request.getParameter("id");
         if (id != null) {
-            LinkedList<Attendance> list = (LinkedList<Attendance>)  attendanceDAO.getByEmployeeID(Integer.parseInt(id));
+            LinkedList<Attendance> list = (LinkedList<Attendance>)  attendanceDAO.getByEmployeeID(Integer.parseInt(id), "");
 //            System.out.println(list.isEmpty());
             session.setAttribute("attendance", list);
             session.setAttribute("emp", employeeDAO.getEmployeeById(Integer.parseInt(id)));
@@ -87,12 +86,13 @@ public class EmployeeServlet extends HttpServlet {
         String sortType = request.getParameter("sortType");
         LinkedList<Employee> list = (LinkedList<Employee>) employeeDAO.getEmployeesByTypes(selected, sortType == null? "" : sortType);
         int pageSize = 6;
-        request.setAttribute("maxPage", (list.size() % pageSize == 0) ? (list.size() / pageSize) : (list.size() / pageSize + 1));
+        int maxPage = (list.size() % pageSize == 0) ? (list.size() / pageSize) : (list.size() / pageSize + 1);
+        request.setAttribute("maxPage", maxPage);
         request.setAttribute("sortType", sortType);
 
         // phan trang danh sach tat ca nhan vien, dieu huong den cac page tuong ung
         String pageNo = request.getParameter("pageNo");
-        if (pageNo == null || pageNo.isEmpty() || Integer.parseInt(pageNo) < 1) {
+        if (pageNo == null || pageNo.isEmpty() || Integer.parseInt(pageNo) < 1 || Integer.parseInt(pageNo) > maxPage) {
             session.setAttribute("employees", Employee.getPage(1, list, pageSize));
             request.setAttribute("pageNo", 1);
         } else {
@@ -110,6 +110,35 @@ public class EmployeeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String role = request.getParameter("role");
+        String hotelName = request.getParameter("hotelName");
+        String mail = request.getParameter("mail");
+        String phoneNum = request.getParameter("phoneNum");
+        String address = request.getParameter("address");
+        String password = request.getParameter("password");
+        String salary = request.getParameter("salary");
+        String overtimePay = request.getParameter("overtime_pay");
+
+        AccountDAO accountDAO = new AccountDAO();
+        HttpSession session = request.getSession();
+        if (accountDAO.getAccount(mail) != null) {
+            request.setAttribute("error", "This email already exists!");
+            request.setAttribute("name", name);
+            request.setAttribute("role", role);
+            request.setAttribute("hotelName", hotelName);
+            request.setAttribute("mail", mail);
+            request.setAttribute("phoneNum", phoneNum);
+            request.setAttribute("address", address);
+            request.setAttribute("password", password);
+            request.setAttribute("salary", salary);
+            request.setAttribute("overtime_pay", overtimePay);
+        } else {
+            Employee newEmp = new Employee(name, role, hotelName, mail, phoneNum, address, Float.parseFloat(salary));
+            EmployeeDAO eDAO = new EmployeeDAO();
+            eDAO.addNew(newEmp, Float.parseFloat(overtimePay), password);
+        }
+        request.getRequestDispatcher("admin/EmployeeDashboard.jsp").forward(request, response);
     }
 
 

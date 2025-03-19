@@ -25,19 +25,22 @@ public class UpdateRequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         RequestDAO requestDAO = new RequestDAO();
         String requestID = request.getParameter("requestID");
         String status = request.getParameter("status");
-        String to = request.getParameter("to");
+        String to = (String) session.getAttribute("to");
         System.out.println(to);
+        System.out.println(status);
+        System.out.println(requestID);
         if (requestID != null && !requestID.isEmpty() && status != null && !status.isEmpty()) {
             requestDAO.updateStatus(Integer.parseInt(requestID), status);
         }
+        session.removeAttribute("to");
         if (to != null && !to.isEmpty()) {
-            response.sendRedirect("EmployeeRequest");
+            response.sendRedirect(to);
         } else {
-            response.sendRedirect("admin");
+            response.sendRedirect("EmployeeRequest");
         }
 
 
