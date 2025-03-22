@@ -4,21 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="fix login, add log out">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeDashboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeSalaryDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeSalaryDashboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeSalaryDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeSalaryDetail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/PayrollDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/PayrollDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeSalaryDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeSalaryDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dao/PayrollDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/PayrollDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeRequests.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeSalaryDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeSalaryDashboard.jsp" afterDir="false" />
+    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="add sort for salary dashboard">
       <change beforePath="$PROJECT_DIR$/web/admin/RoomManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/RoomManagement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/UpdateRoom.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/UpdateRoom.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -439,7 +426,31 @@
       <option name="project" value="LOCAL" />
       <updated>1742647563798</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="add sort for salary dashboard">
+      <option name="closed" value="true" />
+      <created>1742656604417</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1742656604417</updated>
+    </task>
+    <task id="LOCAL-00030" summary="add sort for salary dashboard">
+      <option name="closed" value="true" />
+      <created>1742656610348</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1742656610348</updated>
+    </task>
+    <task id="LOCAL-00031" summary="add sort for salary dashboard">
+      <option name="closed" value="true" />
+      <created>1742656614823</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1742656614823</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -462,7 +473,8 @@
     <MESSAGE value="fix add employee" />
     <MESSAGE value="fix get emp by filter. fix employee request" />
     <MESSAGE value="fix login, add log out" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix login, add log out" />
+    <MESSAGE value="add sort for salary dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="add sort for salary dashboard" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
