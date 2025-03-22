@@ -50,6 +50,7 @@ public class EmployeeRequest extends HttpServlet {
             request.setAttribute(filterType, request.getParameter(filterType));
         }
 
+        session.setAttribute("totalEmp", employeeDAO.getAll(""));
         session.setAttribute("requestTypesDistribution", requestDAO.getRequestDistributionBy("RequestTypeID", "", ""));
         session.setAttribute("requestStatusDistribution", requestDAO.getRequestDistributionBy("status","", ""));
         session.setAttribute("totalRequest", requestDAO.getAll());

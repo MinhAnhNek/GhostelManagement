@@ -122,7 +122,7 @@ public class EmployeeServlet extends HttpServlet {
 
         AccountDAO accountDAO = new AccountDAO();
         HttpSession session = request.getSession();
-        if (accountDAO.getAccount(mail) != null) {
+        if (accountDAO.getAccount("Username", mail) != null) {
             request.setAttribute("error", "This email already exists!");
             request.setAttribute("name", name);
             request.setAttribute("role", role);

@@ -108,7 +108,7 @@ public class PayrollDAO extends DBContext {
         String sql = "select * from Payroll " +
                 "where EmployeeID = ? and salary_month like " + month + " " +
                 "order by salary_year desc, salary_month desc ";
-        System.out.println(sql);
+//        System.out.println(sql);
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setInt(1, id);

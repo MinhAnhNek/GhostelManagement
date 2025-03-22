@@ -29,17 +29,29 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String username = request.getParameter("user");
-        if (username == null) {
-            request.setAttribute("noUsername", "Username is required!");
+        String loginMethod = request.getParameter("loginMethod");
+        String loginValue = request.getParameter(loginMethod);
+//        System.out.println(loginMethod);
+//        System.out.println(loginValue);
+        if (loginValue == null) {
+            request.setAttribute("noLoginValue", "Please enter either an username or a phone number!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
         }
         String password = request.getParameter("password");
         AccountDAO accountDAO = new AccountDAO();
         HttpSession session = request.getSession();
-        if (accountDAO.checkLogin(username, password)) {
-            session.setAttribute("account", accountDAO.getAccount(username));
-            int roleId = accountDAO.getAccount(username).getRoleId();
+        request.setAttribute(loginMethod, loginValue);
+        if (accountDAO.checkLogin(loginMethod, loginValue, password)) {
+            Account account = accountDAO.getAccount(loginMethod, loginValue);
+            if (account.getStatusID() == 2) {
+                request.setAttribute("deactiveAcc", "This account is deactivated");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
+            session.setAttribute("account", account);
+            int roleId = account.getRoleId();
+//            System.out.println(roleId);
             if (roleId == 0) {
                 session.setAttribute("role", "admin");
                 response.sendRedirect("admin");
@@ -48,11 +60,13 @@ public class Login extends HttpServlet {
                 session.setAttribute("role", "manager");
                 response.sendRedirect("manager");
                 return;
+            } else {
+                response.sendRedirect("employee");
             }
-            response.sendRedirect("employee");
         } else {
             request.setAttribute("warningL", "Invalid Username or Password");
-            request.setAttribute("wrongAccount", new Account(username, password));
+//            request.setAttribute("wrongAccount", new Account(username, password));
+            request.setAttribute("password", password);
 //            response.sendRedirect("login.jsp");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }

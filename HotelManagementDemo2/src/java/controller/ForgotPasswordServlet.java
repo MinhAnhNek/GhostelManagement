@@ -35,7 +35,7 @@ public class ForgotPasswordServlet extends HttpServlet {
         String phoneNum = request.getParameter("phoneNum");
         String id = request.getParameter("id");
         AccountDAO accountDAO = new AccountDAO();
-        Account account = accountDAO.getAccount(username);
+        Account account = accountDAO.getAccount("Username", username);
         request.setAttribute("usernameFG", username);
         request.setAttribute("phoneNumFG", phoneNum);
         request.setAttribute("idFG", id);

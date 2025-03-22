@@ -29,9 +29,9 @@ public class HomeServlet extends HttpServlet {
         EmployeeDAO employeeDAO = new EmployeeDAO();
         HttpSession session = request.getSession();
 
-//        Account account = (Account) session.getAttribute("account");
+        Account account = (Account) session.getAttribute("account");
         AccountDAO accountDAO = new AccountDAO();
-        Account account = accountDAO.getAccount("emp@email.com");
+//        Account account = accountDAO.getAccount("Username","emp@email.com");
 
 
         Employee emp = employeeDAO.getEmployeeByUsername(account.getUsername());

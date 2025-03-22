@@ -228,14 +228,17 @@
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-search"></i></span>
                                         <input type="text" class="form-control" placeholder="Search by Employee Name" name="Name" value="${requestScope.Name}">
                                     </div>
                                 </div>
+                                <div class="col-md-1">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-search"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Filter</button>
                         </form>
                     </div>
                 </div>
@@ -361,7 +364,7 @@
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label class="form-label">Admin Feedback</label>
-                                                                    <textarea class="form-control" rows="3" name="AdminFeedback"></textarea>
+                                                                    <textarea class="form-control" rows="3" name="AdminFeedback">${request.getFeedback()}</textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -514,8 +517,6 @@
                                 </div>
                             </c:forEach>
                         </div>
-
-
                     </div>
                 </div>
             </div>

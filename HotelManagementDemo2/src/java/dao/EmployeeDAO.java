@@ -252,7 +252,7 @@ public class EmployeeDAO extends DBContext {
 
             e.setId(getAll("").size());
             // insert into account table
-            Account account = new Account(e.getMail(), accPassword, erDAO.getEmployeeRoleIDByName(e.getRole()), 1);
+            Account account = new Account(e.getMail(), accPassword, erDAO.getEmployeeRoleIDByName(e.getRole()), e.getPhoneNum(), 1);
             AccountDAO accountDAO = new AccountDAO();
             accountDAO.add(account);
 

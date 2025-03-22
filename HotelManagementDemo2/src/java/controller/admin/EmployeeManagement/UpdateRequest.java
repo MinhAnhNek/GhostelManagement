@@ -30,9 +30,9 @@ public class UpdateRequest extends HttpServlet {
         String requestID = request.getParameter("requestID");
         String status = request.getParameter("status");
         String to = (String) session.getAttribute("to");
-        System.out.println(to);
-        System.out.println(status);
-        System.out.println(requestID);
+//        System.out.println(to);
+//        System.out.println(status);
+//        System.out.println(requestID);
         if (requestID != null && !requestID.isEmpty() && status != null && !status.isEmpty()) {
             requestDAO.updateStatus(Integer.parseInt(requestID), status);
         }

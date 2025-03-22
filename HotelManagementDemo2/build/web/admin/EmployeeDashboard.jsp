@@ -23,6 +23,9 @@
                     <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d" alt="Hotel Logo" class="img-fluid rounded-circle">
                 </a>
             </div>
+            <div class="mb-5 d-flex justify-content-center align-items-center">
+                <a class="link-danger" href="${pageContext.request.contextPath}/logout">Log Out</a>
+            </div>
             <ul class="nav flex-column">
                 <%--            <li class="nav-item">--%>
                 <%--                <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>--%>
@@ -71,7 +74,12 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h6 class="card-subtitle mb-2">Total Employees</h6>
+                                <div class="card-subtitle d-flex justify-content-between align-items-center">
+                                    <h6 class="mb-2">Total Employees</h6>
+                                    <button type="button" class="btn btn-primary btn-sm">
+                                        <a href="#empList" class="link-primary text-center text-white">View All</a>
+                                    </button>
+                                </div>
                                 <h2 class="card-title mb-0 text-center">${sessionScope.totalEmp.size()}</h2>
                                 <div class="mt-3">
                                     <div class="progress mt-2">
@@ -92,7 +100,7 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <c:set var="atworkEmp" value="${sessionScope.presentEmp + sessionScope.lateEmp}"/>
-                                <h6 class="card-subtitle mb-2">Today Status</h6>
+                                <h6 class="card-subtitle mb-2">Today Attendance</h6>
                                 <h2 class="card-title mb-0 text-center">${atworkEmp}</h2>
                                 <div class="mt-3">
                                     <div class="progress mt-2">
@@ -165,26 +173,99 @@
                     <div class="col-lg-4">
                         <div class="card h-100">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Recent Pending Requests</h5>
+                                <h5 class="card-title mb-0">Pending Requests</h5>
                                 <button type="button" class="btn btn-primary" onclick="redirectToServlet('${pageContext.request.contextPath}', 'EmployeeRequest')">
                                     View All
                                 </button>
                             </div>
                             <div class="card-body">
                                 <c:if test="${not empty sessionScope.pendingRequests}">
-                                    <c:forEach items="${sessionScope.pendingRequests}" var="request" begin="0" end="1" step="1">
+                                    <c:forEach items="${sessionScope.pendingRequests}" var="request" begin="0" end="2" step="1">
                                         <div class="d-flex align-items-start mb-3">
                                             <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" class="rounded-circle me-2" width="32" height="32" alt="">
                                             <div class="flex-grow-1">
-                                                <small class="float-end text-navy">${request.getAppliedDate().substring(0,10)}</small>
-                                                <div><strong>${request.employeeID} - ${sessionScope.totalEmp.get(request.getEmployeeID()).getName()}</strong></div>
+                                                <div><strong>${request.getEmployeeID()} - ${sessionScope.totalEmp.get(request.getEmployeeID()).getName()}</strong></div>
                                                 <div>${sessionScope.requestTypes.get(request.getTypeID() - 1).getName()}</div>
+                                                <small class="text-navy">${request.getAppliedDate().substring(0,10)}</small>
 <%--                                                <div>${sessionScope.requestTypes.get(request.getTypeID() - 1).getName()}</div>--%>
                                                     <%--                                            <small class="text-muted">${request.get}</small>--%>
-                                                <div class="mt-2">
-                                                    <% session.setAttribute("to", "admin"); %>
-                                                    <button type="submit" class="btn btn-sm btn-success me-1" onclick="redirectToServlet('${pageContext.request.contextPath}', 'UpdateRequest?requestID=${request.getId()}&to=admin&status=Approved')">Approve</button>
-                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="redirectToServlet('${pageContext.request.contextPath}', 'UpdateRequest?requestID=${request.getId()}&to=admin&status=Rejected')">Reject</button>
+                                            </div>
+                                            <div class="mt-2">
+                                                <% session.setAttribute("to", "admin"); %>
+                                                    <%--                                                    <button type="submit" class="btn btn-sm btn-success me-1" onclick="redirectToServlet('${pageContext.request.contextPath}', 'UpdateRequest?requestID=${request.getId()}&to=admin&status=Approved')">Approve</button>--%>
+                                                    <%--                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="redirectToServlet('${pageContext.request.contextPath}', 'UpdateRequest?requestID=${request.getId()}&to=admin&status=Rejected')">Reject</button>--%>
+                                                <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#requestModal${request.getId()}"><i class="bi bi-eye"></i> View</button>
+                                            </div>
+                                        </div>
+                                        <div class="modal fade" id="requestModal${request.getId()}" tabindex="-1">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <form action="${pageContext.request.contextPath}/UpdateRequest" method="get">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Request Details</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <p class="d-flex">
+                                                                        <strong class="col-md-6">Request ID:</strong>
+                                                                        <input type="text" name="requestID" class="form-control" value="${request.getId()}" readonly>
+                                                                    </p>
+                                                                    <p class="d-flex">
+                                                                        <strong class="col-md-6">Employee ID:</strong>
+                                                                        <input type="text" class="form-control" value="${request.getEmployeeID()}" readonly>
+                                                                    </p>
+                                                                    <p class="d-flex">
+                                                                        <strong class="col-md-6">Full Name:</strong>
+                                                                        <input type="text" class="form-control" value="${sessionScope.totalEmp.get(request.getEmployeeID()).getName()}" readonly>
+                                                                    </p>
+                                                                    <p class="d-flex">
+                                                                        <strong class="col-md-6">Hotel:</strong>
+                                                                        <input type="text" class="form-control" value="${sessionScope.totalEmp.get(request.getEmployeeID()).getHotelName()}" readonly>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p class="d-flex">
+                                                                        <strong class="col-md-6">Request Type:</strong>
+                                                                        <input type="text" class="form-control" value="${sessionScope.requestTypes.get(request.getTypeID() - 1).getName()}" readonly>
+                                                                    </p>
+                                                                    <p class="d-flex">
+                                                                        <strong class="col-md-6">Submission Date:</strong>
+                                                                        <input type="text" class="form-control" value="${request.getAppliedDate().substring(0,19)}" readonly>
+                                                                    </p>
+                                                                    <p class="d-flex">
+                                                                        <strong class="col-md-6">Request Status:</strong>
+                                                                        <c:if test="${request.getStatus() == 'Approved'}">
+                                                                            <span class="badge bg-success">${request.getStatus()}</span>
+                                                                        </c:if>
+                                                                        <c:if test="${request.getStatus() == 'Rejected'}">
+                                                                            <span class="badge bg-danger">${request.getStatus()}</span>
+                                                                        </c:if>
+                                                                        <c:if test="${request.getStatus() == 'Pending'}">
+                                                                            <span class="badge bg-warning">${request.getStatus()}</span>
+                                                                        </c:if>
+                                                                    </p>
+                                                                    <p class="d-flex">
+                                                                        <strong class="col-md-6">Replied Date:</strong>
+                                                                        <input type="text" class="form-control" value="${request.getRepliedDate() == null ? 'Not Yet' : request.getRepliedDate().substring(0,19)}" readonly>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <h6>Request Details</h6>
+                                                                <textarea class="form-control" rows="2" readonly>${request.getReason()}</textarea>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Admin Feedback</label>
+                                                                <textarea class="form-control" rows="3" name="AdminFeedback" required></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" name="status" value="Approved" class="btn btn-success" ${request.getStatus() eq 'Pending' ? '' : 'disabled'}><i class="bi bi-check-lg"></i> Approve</button>
+                                                            <button type="submit" name="status" value="Rejected" class="btn btn-danger" ${request.getStatus() eq 'Pending' ? '' : 'disabled'}><i class="bi bi-x-lg"></i> Reject</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -281,7 +362,7 @@
                 </form>
             </div>
 
-            <div class="card">
+            <div class="card" id="empList">
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover">

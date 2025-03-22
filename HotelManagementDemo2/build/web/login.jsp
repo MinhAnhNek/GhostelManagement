@@ -25,29 +25,29 @@
         <div class="tab-content" id="authTabContent">
             <div class="tab-pane fade ${empty requestScope.toRegister and empty requestScope.toForgotPass ? "show active" : ""}" id="login">
                 <form action="login" method="post">
-                    <c:set var="invalidAcc" value="${requestScope.wrongAccount}"/>
+<%--                    <c:set var="invalidAcc" value="${requestScope.wrongAccount}"/>--%>
                     <div class="mb-3">
                         <div class="btn-group w-100 mb-3" role="group">
-                            <input type="radio" class="btn-check" name="loginMethod" value="email" id="emailLogin" checked>
+                            <input type="radio" class="btn-check" name="loginMethod" value="Username" id="emailLogin" checked>
                             <label class="btn btn-outline-primary" for="emailLogin">Email</label>
-                            <input type="radio" class="btn-check" name="loginMethod" value="phone" id="phoneLogin">
+                            <input type="radio" class="btn-check" name="loginMethod" value="phoneNum" id="phoneLogin">
                             <label class="btn btn-outline-primary" for="phoneLogin">Phone</label>
                         </div>
                         <div id="emailInput" class="login-input">
-                            <input name="user" value="${invalidAcc.getUsername()}" type="email" class="form-control" placeholder="Enter your email" >
-                            <c:if test="${not empty requestScope.noUsername}">
+                            <input name="Username" value="${requestScope.Username}" type="email" class="form-control" placeholder="Enter your email" >
+                            <c:if test="${not empty requestScope.noLoginValue}">
                                 <div class="alert alert-warning">Please enter a valid email</div>
                             </c:if>
                         </div>
                         <div id="phoneInput" class="login-input d-none">
-                            <input name="phone" type="tel" class="form-control" placeholder="Enter your phone number" pattern="[0-9]{10}" >
-                            <c:if test="${not empty requestScope.noNumber}">
+                            <input name="phoneNum" value="${requestScope.phoneNum}" type="number" class="form-control" placeholder="Enter your phone number">
+                            <c:if test="${not empty requestScope.noLoginValue}">
                                 <div class="alert alert-warning">Please enter a valid phone Number</div>
                             </c:if>
                         </div>
                     </div>
                     <div class="mb-3 password-field">
-                        <input type="password" name="password" value="${invalidAcc.getPassword()}" class="form-control" placeholder="Enter password" required>
+                        <input type="password" name="password" value="${requestScope.password}" class="form-control" placeholder="Enter password" required>
                         <span class="password-toggle"><i class="bi bi-eye"></i></span>
                         <div class="invalid-feedback">Password is required</div>
                     </div>
@@ -61,6 +61,9 @@
                             <div class="alert alert-warning" role="alert">${requestScope.warningL}</div>
                         </c:if>
                     </div>
+                    <c:if test="${not empty requestScope.deactiveAcc}">
+                        <div class="alert alert-danger" role="alert">${requestScope.deactiveAcc}</div>
+                    </c:if>
                     <button type="submit" class="btn btn-primary w-100">Login</button>
 <%--                    <div class="social-login mt-4">--%>
 <%--                        <button class="btn btn-outline-dark w-100 mb-2"><i class="bi bi-google"></i> Continue with Google</button>--%>

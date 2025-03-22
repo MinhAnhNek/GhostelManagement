@@ -146,7 +146,7 @@ body {
 .modal-content {
     background: var(--card);
     border: 1px solid var(--border);
-    max-height: 80vh;
+    /*max-height: 80vh;*/
 }
 
 .modal-body {
@@ -220,6 +220,11 @@ body {
 
 .test {
     color: var(--primary);
+}
+
+.link-primary:hover {
+    color: var(--secondary);
+    background-color: var(--ring);
 }
 
 @media (max-width: 768px) {

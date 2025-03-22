@@ -10,6 +10,7 @@
     --border: #109f7c;
     --input: #ffffff;
     --ring: #0a8c6d;
+    --danger: #DC3545;
 
     --radius: 0.5rem;
     --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
@@ -146,7 +147,7 @@ body {
 .modal-content {
     background: var(--card);
     border: 1px solid var(--border);
-    max-height: 80vh;
+    /*max-height: 80vh;*/
 }
 
 .modal-body {
@@ -220,6 +221,22 @@ body {
 
 .test {
     color: var(--primary);
+}
+
+.link-primary:hover {
+    color: var(--secondary);
+    background-color: var(--ring);
+}
+
+.link-danger {
+    background-color: var(--danger);
+    color: var(--primary-foreground);
+    text-decoration: none;
+}
+.link-danger:hover {
+    background-color: var(--danger);
+    color: var(--secondary);
+    text-decoration: none;
 }
 
 @media (max-width: 768px) {
