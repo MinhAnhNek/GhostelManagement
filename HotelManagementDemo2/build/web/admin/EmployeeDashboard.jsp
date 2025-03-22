@@ -349,10 +349,6 @@
                             <select name="sortType" class="form-select" style="width: 25%" id="type">
                                 <option value="name" ${requestScope.sortType eq "name" ? "selected" : ""}>Sort by Name Ascending</option>
                                 <option value="name desc" ${requestScope.sortType eq "name desc" ? 'selected' : ''}>Sort by Name Descending</option>
-                                <option value="salary" ${requestScope.sortType eq "salary" ? 'selected' : ''}>Sort by Salary Ascending</option>
-                                <option value="salary desc" ${requestScope.sortType eq "salary desc" ? "selected" : ""}>Sort by Salary Descending</option>
-                                <option value="startDate" ${requestScope.sortType eq "startDate" ? "selected" : ""}>Sort by Start Date Ascending</option>
-                                <option value="startDate desc" ${requestScope.sortType eq "startDate desc" ? "selected" : ""}>Sort by Start Date Descending</option>
                                 <option value="" ${empty requestScope.sortType ? "selected" : ""}>Sort by Employee ID</option>
                             </select>
                             <button class="btn btn-secondary" type="button" onclick="redirectToServlet('${pageContext.request.contextPath}', 'admin')">Reset all Filters</button>

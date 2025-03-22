@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="add sort for salary dashboard">
-      <change beforePath="$PROJECT_DIR$/build/web/admin/RoomManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/RoomManagement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" afterDir="false" />
+    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="delete sorting by salary and start date in emp dashboard">
+      <change afterPath="$PROJECT_DIR$/web/admin/css/employeeAttendance.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeDashboard.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +25,8 @@
         <option value="JavaScript File" />
         <option value="Jsp File" />
         <option value="package.json" />
-        <option value="CSS File" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -459,7 +462,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742656670864</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="delete sorting by salary and start date in emp dashboard">
+      <option name="closed" value="true" />
+      <created>1742656951869</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1742656951870</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -483,7 +494,8 @@
     <MESSAGE value="fix get emp by filter. fix employee request" />
     <MESSAGE value="fix login, add log out" />
     <MESSAGE value="add sort for salary dashboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="add sort for salary dashboard" />
+    <MESSAGE value="delete sorting by salary and start date in emp dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete sorting by salary and start date in emp dashboard" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

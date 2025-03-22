@@ -72,6 +72,10 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>controller.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EmployeeAttendance</servlet-name>
+        <servlet-class>controller.admin.EmployeeManagement.EmployeeAttendance</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -127,5 +131,9 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeAttendance</servlet-name>
+        <url-pattern>/EmployeeAttendance</url-pattern>
     </servlet-mapping>
 </web-app>
