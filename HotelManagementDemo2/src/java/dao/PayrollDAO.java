@@ -42,8 +42,9 @@ public class PayrollDAO extends DBContext {
         return list;
     }
 
-    public List<Payroll> getByYear(String hotelID, String year) {
+    public List<Payroll> getByYear(String hotelID, String year, String sortType) {
         if (year.isEmpty()) year = "year(getdate())";
+        sortType = sortType.isEmpty() ? "" : " order by " + sortType;
         String sql = "select p.EmployeeID, salary_year, sum(total_working_days), sum(total_hours), sum(overtime_hours), sum(base_salary), sum(overtime_pay), sum(total_salary) " +
                 "from payroll p left join Employee e on e.EmployeeID = p.EmployeeID " +
                 "where e.HotelID like '%" + hotelID + "%' and salary_year like " + year + " " +
@@ -72,12 +73,14 @@ public class PayrollDAO extends DBContext {
         return list;
     }
 
-    public List<Payroll> getByHotelAndMonth(String id, String month) {
+    public List<Payroll> getByHotelAndMonth(String id, String month, String sortType) {
         List<Payroll> list = new LinkedList<>();
+        sortType = sortType.isEmpty() ? "" : "," + sortType;
         String sql = "select * from Payroll p " +
                 "left join Employee e on e.EmployeeID = p.EmployeeID " +
                 "where e.HotelID like '%" + id + "%' and salary_month like '%" + month + "%' " +
-                "order by salary_year desc, salary_month desc ";
+                "order by salary_year desc, salary_month desc " + sortType;
+//        System.out.println(sql);
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();

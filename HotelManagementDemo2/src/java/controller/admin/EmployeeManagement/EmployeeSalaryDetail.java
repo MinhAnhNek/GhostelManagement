@@ -37,6 +37,7 @@ public class EmployeeSalaryDetail extends HttpServlet {
         String hotelID = request.getParameter("hotelID") == null ? "" : request.getParameter("hotelID");
         String month = request.getParameter("month") == null ? "" : request.getParameter("month");
         String year = request.getParameter("year") == null ? "" : request.getParameter("year");
+        String sort = request.getParameter("sort") == null ? "" : request.getParameter("sort");
 
 
         HttpSession session = request.getSession();
@@ -54,8 +55,8 @@ public class EmployeeSalaryDetail extends HttpServlet {
 
         HashMap<String, String> map = new HashMap<>();
         map.put("hotelID", hotelID);
-        LinkedList<Payroll> payrolls = (LinkedList<Payroll>) payrollDAO.getByHotelAndMonth(hotelID, month);
-        LinkedList<Payroll> payrolls2 = ( LinkedList<Payroll>) payrollDAO.getByYear(hotelID, year);
+        LinkedList<Payroll> payrolls = (LinkedList<Payroll>) payrollDAO.getByHotelAndMonth(hotelID, month, sort);
+        LinkedList<Payroll> payrolls2 = ( LinkedList<Payroll>) payrollDAO.getByYear(hotelID, year, sort);
 
         session.setAttribute("hotelID", hotelID);
         session.setAttribute("payrolls", payrolls);
@@ -63,6 +64,7 @@ public class EmployeeSalaryDetail extends HttpServlet {
         session.setAttribute("avgPaidSalary", payrollDAO.getAvgPaidSalary(hotelID));
         request.setAttribute("month", month);
         request.setAttribute("year", year);
+        request.setAttribute("sort", sort);
         request.getRequestDispatcher("admin/EmployeeSalaryDashboard.jsp").forward(request, response);
 
     }

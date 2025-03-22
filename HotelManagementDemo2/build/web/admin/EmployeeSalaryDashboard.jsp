@@ -1,9 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-    Document   : EmployeeSalaryDashboard
-    Created on : Mar 16, 2025, 11:54:07 PM
-    Author     : ADMIN
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,6 +19,9 @@
             <a href="">
                 <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d" alt="Hotel Logo" class="img-fluid rounded-circle">
             </a>
+        </div>
+        <div class="mb-4 d-flex justify-content-center align-items-center">
+            <a class="link-danger bg-danger text-white rounded-3 p-2" href="${pageContext.request.contextPath}/logout">Log Out</a>
         </div>
         <ul class="nav flex-column">
             <%--            <li class="nav-item">--%>
@@ -128,7 +126,7 @@
                                     <div class="tab-content mt-3">
                                         <div class="tab-pane fade show active" id="monthly">
                                             <div class="row mb-3">
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <select class="form-select" onchange="redirectToServlet('${pageContext.request.contextPath}', 'EmployeeSalaryDetail?hotelID=${sessionScope.hotelID}&month=' + this.value)">
                                                         <option value="">All Month</option>
                                                         <option value="3" ${requestScope.month eq '3' ? 'selected' : ''}>March 2024</option>
@@ -143,6 +141,15 @@
 <%--                                                            <button class="btn btn-primary me-2"><i class="bi bi-download"></i> Export</button>--%>
 <%--                                                            <button class="btn btn-secondary"><i class="bi bi-printer"></i> Print</button>--%>
 <%--                                                        </div>--%>
+                                                <div class="col-md-4">
+                                                    <select class="form-select"onchange="redirectToServlet('${pageContext.request.contextPath}', 'EmployeeSalaryDetail?hotelID=${sessionScope.hotelID}&month=${requestScope.month}' + '&sort=' + this.value)">
+                                                        <option value="total_salary" ${requestScope.sort eq "total_salary" ? 'selected' : ''}>Sort by Net Salary Ascending</option>
+                                                        <option value="total_salary desc" ${requestScope.sort eq "total_salary desc" ? "selected" : ""}>Sort by Net Salary Descending</option>
+                                                        <option value="base_salary" ${requestScope.sort eq "base_salary" ? 'selected' : ''}>Sort by Base Salary Ascending</option>
+                                                        <option value="base_salary desc" ${requestScope.sort eq "base_salary desc" ? "selected" : ""}>Sort by Base Salary Descending</option>
+                                                        <option value="p.EmployeeID" ${requestScope.sort eq 'p.EmployeeID' ? 'selected' : ''}>Sort by EmployeeID</option>
+                                                    </select>
+                                                </div>
                                             </div>
 
                                             <div class="table-responsive">

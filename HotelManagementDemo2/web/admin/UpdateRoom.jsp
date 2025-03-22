@@ -1,10 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--
-    Document   : UpdateRoom
-    Created on : Mar 9, 2025, 11:33:42 AM
-    Author     : ADMIN
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,6 +18,9 @@
         <div class="sidebar bg-dark p-3">
             <div class="logo mb-4">
                 <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d" alt="Hotel Logo" class="img-fluid rounded-circle">
+            </div>
+            <div class="mb-4 d-flex justify-content-center align-items-center">
+                <a class="link-danger bg-danger text-white rounded-3 p-2" href="${pageContext.request.contextPath}/logout">Log Out</a>
             </div>
             <ul class="nav flex-column">
                 <%--            <li class="nav-item">--%>

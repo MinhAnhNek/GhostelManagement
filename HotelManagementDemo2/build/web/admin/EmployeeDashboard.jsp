@@ -23,8 +23,8 @@
                     <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d" alt="Hotel Logo" class="img-fluid rounded-circle">
                 </a>
             </div>
-            <div class="mb-5 d-flex justify-content-center align-items-center">
-                <a class="link-danger" href="${pageContext.request.contextPath}/logout">Log Out</a>
+            <div class="mb-4 d-flex justify-content-center align-items-center">
+                <a class="link-danger bg-danger text-white rounded-3 p-2" href="${pageContext.request.contextPath}/logout">Log Out</a>
             </div>
             <ul class="nav flex-column">
                 <%--            <li class="nav-item">--%>
