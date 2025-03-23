@@ -4,33 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="delete sorting by salary and start date in emp dashboard">
+    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="add link to employee attendance on side bar menu">
+      <change afterPath="$PROJECT_DIR$/src/java/dao/AttendanceCodeDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/model/AttendanceCode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeSalaryDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeSalaryDetail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/AttendanceDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/AttendanceDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/PayrollDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/PayrollDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeAttendance.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeAttendance.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeDashboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeDetails.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeRequests.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeSalaryDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeSalaryDashboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/RoomManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/RoomManagement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/UpdateRoom.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/UpdateRoom.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/css/employeeAttendance.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/css/employeeAttendance.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeAttendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeAttendance.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/AttendanceDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/AttendanceDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeAttendance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeAttendance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/dao/AttendanceDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/AttendanceDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/admin/EmployeeAttendance.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeAttendance.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDetails.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeRequests.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeSalaryDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeSalaryDashboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/RoomManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/RoomManagement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/UpdateRoom.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/UpdateRoom.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/css/employeeAttendance.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/css/employeeAttendance.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,8 +31,8 @@
         <option value="JavaScript File" />
         <option value="Jsp File" />
         <option value="package.json" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -491,7 +476,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742656951870</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="add link to employee attendance on side bar menu">
+      <option name="closed" value="true" />
+      <created>1742736868727</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1742736868727</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -516,7 +509,8 @@
     <MESSAGE value="fix login, add log out" />
     <MESSAGE value="add sort for salary dashboard" />
     <MESSAGE value="delete sorting by salary and start date in emp dashboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete sorting by salary and start date in emp dashboard" />
+    <MESSAGE value="add link to employee attendance on side bar menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="add link to employee attendance on side bar menu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

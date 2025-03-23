@@ -120,4 +120,22 @@ public class AttendanceDAO extends DBContext {
         return -1;
     }
 
+
+
+    public void update(String empID, String checkInTime, String checkOutTime, String status) {
+        String total_hours = "";
+        if (!checkOutTime.isEmpty()) {
+            total_hours = ", total_hours = datediff (hour, '" + checkInTime + "', '" + checkOutTime + "')";
+            checkOutTime =  "', CheckOutTime = '" + checkOutTime + "'";
+        }
+        String sql = "update attendance set CheckInTime = '" + checkInTime + checkOutTime + total_hours + ", status = '" + status + "' " +
+                "where EmployeeID = " + empID;
+//        System.out.println(sql);
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("AttendanceDAO update(): " + e.getMessage());
+        }
+    }
 }

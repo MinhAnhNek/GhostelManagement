@@ -76,6 +76,10 @@
         <servlet-name>EmployeeAttendance</servlet-name>
         <servlet-class>controller.admin.EmployeeManagement.EmployeeAttendance</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AttendanceCode</servlet-name>
+        <servlet-class>controller.admin.EmployeeManagement.AttendanceCodeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -135,5 +139,9 @@
     <servlet-mapping>
         <servlet-name>EmployeeAttendance</servlet-name>
         <url-pattern>/EmployeeAttendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttendanceCode</servlet-name>
+        <url-pattern>/AttendanceCode</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -56,10 +56,20 @@
 
   <div class="main-content p-4 w-100">
     <div class="row">
-      <nav class="navbar navbar-expand-lg">
-        <h1>
+      <nav class="d-flex justify-content-between navbar navbar-expand-lg">
+        <h1 class="col-md-6">
           <i class="bi bi-building"></i> Employee Attendance
         </h1>
+
+
+        <c:if test="${not empty sessionScope.codeSuccess}">
+          <div class="col-md-3 p-2">
+            <div class="alert alert-success" role="alert">${sessionScope.codeSuccess}</div>
+          </div>
+          <% session.removeAttribute("codeSuccess"); %>
+        </c:if>
+<%--        ${not empty sessionScope.codeError ? "" : ""}--%>
+        <button class="col-md-3 btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#setAttCode" >Set Today Attendance Code</button>
       </nav>
     </div>
 
@@ -129,7 +139,7 @@
             <div class="row mb-3">
               <div class="col-md-4">
                 <select class="form-select" name="status" aria-label="Filter by" onchange="redirectToServlet('${pageContext.request.contextPath}', 'EmployeeAttendance?hotelID=${requestScope.hotelID}&status=' + this.value)">
-<%--                  <option selected>Sort by...</option>--%>
+                  <option value="">Sort by...</option>
                   <option value="Present" ${requestScope.status eq 'Present' ? 'selected' : ''}>Present</option>
                   <option value="Late" ${requestScope.status eq 'Late' ? 'selected' : ''}>Late</option>
                   <option value="Absent" ${requestScope.status eq 'Absent' ? 'selected' : ''}>Absent</option>
@@ -148,6 +158,7 @@
                       <th>Employee Name</th>
                       <th>Clock In</th>
                       <th>Clock Out</th>
+                      <th>Total Hours</th>
                       <th>Status</th>
                       <th>Actions</th>
                     </tr>
@@ -164,6 +175,7 @@
                       <td>${sessionScope.totalEmp.get(att.getEmployeeID()).getName()}</td>
                       <td>${att.getCheckInTime()}</td>
                       <td>${att.getCheckOutTime()}</td>
+                      <td>${att.getTotalHours()}</td>
                       <td>
                         <c:if test="${att.getStatus() == 'Present'}">
                           <span class="badge bg-success">${att.getStatus()}</span>
@@ -179,7 +191,7 @@
                         </c:if>
                       </td>
                       <td>
-                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detailsModal${att.getAttId()}">
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detailsModal${att.getEmployeeID()}">
                           <i class="bi bi-pencil"></i> Edit
                         </button>
                       </td>
@@ -190,13 +202,13 @@
                   </table>
                 </div>
 
-                <nav aria-label="Page navigation">
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  </ul>
-                </nav>
+<%--                <nav aria-label="Page navigation">--%>
+<%--                  <ul class="pagination justify-content-center">--%>
+<%--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>--%>
+<%--                    <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
+<%--                    <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
+<%--                  </ul>--%>
+<%--                </nav>--%>
               </div>
             </div>
           </div>
@@ -208,10 +220,10 @@
 
 <c:forEach var="att" items="${attendances}">
   <!-- Details Modal -->
-  <div class="modal fade" id="detailsModal${att.getAttId()}" tabindex="-1" aria-hidden="true">
+  <div class="modal fade" id="detailsModal${att.getEmployeeID()}" tabindex="-1" aria-hidden="true">
     <form action="${pageContext.request.contextPath}/EmployeeAttendance" method="post">
       <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content p-3">
           <div class="modal-header">
             <h5 class="modal-title" id="detailsModalLabel">Employee Attendance Details</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -219,30 +231,51 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-md-6">
-                <p><strong>Employee ID:</strong> ${att.getEmployeeID()}</p>
-                <p><strong>Employee Name:</strong> ${sessionScope.totalEmp.get(att.getEmployeeID()).getName()}</p>
-                <p><strong>Position:</strong> ${sessionScope.totalEmp.get(att.getEmployeeID()).getRole()}</p>
-              </div>
-              <div class="col-md-6">
-                <p><strong>Current Status:</strong>
-                  <select class="form-select" name="status">
-                    <option class="text-bg-success text-white" value="Present" ${att.getStatus() eq 'Present' ? 'selected' :''}>Present</option>
-                    <option class="text-bg-danger text-white" value="Absent" ${att.getStatus() eq 'Absent' ? 'selected' :''}>Absent</option>
-                    <option class="text-bg-warning text-white" value="Late" ${att.getStatus() eq 'Late' ? 'selected' :''}>Late</option>
-                    <option class="text-bg-info text-white" value="Day Off" ${att.getStatus() eq 'Day Off' ? 'selected' :''}>Day Off</option>
-                  </select>
+                <p class="d-flex">
+                  <strong class="col-md-4">Employee ID:</strong>
+                  <input class="form-control" type="text" name="employeeID" value="${att.getEmployeeID()}" readonly>
                 </p>
                 <p class="d-flex">
+                  <strong class="col-md-4">Employee Name:</strong>
+                  <input class="form-control" type="text" name="employeeName" value="${sessionScope.totalEmp.get(att.getEmployeeID()).getName()}" readonly>
+                </p>
+                <p class="d-flex">
+                  <strong class="col-md-4">Position:</strong>
+                  <input class="form-control" type="text" name="position" value="${sessionScope.totalEmp.get(att.getEmployeeID()).getRole()}" readonly>
+                </p>
+              </div>
+              <div class="col-md-6">
+<%--                <p><strong>Current Status:</strong>--%>
+<%--                  <select class="form-select" name="status">--%>
+<%--                    <option class="text-bg-success text-white" value="Present" ${att.getStatus() eq 'Present' ? 'selected' :''}>Present</option>--%>
+<%--                    <option class="text-bg-danger text-white" value="Absent" ${att.getStatus() eq 'Absent' ? 'selected' :''}>Absent</option>--%>
+<%--                    <option class="text-bg-warning text-white" value="Late" ${att.getStatus() eq 'Late' ? 'selected' :''}>Late</option>--%>
+<%--                    <option class="text-bg-info text-white" value="Day Off" ${att.getStatus() eq 'Day Off' ? 'selected' :''}>Day Off</option>--%>
+<%--                  </select>--%>
+<%--                </p>--%>
+                <p class="d-flex">
                   <strong class="col-md-4">Checkin Time: </strong>
-                  <input type="time" value="${att.getCheckInTime()}" min="08:00" max="22:00" name="checkInTime" required>
+                  <input class="form-control" type="time" value="${att.getCheckInTime()}" min="08:30" max="22:00" name="checkInTime" >
                 </p>
                 <p class="d-flex">
                   <strong class="col-md-4">Checkout Time: </strong>
-                  <input type="time" min="08:00" max="22:00" value="${att.getCheckOutTime()}" name="checkOutTime" required>
+                  <input class="form-control" type="time" min="08:30" max="22:00" value="${att.getCheckOutTime()}" name="checkOutTime" >
+                </p>
+
+                <c:if test="${not empty sessionScope.checkOutTimeError}">
+                  <div class="alert alert-danger" role="alert">${sessionScope.checkOutTimeError}</div>
+                </c:if>
+              </div>
+              <div class="alert alert-info col-md-6" role="alert">
+                <strong class="text-decoration-underline">Note:</strong>
+                <p>
+                  Present: Check In time <= 09:00<br>
+                  Late: Check In time > 09:00<br>
+                  Absent: Left blank all fields
                 </p>
               </div>
             </div>
-            <hr>
+<%--            <hr>--%>
 <%--            <h6>Attendance History</h6>--%>
 <%--            <div class="table-responsive">--%>
 <%--              <table class="table table-sm">--%>
@@ -272,7 +305,7 @@
 <%--            </div>--%>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </div>
@@ -281,8 +314,98 @@
   </div>
 </c:forEach>
 
-<script src="admin/js/home.js"></script>
+<div class="modal fade" id="setAttCode" tabindex="-1" role="dialog" aria-hidden="true">
+  <form action="${pageContext.request.contextPath}/AttendanceCode" method="post">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between">
+          <h5 class="modal-title">Attendance Code Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <h4>Add New Code</h4>
+            <div class="alert alert-info" role="alert">
+              <strong>This code is only available in 1 hour!</strong>
+            </div>
+            <div class="form-group col-md-12 p-2">
+              <label class="control-label">Code</label>
+              <input type="text" class="form-control" name="attCode" value="${sessionScope.code}" required>
+            </div>
+            <div class="d-flex justify-content-between">
+              <div class="form-group col-md-6 p-2">
+                <label class="control-label">Start Time</label>
+                <input type="time" class="form-control" min="08:30" max="12:30" name="startTime" value="${sessionScope.thisCode.getStartTime()}" readonly>
+              </div>
+              <div class="form-group col-md-6 p-2">
+                <label class="control-label">End Time</label>
+                <input type="time" class="form-control" min="08:30" max="12:30" name="endTime" value="${sessionScope.thisCode.getEndTime()}" readonly>
+              </div>
+            </div>
+            <c:if test="${not empty sessionScope.codeError}">
+              <div class="alert alert-warning">${sessionScope.codeError}</div>
+            </c:if>
+
+
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <tr>
+                <th>Code</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+              </tr>
+              <c:if test="${empty sessionScope.attCodeList}">
+                <div class="alert alert-warning">There is no Attendance Code for today yet</div>
+              </c:if>
+              <c:forEach var="attCode" items="${sessionScope.attCodeList}">
+                <tr>
+                  <td>${attCode.getCode()}</td>
+                  <td>${attCode.getStartTime()}</td>
+                  <td>${attCode.getEndTime()}</td>
+                </tr>
+              </c:forEach>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary">Reset</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+  var show = '${not empty sessionScope.codeError}';
+  // var showEmpAtt = '';
+  document.addEventListener("DOMContentLoaded", function() {
+    if (show === 'true') {
+      var myModal = new bootstrap.Modal(document.getElementById('setAttCode'));
+      console.log(show);
+      myModal.show();
+    }
+
+    if (${not empty sessionScope.empID}) {
+      var empModal = new bootstrap.Modal(document.getElementById('detailsModal${sessionScope.empID}'));
+      // console.log(showEmpAtt);
+      empModal.show();
+    }
+  });
+</script>
+<script src="admin/js/home.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<%
+  session.removeAttribute("code");
+  session.removeAttribute("startTime");
+  session.removeAttribute("codeError");
+  session.removeAttribute("empID");
+%>
 </body>
 </html>
