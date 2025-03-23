@@ -37,13 +37,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeAttendance" style="border-bottom: none;">
+                        <i class="bi bi-calendar-check me-2"></i>Employee Attendance
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeSalaryDetail" style="border-bottom: none;">
-                        <i class="bi bi-calendar-check me-2"></i>Employee Salary Dashboard
+                        <i class="bi bi-cash me-2"></i>Employee Salary
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeRequest" style="border-bottom: none;">
-                        <i class="bi bi-graph-up me-2"></i>Employee Request Dashboard
+                        <i class="bi bi-graph-up me-2"></i>Employee Request
                     </a>
                 </li>
 
@@ -324,17 +329,17 @@
                                 <label for="Phone">Phone Number</label>
                                 <input name="phoneNum" type="tel" class="form-control" id="Phone" placeholder="Enter Phone" value="${sessionScope.phoneNum}">
                             </div>
-                            <div class="col-md-3 form-group">
-                                <label for="salary">Salary</label>
-                                <div class="input-group d-flex justify-context-between" id="salary">
-                                    <div class="col-md-6 min-salary">
-                                        <input name="minSalary" type="number" class="form-control" placeholder="Min Salary" value="${sessionScope.minSalary}">
-                                    </div>
-                                    <div class="col-md-6 max-salary">
-                                        <input name="maxSalary" type="number" class="form-control" placeholder="Max Salary" value="${sessionScope.maxSalary}">
-                                    </div>
-                                </div>
-                            </div>
+<%--                            <div class="col-md-3 form-group">--%>
+<%--                                <label for="salary">Salary</label>--%>
+<%--                                <div class="input-group d-flex justify-context-between" id="salary">--%>
+<%--                                    <div class="col-md-6 min-salary">--%>
+<%--                                        <input name="minSalary" type="number" class="form-control" placeholder="Min Salary" value="${sessionScope.minSalary}">--%>
+<%--                                    </div>--%>
+<%--                                    <div class="col-md-6 max-salary">--%>
+<%--                                        <input name="maxSalary" type="number" class="form-control" placeholder="Max Salary" value="${sessionScope.maxSalary}">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <div class="col-md-3 form-group">
                                 <label for="hotelName">Hotel Branch</label>
                                 <select name="hotelID" class="form-select" id="hotelName">

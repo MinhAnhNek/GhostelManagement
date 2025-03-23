@@ -57,14 +57,15 @@ public class AttendanceDAO extends DBContext {
         return list;
     }
 
-    public List<Attendance> getByDateAndStatus(String date, String status) {
+    public List<Attendance> getByDateAndStatus(String date, String status, String hotelID) {
         String sql;
-        if (date.isEmpty()) sql = "select * from attendance " +
+        if (date.isEmpty()) sql = "select * from attendance a left join Employee e on e.EmployeeID = a.EmployeeID " +
                 "where date like CAST( GETDATE() AS Date ) " +
-                "and status like '%" + status + "%'";
+                "and status like '%" + status + "%' and e.hotelID like '%" + hotelID + "%'";
         else sql = "select * from attendance " +
                 "where date like " + "'%" + date + "%'" +
                 "and status like '%" + status + "%'";
+//        System.out.println(sql);
         List<Attendance> list = new LinkedList<>();
         try {
             PreparedStatement pre = connection.prepareStatement(sql);

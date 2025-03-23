@@ -25,19 +25,24 @@
       <%--                <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>--%>
       <%--            </li>--%>
       <li class="nav-item">
-        <a class="nav-link active" href="${pageContext.request.contextPath}/admin" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius); border-bottom: none;">
+        <a class="nav-link" href="${pageContext.request.contextPath}/admin" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius); border-bottom: none;">
           <i class="bi bi-people me-2"></i>
           Employee Dashboard
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link active" href="${pageContext.request.contextPath}/EmployeeAttendance" style="border-bottom: none;">
+          <i class="bi bi-calendar-check me-2"></i>Employee Attendance
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeSalaryDetail" style="border-bottom: none;">
-          <i class="bi bi-calendar-check me-2"></i>Employee Salary Dashboard
+          <i class="bi bi-cash me-2"></i>Employee Salary
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeRequest" style="border-bottom: none;">
-          <i class="bi bi-graph-up me-2"></i>Employee Request Dashboard
+          <i class="bi bi-graph-up me-2"></i>Employee Request
         </a>
       </li>
 
@@ -51,77 +56,84 @@
 
   <div class="main-content p-4 w-100">
     <div class="row">
-      <nav class="navbar navbar-expand-lg bg-primary">
-        <div class="container-fluid">
-          <a class="navbar-brand text-white" href="#"><i class="bi bi-building"></i> Employee Attendance Manager</a>
-        </div>
+      <nav class="navbar navbar-expand-lg">
+        <h1>
+          <i class="bi bi-building"></i> Employee Attendance
+        </h1>
       </nav>
     </div>
 
     <div class="row mt-4">
       <div class="col-12">
         <ul class="nav nav-tabs" id="hotelTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link ${empty requestScope.hotelID ? 'active' : ''}" href="${pageContext.request.contextPath}/EmployeeAttendance" role="tab">Home</a>
           <c:forEach var="hotel" items="${sessionScope.hotels}">
             <li class="nav-item" role="presentation">
-              <button class="nav-link ${requestScope.hotelID == hotel.getHotelId() ? "active" : ""}" data-bs-toggle="tab" data-bs-target="#hotel${hotel.getHotelId()}">${hotel.getName()}</button>
+              <button class="nav-link ${requestScope.hotelID == hotel.getHotelId() ? "active" : ""}" onclick="redirectToServlet('${pageContext.request.contextPath}', 'EmployeeAttendance?hotelID=${hotel.getHotelId()}')">${hotel.getName()}</button>
             </li>
           </c:forEach>
-
         </ul>
 
+        <c:set var="lates" value="${sessionScope.lates}"/>
+        <c:set var="presents" value="${sessionScope.presents}"/>
+        <c:set var="absents" value="${sessionScope.absents}"/>
+        <c:set var="dayoffs" value="${sessionScope.dayoffs}"/>
+        <c:set var="attendances" value="${sessionScope.attendances}"/>
+        <c:set var="hotelAtt" value="${sessionScope.hotelAttendance}"/>
+
         <div class="tab-content mt-3" id="hotelTabContent">
-          <div class="tab-pane fade show active" id="hotel1">
+          <div class="tab-pane fade show active">
             <div class="row">
-              <div class="col-lg-4 col-md-6 mb-4">
+              <div class="col-lg-6 col-md-6 mb-4">
                 <div class="card">
                   <div class="card-body">
-                    <h5 class="card-title">Total Employees Present</h5>
+                    <h5 class="card-title">Total Employees Attendance</h5>
                     <div class="progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                      <c:if test="${not empty presents}">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: ${presents.size() / hotelAtt.size() * 100}%" aria-valuenow="${presents.size()}" aria-valuemin="0" aria-valuemax="100">${presents.size()}</div>
+                      </c:if>
+                      <c:if test="${not empty lates}">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: ${lates.size() / hotelAtt.size() * 100}%" aria-valuenow="${lates.size()}">${lates.size()}</div>
+                      </c:if>
+                      <c:if test="${not empty absents}">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: ${absents.size() / hotelAtt.size() * 100}%" aria-valuenow="${absents.size()}">${absents.size()}</div>
+                      </c:if>
+                      <c:if test="${not empty dayoffs}">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: ${dayoffs.size() / hotelAtt.size() * 100}%" aria-valuenow="${dayoffs.size()}">${dayoffs.size()}</div>
+                      </c:if>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Late Arrivals</h5>
-                    <div class="progress">
-                      <div class="progress-bar bg-warning" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Absent Employees</h5>
-                    <div class="progress">
-                      <div class="progress-bar bg-danger" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100">5%</div>
+                    <div class="mt-3 d-flex justify-content-between">
+                      <span class="badge rounded-pill bg-success">Present</span>
+                      <span class="badge rounded-pill bg-warning">Late</span>
+                      <span class="badge rounded-pill bg-danger">Absent</span>
+                      <span class="badge rounded-pill bg-info">Day Off</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="row mb-4">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Attendance Trend</h5>
-                    <canvas id="attendanceChart" height="100"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
+<%--            <div class="row mb-4">--%>
+<%--              <div class="col-12">--%>
+<%--                <div class="card">--%>
+<%--                  <div class="card-body">--%>
+<%--                    <h5 class="card-title">Attendance Trend</h5>--%>
+<%--                    <canvas id="attendanceChart" height="100"></canvas>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+
 
             <div class="row mb-3">
-              <div class="col-md-6">
-                <select class="form-select" aria-label="Sort by">
-                  <option selected>Sort by...</option>
-                  <option value="1">Employee ID</option>
-                  <option value="2">Employee Name</option>
-                  <option value="3">Attendance Status</option>
+              <div class="col-md-4">
+                <select class="form-select" name="status" aria-label="Filter by" onchange="redirectToServlet('${pageContext.request.contextPath}', 'EmployeeAttendance?hotelID=${requestScope.hotelID}&status=' + this.value)">
+<%--                  <option selected>Sort by...</option>--%>
+                  <option value="Present" ${requestScope.status eq 'Present' ? 'selected' : ''}>Present</option>
+                  <option value="Late" ${requestScope.status eq 'Late' ? 'selected' : ''}>Late</option>
+                  <option value="Absent" ${requestScope.status eq 'Absent' ? 'selected' : ''}>Absent</option>
+                  <option value="Day Off" ${requestScope.status eq 'Day Off' ? 'selected' : ''}>Day Off</option>
                 </select>
               </div>
             </div>
@@ -140,46 +152,49 @@
                       <th>Actions</th>
                     </tr>
                     </thead>
+                    <c:if test="${empty attendances}">
+                      <div class="alert alert-warning" role="alert">
+                        There are no such attendances.
+                      </div>
+                    </c:if>
+                    <c:forEach var="att" items="${attendances}">
                     <tbody>
                     <tr>
-                      <td>EMP001</td>
-                      <td>John Doe</td>
-                      <td>09:00 AM</td>
-                      <td>05:00 PM</td>
-                      <td><span class="badge bg-success">Present</span></td>
+                      <td>${att.getEmployeeID()}</td>
+                      <td>${sessionScope.totalEmp.get(att.getEmployeeID()).getName()}</td>
+                      <td>${att.getCheckInTime()}</td>
+                      <td>${att.getCheckOutTime()}</td>
                       <td>
-                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detailsModal">
-                          <i class="bi bi-eye"></i> View
+                        <c:if test="${att.getStatus() == 'Present'}">
+                          <span class="badge bg-success">${att.getStatus()}</span>
+                        </c:if>
+                        <c:if test="${att.getStatus() == 'Absent'}">
+                          <span class="badge bg-danger">${att.getStatus()}</span>
+                        </c:if>
+                        <c:if test="${att.getStatus() == 'Late'}">
+                          <span class="badge bg-warning">${att.getStatus()}</span>
+                        </c:if>
+                        <c:if test="${att.getStatus() == 'Day Off'}">
+                          <span class="badge bg-info">${att.getStatus()}</span>
+                        </c:if>
+                      </td>
+                      <td>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detailsModal${att.getAttId()}">
+                          <i class="bi bi-pencil"></i> Edit
                         </button>
                       </td>
                     </tr>
-                    <tr>
-                      <td>EMP002</td>
-                      <td>Jane Smith</td>
-                      <td>09:30 AM</td>
-                      <td>05:30 PM</td>
-                      <td><span class="badge bg-warning">Late</span></td>
-                      <td>
-                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detailsModal">
-                          <i class="bi bi-eye"></i> View
-                        </button>
-                      </td>
-                    </tr>
+
+                    </c:forEach>
                     </tbody>
                   </table>
                 </div>
 
                 <nav aria-label="Page navigation">
                   <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
                     <li class="page-item active"><a class="page-link" href="#">1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">Next</a>
-                    </li>
                   </ul>
                 </nav>
               </div>
@@ -191,63 +206,82 @@
   </div>
 </div>
 
-<!-- Details Modal -->
-<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="detailsModalLabel">Employee Attendance Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-6">
-            <p><strong>Employee ID:</strong> EMP001</p>
-            <p><strong>Employee Name:</strong> John Doe</p>
-            <p><strong>Department:</strong> Housekeeping</p>
+<c:forEach var="att" items="${attendances}">
+  <!-- Details Modal -->
+  <div class="modal fade" id="detailsModal${att.getAttId()}" tabindex="-1" aria-hidden="true">
+    <form action="${pageContext.request.contextPath}/EmployeeAttendance" method="post">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailsModalLabel">Employee Attendance Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="col-md-6">
-            <p><strong>Current Status:</strong> <span class="badge bg-success">Present</span></p>
-            <p><strong>Clock In:</strong> 09:00 AM</p>
-            <p><strong>Clock Out:</strong> 05:00 PM</p>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>Employee ID:</strong> ${att.getEmployeeID()}</p>
+                <p><strong>Employee Name:</strong> ${sessionScope.totalEmp.get(att.getEmployeeID()).getName()}</p>
+                <p><strong>Position:</strong> ${sessionScope.totalEmp.get(att.getEmployeeID()).getRole()}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Current Status:</strong>
+                  <select class="form-select" name="status">
+                    <option class="text-bg-success text-white" value="Present" ${att.getStatus() eq 'Present' ? 'selected' :''}>Present</option>
+                    <option class="text-bg-danger text-white" value="Absent" ${att.getStatus() eq 'Absent' ? 'selected' :''}>Absent</option>
+                    <option class="text-bg-warning text-white" value="Late" ${att.getStatus() eq 'Late' ? 'selected' :''}>Late</option>
+                    <option class="text-bg-info text-white" value="Day Off" ${att.getStatus() eq 'Day Off' ? 'selected' :''}>Day Off</option>
+                  </select>
+                </p>
+                <p class="d-flex">
+                  <strong class="col-md-4">Checkin Time: </strong>
+                  <input type="time" value="${att.getCheckInTime()}" min="08:00" max="22:00" name="checkInTime" required>
+                </p>
+                <p class="d-flex">
+                  <strong class="col-md-4">Checkout Time: </strong>
+                  <input type="time" min="08:00" max="22:00" value="${att.getCheckOutTime()}" name="checkOutTime" required>
+                </p>
+              </div>
+            </div>
+            <hr>
+<%--            <h6>Attendance History</h6>--%>
+<%--            <div class="table-responsive">--%>
+<%--              <table class="table table-sm">--%>
+<%--                <thead>--%>
+<%--                <tr>--%>
+<%--                  <th>Date</th>--%>
+<%--                  <th>Clock In</th>--%>
+<%--                  <th>Clock Out</th>--%>
+<%--                  <th>Status</th>--%>
+<%--                </tr>--%>
+<%--                </thead>--%>
+<%--                <tbody>--%>
+<%--                <tr>--%>
+<%--                  <td>2024-01-20</td>--%>
+<%--                  <td>09:00 AM</td>--%>
+<%--                  <td>05:00 PM</td>--%>
+<%--                  <td><span class="badge bg-success">Present</span></td>--%>
+<%--                </tr>--%>
+<%--                <tr>--%>
+<%--                  <td>2024-01-19</td>--%>
+<%--                  <td>09:15 AM</td>--%>
+<%--                  <td>05:00 PM</td>--%>
+<%--                  <td><span class="badge bg-warning">Late</span></td>--%>
+<%--                </tr>--%>
+<%--                </tbody>--%>
+<%--              </table>--%>
+<%--            </div>--%>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </div>
-        <hr>
-        <h6>Attendance History</h6>
-        <div class="table-responsive">
-          <table class="table table-sm">
-            <thead>
-            <tr>
-              <th>Date</th>
-              <th>Clock In</th>
-              <th>Clock Out</th>
-              <th>Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td>2024-01-20</td>
-              <td>09:00 AM</td>
-              <td>05:00 PM</td>
-              <td><span class="badge bg-success">Present</span></td>
-            </tr>
-            <tr>
-              <td>2024-01-19</td>
-              <td>09:15 AM</td>
-              <td>05:00 PM</td>
-              <td><span class="badge bg-warning">Late</span></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
+    </form>
   </div>
-</div>
+</c:forEach>
 
+<script src="admin/js/home.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>

@@ -31,9 +31,22 @@ public class EmployeeAttendance extends HttpServlet {
         EmployeeDAO employeeDAO = new EmployeeDAO();
         HotelDAO hotelDAO = new HotelDAO();
 
+
+        String hotelID = request.getParameter("hotelID");
+        hotelID = hotelID == null ? "" : hotelID;
+        String status = request.getParameter("status");
+        status = status == null ? "" : status;
         session.setAttribute("hotels", hotelDAO.getAll());
-        session.setAttribute("employees", employeeDAO.getAll(""));
-        session.setAttribute("attendances", attendanceDAO.getAll());
+        session.setAttribute("totalEmp", employeeDAO.getAll(""));
+        session.setAttribute("hotelAttendance", attendanceDAO.getByDateAndStatus("", "", hotelID));
+        session.setAttribute("attendances", attendanceDAO.getByDateAndStatus("", status, hotelID));
+        session.setAttribute("lates", attendanceDAO.getByDateAndStatus("", "late", hotelID));
+        session.setAttribute("presents", attendanceDAO.getByDateAndStatus("", "present", hotelID));
+        session.setAttribute("absents", attendanceDAO.getByDateAndStatus("", "absent", hotelID));
+        session.setAttribute("dayoffs", attendanceDAO.getByDateAndStatus("", "Day Off", hotelID));
+
+        request.setAttribute("hotelID", hotelID);
+        request.setAttribute("status", status);
 
         request.getRequestDispatcher("admin/EmployeeAttendance.jsp").forward(request, response);
     } 
@@ -42,7 +55,13 @@ public class EmployeeAttendance extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+
+        String checkInTime = request.getParameter("checkInTime");
+        System.out.println(checkInTime);
+        String checkOutTime = request.getParameter("checkOutTime");
+        System.out.println(checkOutTime);
+        AttendanceDAO attendanceDAO = new AttendanceDAO();
+
     }
 
     /** 

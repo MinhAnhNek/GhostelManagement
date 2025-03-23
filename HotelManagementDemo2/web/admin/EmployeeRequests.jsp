@@ -35,13 +35,18 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeAttendance" style="border-bottom: none;">
+                    <i class="bi bi-calendar-check me-2"></i>Employee Attendance
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeSalaryDetail" style="border-bottom: none;">
-                    <i class="bi bi-calendar-check me-2"></i>Employee Salary Dashboard
+                    <i class="bi bi-cash me-2"></i>Employee Salary
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="${pageContext.request.contextPath}/EmployeeRequest" style="border-bottom: none;">
-                    <i class="bi bi-graph-up me-2"></i>Employee Request Dashboard
+                    <i class="bi bi-graph-up me-2"></i>Employee Request
                 </a>
             </li>
 
@@ -51,7 +56,6 @@
                 </a>
             </li>
         </ul>
-
     </div>
 
     <div class="main-content p-4 w-100">

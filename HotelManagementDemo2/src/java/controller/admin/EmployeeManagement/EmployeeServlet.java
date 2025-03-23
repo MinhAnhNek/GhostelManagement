@@ -46,8 +46,8 @@ public class EmployeeServlet extends HttpServlet {
         session.setAttribute("onVacation", employeeDAO.countEmployeesByStatus("Currently on Vacation"));
         session.setAttribute("lateEmp", attendanceDAO.countByDateAndStatus("", "late"));
         session.setAttribute("presentEmp", attendanceDAO.countByDateAndStatus("", "present"));
-        session.setAttribute("absentEmp", attendanceDAO.getByDateAndStatus("", "absent"));
-        session.setAttribute("dayoff", attendanceDAO.getByDateAndStatus("", "Day Off"));
+        session.setAttribute("absentEmp", attendanceDAO.getByDateAndStatus("", "absent", ""));
+        session.setAttribute("dayoff", attendanceDAO.getByDateAndStatus("", "Day Off", ""));
         session.setAttribute("payrolls", payrollDAO.getByMonth("", ""));
         session.setAttribute("pendingRequests", requestDAO.getRequestsByType("status", "Pending"));
 //        System.out.println(requestDAO.getRequestsByType("Pending").getFirst().getStatus());
