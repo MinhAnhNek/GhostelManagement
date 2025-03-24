@@ -54,8 +54,12 @@ public class AttendanceCodeDAO extends DBContext{
         return list;
     }
 
-    public AttendanceCode getByTime(Time time){
-        String sql = "select * from attendanceCode where " + time + " >= startTime and " + time + " <= endTime ";
+    public AttendanceCode getByTime(String time, String code){
+        if (time.isEmpty()){
+            time = " cast(getdate() as time) ";
+        }
+        String sql = "select * from attendanceCode " +
+                "where " + time + " >= startTime and " + time + " <= endTime  and code = '" + code + "'";
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet r = pre.executeQuery();

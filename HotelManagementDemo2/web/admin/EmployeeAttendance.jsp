@@ -62,12 +62,12 @@
         </h1>
 
 
-        <c:if test="${not empty sessionScope.codeSuccess}">
-          <div class="col-md-3 p-2">
-            <div class="alert alert-success" role="alert">${sessionScope.codeSuccess}</div>
-          </div>
-          <% session.removeAttribute("codeSuccess"); %>
-        </c:if>
+<%--        <c:if test="${not empty sessionScope.codeSuccess}">--%>
+<%--          <div class="col-md-3 p-2">--%>
+<%--            <div class="alert alert-success" role="alert">${sessionScope.codeSuccess}</div>--%>
+<%--          </div>--%>
+<%--          <% session.removeAttribute("codeSuccess"); %>--%>
+<%--        </c:if>--%>
 <%--        ${not empty sessionScope.codeError ? "" : ""}--%>
         <button class="col-md-3 btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#setAttCode" >Set Today Attendance Code</button>
       </nav>
@@ -370,7 +370,7 @@
         </div>
         <div class="modal-footer">
           <button type="reset" class="btn btn-secondary">Reset</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" ${not empty sessionScope.endOfTime ? "disabled" : ""}>${not empty sessionScope.endOfTime ? sessionScope.endOfTime : "Submit"}</button>
         </div>
 
       </div>
@@ -383,8 +383,13 @@
 <script>
 
   var show = '${not empty sessionScope.codeError}';
+  var success = '${not empty sessionScope.added}';
   // var showEmpAtt = '';
   document.addEventListener("DOMContentLoaded", function() {
+    if (success === 'true') {
+      alert('${sessionScope.added}');
+    }
+
     if (show === 'true') {
       var myModal = new bootstrap.Modal(document.getElementById('setAttCode'));
       console.log(show);
@@ -406,6 +411,7 @@
   session.removeAttribute("startTime");
   session.removeAttribute("codeError");
   session.removeAttribute("empID");
+  session.removeAttribute("added");
 %>
 </body>
 </html>

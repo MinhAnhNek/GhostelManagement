@@ -17,7 +17,7 @@
             <img src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9" width="40" height="40" class="rounded-circle" alt="Company Logo">
         </a>
         <div class="d-flex align-items-center">
-            <div class="me-3 d-none d-lg-block">Welcome, ${emp.getName()}</div>
+            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#attendanceCode">Set Attendance by Code</button>
             <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d" width="40" height="40" class="rounded-circle me-2" alt="Profile">
             <button class="btn btn-danger btn-sm">Logout</button>
         </div>
@@ -96,10 +96,10 @@
                         <span>Bonus</span>
                         <span class="text-success">$${payroll.getOvertimeHours() * payroll.getOvertimePay()}</span>
                     </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <span>Deductions</span>
-                        <span class="text-danger">-$500</span>
-                    </div>
+<%--                    <div class="d-flex justify-content-between mb-2">--%>
+<%--                        <span>Deductions</span>--%>
+<%--                        <span class="text-danger">-$500</span>--%>
+<%--                    </div>--%>
                     <hr>
                     <div class="d-flex justify-content-between">
                         <strong>Net Salary</strong>
@@ -330,12 +330,36 @@
     </div>
 </c:forEach>
 
+
+<div class="modal fade" id="attendanceCode" tabindex="-1">
+    <form class="modal-dialog modal-dialog-centered" action="employee" method="POST">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Attends with Code</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+<%--                    <% request.setAttribute("empID", ) %>--%>
+                    <input class="form-control" type="text" name="attCode" placeholder="Enter Attendance Code" value="${sessionScope.attCode}">
+                    <c:if test="${not empty sessionScope.wrongCode}">
+                        <div class="alert alert-danger mt-3" role="alert">Invalid code</div>
+                    </c:if>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
 <div class="modal fade" id="request" tabindex="-1">
     <form class="modal-dialog modal-dialog-centered" action="EmployeeRequest" method="POST">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">New Request</h4>
-                <button type="button" class="close" data-dismiss="modal"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -371,6 +395,26 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+    var show = '${not empty sessionScope.wrongCode}';
+    var success = '${not empty sessionScope.successAttend}';
+    // var showEmpAtt = '';
+    document.addEventListener("DOMContentLoaded", function() {
+        if (success === 'true') {
+            alert('${sessionScope.successAttend}');
+        }
+        if (show === 'true') {
+            var myModal = new bootstrap.Modal(document.getElementById('attendanceCode'));
+            console.log(show);
+            myModal.show();
+        }
+    });
+</script>
+<%
+    session.removeAttribute("wrongCode");
+    session.removeAttribute("successAttend");
+%>
 </body>
 </html>
 

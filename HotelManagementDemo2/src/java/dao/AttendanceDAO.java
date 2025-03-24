@@ -34,11 +34,12 @@ public class AttendanceDAO extends DBContext {
 
     public List<Attendance> getByEmployeeID(int empId, String month) {
         month = month.isEmpty() ? "'%%'" : month;
-        String sql = "select * from attendance where EmployeeID = ? and month(date) like " + month + " order by date desc";
+        String sql = "select * from attendance where EmployeeID = " + empId + " and month(date) like " + month + " order by date desc";
+        System.out.println(sql);
         List<Attendance> list = new LinkedList<>();
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
-            pre.setInt(1, empId);
+//            pre.setInt(1, empId);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 list.add(new Attendance(
@@ -110,6 +111,7 @@ public class AttendanceDAO extends DBContext {
         String sql = "select count(status) total, EmployeeID from attendance " +
                 "where status = '" + status + "' " +
                 "group by EmployeeID having EmployeeID = " + empId;
+        System.out.println(sql);
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
@@ -117,20 +119,26 @@ public class AttendanceDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println("AttendanceDAO countByDateAndStatus(): " + e.getMessage());
         }
-        return -1;
+        return 0;
     }
 
 
 
     public void update(String empID, String checkInTime, String checkOutTime, String status) {
+        if (checkInTime.isEmpty()) {
+            checkInTime = " cast (getdate() as time) ";
+            status = status.isEmpty() ? "'%%'" : status;
+        } else {
+            checkInTime = "'" + checkInTime + "'";
+        }
         String total_hours = "";
         if (!checkOutTime.isEmpty()) {
             total_hours = ", total_hours = datediff (hour, '" + checkInTime + "', '" + checkOutTime + "')";
             checkOutTime =  "', CheckOutTime = '" + checkOutTime + "'";
         }
-        String sql = "update attendance set CheckInTime = '" + checkInTime + checkOutTime + total_hours + ", status = '" + status + "' " +
-                "where EmployeeID = " + empID;
-//        System.out.println(sql);
+        String sql = "update attendance set CheckInTime = " + checkInTime + checkOutTime + total_hours + ", status = '" + status + "' " +
+                "where EmployeeID = " + empID + " and date = cast (getdate() as date)";
+        System.out.println(sql);
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.executeUpdate();

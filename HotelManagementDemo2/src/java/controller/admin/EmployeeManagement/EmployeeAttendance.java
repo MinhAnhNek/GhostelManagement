@@ -63,6 +63,10 @@ public class EmployeeAttendance extends HttpServlet {
         } else {
             thisCode = attendanceCodeDAO.getPredictingNext();
         }
+        if (LocalTime.parse(String.valueOf(thisCode.getEndTime())).isAfter(LocalTime.parse("17:30", DateTimeFormatter.ofPattern("HH:mm")))) {
+//            System.out.println("end of working time");
+            session.setAttribute("endOfTime", "End of Working Time");
+        }
         session.setAttribute("thisCode", thisCode);
 //        session.setAttribute("attendanceCodes", attendanceCodeDAO.getAll());
 
@@ -87,6 +91,7 @@ public class EmployeeAttendance extends HttpServlet {
         LocalTime inTime = LocalTime.parse(checkInTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
         LocalTime outTime = LocalTime.parse(checkOutTime, DateTimeFormatter.ofPattern("HH:mm"));
 //        System.out.println(inTime.isAfter(outTime));
+
         if (inTime.isAfter(outTime)) {
             session.setAttribute("checkOutTimeError", "Check Out Time must be after Check In Time");
             session.setAttribute("empID", employeeID);
@@ -100,6 +105,7 @@ public class EmployeeAttendance extends HttpServlet {
             status = "Late";
         }
         attendanceDAO.update(employeeID, checkInTime, checkOutTime, status);
+        session.setAttribute("added", "Successfully Added Attendance Code");
 
         response.sendRedirect("EmployeeAttendance");
     }

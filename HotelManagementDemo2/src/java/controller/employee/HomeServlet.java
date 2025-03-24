@@ -7,6 +7,8 @@ package controller.employee;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import dao.*;
 import jakarta.servlet.ServletException;
@@ -15,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Account;
+import model.AttendanceCode;
 import model.Employee;
 
 /**
@@ -29,9 +32,9 @@ public class HomeServlet extends HttpServlet {
         EmployeeDAO employeeDAO = new EmployeeDAO();
         HttpSession session = request.getSession();
 
-        Account account = (Account) session.getAttribute("account");
+//        Account account = (Account) session.getAttribute("account");
         AccountDAO accountDAO = new AccountDAO();
-//        Account account = accountDAO.getAccount("Username","emp@email.com");
+        Account account = accountDAO.getAccount("Username","emp@email.com");
 
 
         Employee emp = employeeDAO.getEmployeeByUsername(account.getUsername());
@@ -60,6 +63,28 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        AttendanceCodeDAO attendanceCodeDAO = new AttendanceCodeDAO();
+        String attCode = request.getParameter("attCode");
+        AttendanceCode ac = attendanceCodeDAO.getByTime("", attCode);
+        if (ac == null) {
+            System.out.println("invalid code");
+            session.setAttribute("attCode", attCode);
+            session.setAttribute("wrongCode", "This code is invalid");
+        } else {
+            session.setAttribute("successAttend", "Successfully attended");
+            AttendanceDAO attendanceDAO = new AttendanceDAO();
+            Employee emp = (Employee) session.getAttribute("emp");
+
+            LocalTime now = LocalTime.now();
+            String status = "Late";
+            if (now.isBefore(LocalTime.parse("09:00", DateTimeFormatter.ofPattern("HH:mm")))) {
+                status = "Present";
+            }
+            attendanceDAO.update(String.valueOf(emp.getId()), "", "", status);
+            System.out.println("successfully attended");
+        }
+        response.sendRedirect("employee");
     }
 
     /** 
