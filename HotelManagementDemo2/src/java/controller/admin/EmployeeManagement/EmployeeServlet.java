@@ -35,6 +35,8 @@ public class EmployeeServlet extends HttpServlet {
         EmployeeDAO employeeDAO = new EmployeeDAO();
         RequestDAO requestDAO = new RequestDAO();
 
+        attendanceDAO.autoAddAttendance();
+
         HttpSession session = request.getSession();
         session.setAttribute("roles", erDAO.getAll());
         session.setAttribute("employeeStatuses", esDAO.getAll());

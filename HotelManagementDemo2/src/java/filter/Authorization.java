@@ -134,7 +134,7 @@ public class Authorization implements Filter {
 //        Boolean isAdminObj = user != null ? user.getRoleId() == 0 : null;
 //        boolean isAdmin = (isAdminObj != null) && isAdminObj;
         boolean isAdmin = (session != null) ? session.getAttribute("role") == "admin" : false;
-        System.out.println(isAdmin);
+//        System.out.println(isAdmin);
 //        if (user != null) {
 //            System.out.println(user.getUsername());
 //            isAdmin = user.getRoleId() == 0;

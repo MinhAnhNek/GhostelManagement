@@ -146,4 +146,14 @@ public class AttendanceDAO extends DBContext {
             System.out.println("AttendanceDAO update(): " + e.getMessage());
         }
     }
+
+    public void autoAddAttendance() {
+        String sql = "EXEC dbo.InsertDailyAttendance;";
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("AttendanceDAO autoAddAttendance(): " + e.getMessage());
+        }
+    }
 }

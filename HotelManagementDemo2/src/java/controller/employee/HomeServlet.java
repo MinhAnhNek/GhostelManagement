@@ -30,17 +30,17 @@ public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         EmployeeDAO employeeDAO = new EmployeeDAO();
+        AttendanceDAO attendanceDAO = new AttendanceDAO();
         HttpSession session = request.getSession();
 
+        attendanceDAO.autoAddAttendance();
         Account account = (Account) session.getAttribute("account");
         AccountDAO accountDAO = new AccountDAO();
 //        Account account = accountDAO.getAccount("Username","emp@email.com");
 
-
         Employee emp = employeeDAO.getEmployeeByUsername(account.getUsername());
         session.setAttribute("emp", emp);
 
-        AttendanceDAO attendanceDAO = new AttendanceDAO();
         session.setAttribute("attendances", attendanceDAO.getByEmployeeID(emp.getId(), " month(getdate()) "));
         session.setAttribute("monthlyPresentCount", attendanceDAO.countByEmployeeID(emp.getId(), "Present"));
         session.setAttribute("monthlyAbsentCount", attendanceDAO.countByEmployeeID(emp.getId(),  "Absent"));

@@ -426,7 +426,7 @@
 </div>
 
 <div class="modal fade" id="request" tabindex="-1">
-    <form class="modal-dialog modal-dialog-centered" action="EmployeeRequest" method="POST">
+    <form class="modal-dialog modal-dialog-centered" action="AddRequestForEmployee" method="POST">
         <div class="modal-content p-2">
             <div class="modal-header">
                 <h4 class="modal-title">New Request</h4>

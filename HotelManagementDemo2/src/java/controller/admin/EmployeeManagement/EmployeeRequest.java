@@ -94,12 +94,7 @@ public class EmployeeRequest extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String employeeID = request.getParameter("employeeID");
-        String requestType = request.getParameter("requestType");
-        String reason = request.getParameter("reason");
-        RequestDAO requestDAO = new RequestDAO();
-        requestDAO.add(Integer.parseInt(employeeID), Integer.parseInt(requestType), reason);
-        response.sendRedirect("employee");
+
     }
 
     /** 
