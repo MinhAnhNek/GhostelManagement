@@ -1,6 +1,6 @@
 ﻿-- Tạo cơ sở dữ liệu
 USE [master]
-
+drop database HotelManagement
 
 CREATE DATABASE HotelManagement;
 GO
@@ -22,7 +22,6 @@ INSERT INTO Hotel (Name, Address, Rating) VALUES
 ('Mountain View Inn', '789 Hillside Drive', 4),
 ('City Center Hotel', '101 Downtown Blvd', 5),
 ('Lakeside Lodge', '202 Lake Road', 3);
-
 
 
 -- Bảng RoomType 
@@ -210,7 +209,7 @@ INSERT INTO Employee (Name, RoleID, StartDate, HotelID, Mail, PhoneNum, StatusID
 ('Luke Brown', 1, '2025-01-01', 5, 'luke.brown@email.com', '6789012345', 1, '303 Luke St, City E'),
 
 -- Employees
-('Anna Taylor', 2, '2025-01-01', 1, 'anna.taylor@email.com', '7890123456', 2, '404 Anna Ave, City A'),
+('Anna Taylor', 2, '2025-01-01', 1, 'anna.taylor@email.com', '7890123456', 1, '404 Anna Ave, City A'),
 ('Michael Clark', 3, '2025-01-01', 1, 'michael.clark@email.com', '8901234567', 1, '505 Michael Rd, City A'),
 ('Sarah Lee', 4, '2025-01-01', 1, 'sarah.lee@email.com', '9012345678', 1, '606 Sarah Blvd, City A'),
 ('David Kim', 5, '2025-01-01', 1, 'david.kim@email.com', '0123456789', 1, '707 David Ln, City A'),
@@ -218,7 +217,7 @@ INSERT INTO Employee (Name, RoleID, StartDate, HotelID, Mail, PhoneNum, StatusID
 ('Alice Johnson', 7, '2025-01-01', 1, 'alice.johnson@email.com', '2345678902', 3, '909 Alice Ave, City A'),
 ('Bob Smith', 8, '2025-01-01', 1, 'bob.smith@email.com', '3456789013', 1, '101 Bob Rd, City A'),
 ('Charlie Brown', 2, '2025-01-01', 2, 'charlie.brown@email.com', '4567890124', 1, '202 Charlie Blvd, City B'),
-('Diana Prince', 3, '2025-01-01', 2, 'diana.prince@email.com', '5678901235', 1, '303 Diana Ln, City B'),
+('Diana Prince 2', 3, '2025-01-01', 2, 'diana.prince2@email.com', '5678901235', 1, '303 Diana Ln, City B'),
 ('Ethan Hunt', 4, '2025-01-01', 2, 'ethan.hunt@email.com', '6789012346', 3, '404 Ethan St, City B'),
 ('Fiona Gallagher', 5, '2025-01-01', 2, 'fiona.gallagher@email.com', '7890123457', 1, '505 Fiona Ave, City B'),
 ('George Clooney', 6, '2025-01-01', 2, 'george.clooney@email.com', '8901234568', 1, '606 George Rd, City B'),
@@ -227,7 +226,7 @@ INSERT INTO Employee (Name, RoleID, StartDate, HotelID, Mail, PhoneNum, StatusID
 ('Jack Sparrow', 2, '2025-01-01', 3, 'jack.sparrow@email.com', '1234567891', 1, '909 Jack St, City C'),
 ('Karen Gillan', 3, '2025-01-01', 3, 'karen.gillan@email.com', '2345678903', 3, '101 Karen Ave, City C'),
 ('Leo Messi', 4, '2025-01-01', 3, 'leo.messi@email.com', '3456789014', 1, '202 Leo Rd, City C'),
-('Mia Wallace', 5, '2025-01-01', 3, 'mia.wallace@email.com', '4567890125', 2, '303 Mia Blvd, City C'),
+('Mia Wallace', 5, '2025-01-01', 3, 'mia.wallace@email.com', '4567890125', 1, '303 Mia Blvd, City C'),
 ('Noah Centineo', 6, '2025-01-01', 3, 'noah.centineo@email.com', '5678901236', 1, '404 Noah Ln, City C'),
 ('Olivia Wilde', 7, '2025-01-01', 3, 'olivia.wilde@email.com', '6789012347', 1, '505 Olivia St, City C'),
 ('Paul Atreides', 8, '2025-01-01', 3, 'paul.atreides@email.com', '7890123458', 1, '606 Paul Ave, City C'),
@@ -243,8 +242,8 @@ INSERT INTO Employee (Name, RoleID, StartDate, HotelID, Mail, PhoneNum, StatusID
 ('Clark Kent', 4, '2025-01-14', 1, 'clark.kent@email.com', '3334445556', 1, '300 Daily Planet St, City A'),
 ('Natasha Romanoff', 5, '2025-01-15', 3, 'natasha.romanoff@email.com', '4445556667', 1, '400 Red Room Blvd, City C'),
 ('Peter Parker', 6, '2025-01-16', 4, 'peter.parker@email.com', '5556667778', 1, '500 Queens St, City D'),
-('Wade Wilson', 7, '2025-01-17', 5, 'wade.wilson@email.com', '6667778889', 2, '600 Merc Blvd, City E'),
-('Liam Wilson', 8, '2025-01-01', 4, 'liam.anderson@email.com', '4567890126', 1, '406 Liam Blvd, City D');
+('Wade Wilson', 7, '2025-01-17', 5, 'wade.wilson@email.com', '6667778889', 1, '600 Merc Blvd, City E'),
+('emp', 8, '2025-01-01', 4, 'emp@email.com', '987654321', 1, '406 Liam Blvd, City D');
 
 
 
@@ -254,14 +253,14 @@ INSERT INTO Employee (Name, RoleID, StartDate, HotelID, Mail, PhoneNum, StatusID
 CREATE TABLE attendance (
     att_id INT PRIMARY KEY identity(1,1),
     EmployeeID INT NOT NULL,
-    date DATE NOT NULL,
-    check_in_time TIME,
-    check_out_time TIME,
-    status VARCHAR(10) CHECK (status IN ('Present', 'Absent', 'Late', 'On Leave', 'Day Off')) DEFAULT 'Present',
+    date DATE NOT NULL default cast(getdate() as date),
+    checkInTime TIME default null,
+    checkOutTime TIME default null,
+    status VARCHAR(10) CHECK (status IN ('Present', 'Absent', 'Late', 'Day Off')) DEFAULT 'Absent',
     total_hours DECIMAL(5,2) DEFAULT 0.00,
     FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID) ON DELETE CASCADE
 );
-INSERT INTO Attendance (EmployeeID, date, check_in_time, check_out_time, status, total_hours) VALUES
+INSERT INTO Attendance (EmployeeID, date, checkInTime, checkOutTime, status, total_hours) VALUES
 (1, '2025-03-01', null, null, 'Day Off', 0),
 (2, '2025-03-01', null, null, 'Day Off', 0),
 (3, '2025-03-01', null, null, 'Day Off', 0),
@@ -998,11 +997,125 @@ INSERT INTO Attendance (EmployeeID, date, check_in_time, check_out_time, status,
 (37, '2025-03-18', '09:00', '17:00', 'Present', 8),  
 (38, '2025-03-18', '09:00', '17:00', 'Present', 8),  
 (39, '2025-03-18', '09:00', '17:00', 'Present', 8),  
-(40, '2025-03-18', '09:05', '17:05', 'Present', 8);
+(40, '2025-03-18', '09:05', '17:05', 'Present', 8),
+
+(1, '2025-03-19', '09:00', '17:00', 'Present', 8),
+(2, '2025-03-19', '08:50', '17:10', 'Present', 8.33),
+(3, '2025-03-19', '09:05', '17:05', 'Present', 8),
+(4, '2025-03-19', '09:10', '16:55', 'Late', 7.75),
+(5, '2025-03-19', '09:15', '16:50', 'Late', 7.58),
+(6, '2025-03-19', '09:00', '17:00', 'Present', 8),
+(7, '2025-03-19', '09:05', '17:00', 'Present', 7.92),
+(8, '2025-03-19', '09:10', '16:55', 'Late', 7.75),
+(9, '2025-03-19', '08:55', '16:55', 'Present', 8),
+(10, '2025-03-19', '09:00', '17:00', 'Present', 8),
+(11, '2025-03-19', '09:10', '17:05', 'Late', 7.92),
+(12, '2025-03-19', '09:00', '16:50', 'Present', 7.83),
+(13, '2025-03-19', '08:55', '17:05', 'Present', 8.16),
+(14, '2025-03-19', '09:15', '16:45', 'Late', 7.50),
+(15, '2025-03-19', '08:50', '17:00', 'Present', 8.16),
+(16, '2025-03-19', '09:05', '17:05', 'Present', 8),
+(17, '2025-03-19', '09:00', '17:00', 'Present', 8),
+(18, '2025-03-19', '09:10', '17:10', 'Late', 7.83),
+(19, '2025-03-19', '08:50', '16:55', 'Present', 8),
+(20, '2025-03-19', '09:15', '17:15', 'Late', 7.75),
+(21, '2025-03-19', '08:55', '16:50', 'Present', 7.92),
+(22, '2025-03-19', '09:00', '17:00', 'Present', 8),
+(23, '2025-03-19', '09:10', '17:10', 'Late', 7.83),
+(24, '2025-03-19', '08:55', '17:00', 'Present', 8.08),
+(25, '2025-03-19', '09:05', '17:00', 'Present', 7.92),
+(26, '2025-03-19', '09:10', '16:45', 'Late', 7.58),
+(27, '2025-03-19', '09:00', '17:00', 'Present', 8),
+(28, '2025-03-19', '08:55', '16:55', 'Present', 8),
+(29, '2025-03-19', '09:05', '17:05', 'Present', 8),
+(30, '2025-03-19', '09:10', '17:00', 'Late', 7.83),
+(31, '2025-03-19', '09:15', '16:50', 'Late', 7.58),
+(32, '2025-03-19', '08:50', '17:10', 'Present', 8.33),
+(33, '2025-03-19', '09:00', '17:00', 'Present', 8),
+(34, '2025-03-19', '09:05', '17:00', 'Present', 7.92),
+(35, '2025-03-19', '08:55', '16:55', 'Present', 8),
+(36, '2025-03-19', '09:10', '17:10', 'Late', 7.83),
+(37, '2025-03-19', '09:00', '17:00', 'Present', 8),
+(38, '2025-03-19', '09:05', '17:05', 'Present', 8),
+(39, '2025-03-19', '09:00', '17:00', 'Present', 8),
+(40, '2025-03-19', '09:10', '16:55', 'Late', 7.75),
+
+(1, '2025-03-22', null, null, 'Day Off', 0),  
+(2, '2025-03-22', null, null, 'Day Off', 0),  
+(3, '2025-03-22', null, null, 'Day Off', 0),  
+(4, '2025-03-22', null, null, 'Day Off', 0),  
+(5, '2025-03-22', null, null, 'Day Off', 0),  
+(7, '2025-03-22', '09:00', '17:00', 'Present', 8),
+(8, '2025-03-22', '08:50', '17:10', 'Present', 8.33),
+(9, '2025-03-22', '09:05', '17:00', 'Present', 7.92),
+(10, '2025-03-22', '08:55', '17:00', 'Present', 8.08),
+(11, '2025-03-22', '09:00', '16:50', 'Present', 7.83),
+(12, '2025-03-22', '09:10', '17:10', 'Late', 7.83),
+(13, '2025-03-22', '09:05', '17:00', 'Present', 7.92),
+(14, '2025-03-22', '08:55', '17:05', 'Present', 8.16),
+(15, '2025-03-22', '09:10', '16:55', 'Late', 7.75),
+(16, '2025-03-22', '09:15', '16:50', 'Late', 7.58),
+(17, '2025-03-22', '09:00', '17:00', 'Present', 8),
+(18, '2025-03-22', '09:10', '17:10', 'Late', 7.83),
+(19, '2025-03-22', '08:50', '16:55', 'Present', 8),
+(20, '2025-03-22', '09:05', '17:05', 'Present', 8),
+(21, '2025-03-22', '09:10', '16:55', 'Late', 7.75),
+(22, '2025-03-22', '08:50', '16:55', 'Present', 8),
+(23, '2025-03-22', '09:10', '17:10', 'Late', 7.83),
+(24, '2025-03-22', '08:55', '17:00', 'Present', 8.08),
+(25, '2025-03-22', '09:00', '17:00', 'Present', 8),
+(26, '2025-03-22', '09:15', '17:15', 'Late', 7.75),
+(27, '2025-03-22', '09:05', '17:00', 'Present', 7.92),
+(28, '2025-03-22', '08:55', '16:50', 'Present', 7.92),
+(29, '2025-03-22', '09:10', '17:10', 'Late', 7.83),
+(30, '2025-03-22', '08:50', '17:00', 'Present', 8.16),
+(31, '2025-03-22', '08:55', '16:55', 'Present', 8),
+(32, '2025-03-22', '09:10', '16:55', 'Late', 7.75),
+(33, '2025-03-22', '09:00', '17:00', 'Present', 8),
+(34, '2025-03-22', '08:55', '16:55', 'Present', 8),
+(35, '2025-03-22', '09:10', '16:45', 'Late', 7.58),
+(36, '2025-03-22', '09:05', '17:05', 'Present', 8),
+(37, '2025-03-22', '09:00', '17:00', 'Present', 8),
+(38, '2025-03-22', '09:10', '16:55', 'Late', 7.75),
+(39, '2025-03-22', '08:55', '16:55', 'Present', 8),
+(40, '2025-03-22', '09:05', '17:00', 'Present', 7.92);
 
 
 
+GO
+CREATE FUNCTION dbo.CheckAttendanceExists(@Date DATE)
+RETURNS BIT
+AS
+BEGIN
+    DECLARE @Exists BIT;
+    IF EXISTS (SELECT 1 FROM attendance WHERE date = @Date)
+        SET @Exists = 1;
+    ELSE
+        SET @Exists = 0;
+    RETURN @Exists;
+END;
+GO
 
+
+GO
+CREATE PROCEDURE dbo.InsertDailyAttendance
+AS
+BEGIN
+    DECLARE @Today DATE = CAST(GETDATE() AS DATE);
+
+    -- Check if attendance for today already exists
+    IF dbo.CheckAttendanceExists(@Today) = 0
+    BEGIN
+        -- Insert new attendance records for all employees
+        INSERT INTO attendance (EmployeeID, date, status, total_hours)
+        SELECT EmployeeID, @Today, 'Absent', 0.00
+        FROM Employee;
+    END
+END;
+GO
+
+
+EXEC dbo.InsertDailyAttendance;
 
 
 
@@ -1060,31 +1173,59 @@ INSERT INTO work_schedule (EmployeeID, shift_start, shift_end, work_days) VALUES
 
 
 
-  
 
+CREATE TABLE RequestType (
+	RequestTypeID int identity(1,1) primary key,
+	RequestName varchar(50)
+);
+INSERT INTO RequestType (RequestName) values
+('Sick Leave'),			--1
+('Attendance Check'),	--2
+('Salary Raise'),		--3
+('Workplace Change'),	--4
+('Quit Job'),			--5
+('Others');				--6
+	
 
-CREATE TABLE leave_requests (
-    leave_id INT PRIMARY KEY  identity(1,1),
+CREATE TABLE Request (
+    RequestID INT PRIMARY KEY  identity(1,1),
     EmployeeID INT NOT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
-	leave_type VARCHAR(20) CHECK (leave_type IN ('Sick Leave', 'Casual Leave', 'Paid Leave', 'Unpaid Leave')),
+	RequestTypeID int foreign key references RequestType(RequestTypeID),
     status VARCHAR(10) CHECK (status IN ('Pending', 'Approved', 'Rejected')) DEFAULT 'Pending',
     reason NVARCHAR(MAX),
     applied_at DATETIME DEFAULT GETDATE(),
+	replied_at datetime default null,
+	AdminFeedback nvarchar(max) default '',
 	FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID) ON DELETE CASCADE
 );
+INSERT INTO Request (EmployeeID, RequestTypeID, status, reason, applied_at) VALUES
+(22, 2, 'Pending', 'Attendance correction for missed punch-in', '2025-03-02 11:02:00'),
+(21, 2, 'Pending', 'Attendance correction for missed punch-in', '2025-03-02 11:20:00'),
+(32, 3, 'Pending', 'Request for salary increase after promotion', '2025-03-03 12:10:00'),
+(33, 3, 'Pending', 'Request for salary increase after promotion', '2025-03-03 11:10:00'),
+(26, 6, 'Pending', 'Request for additional training', '2025-03-06 14:09:05'),
+(17, 1, 'Pending', 'Extended sick leave for recovery', '2025-03-07 14:21:00'),
+(10, 4, 'Pending', 'Transfer to another hotel branch', '2025-03-10 09:00:46'),
+(10, 3, 'Pending', 'Incresease salary after promotion', '2025-03-11 09:01:02');
+
+INSERT INTO Request (EmployeeID, RequestTypeID, status, reason, applied_at, replied_at, AdminFeedback) VALUES
+(12, 1, 'Approved', 'Sick leave for 3 days due to flu', '2025-03-01 10:01:20', '2025-03-01 11:01:20', 'Have a nice break, we all hope for your come back'),
+(11, 1, 'Approved', 'Sick leave for 3 days due to flu', '2025-03-01 10:01:20', '2025-03-01 13:01:20', 'Have a nice break, we all hope for your come back'),
+(24, 4, 'Rejected', 'Change to remote work', '2025-03-04 09:00:01', '2025-03-04 12:00:01', 'Your reason is not clear enough, please describe it fully in another request'),
+(35, 5, 'Approved', 'Resignation notice submitted', '2025-03-05 08:22:30', '2025-03-05 11:22:30', 'We have gotten you resignation letter and handle it as soon as possible'),
+(38, 2, 'Approved', 'The connection was not good when i checked in, i have my proof with me that i did come to work with cameras', '2025-03-08 11:22:00', '2025-03-08 14:22:00', 'Attendance status is updated, check again on your schedule'),
+(39, 3, 'Rejected', 'Salary raise request', '2025-03-09 15:23:00', '2025-03-09 16:23:00', 'Not reasonable');
 
 
 
-CREATE TABLE overtime (
-    overtime_id INT PRIMARY KEY identity(1,1),
-    EmployeeID INT NOT NULL,
-    date DATE NOT NULL,
-    extra_hours DECIMAL(5,2) NOT NULL,
-    approved_by INT NULL,
-    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID) ON DELETE CASCADE,
-    FOREIGN KEY (approved_by) REFERENCES Employee(EmployeeID)
+
+
+create table attendanceCode (
+	id int identity(1,1) primary key,
+	code varchar(20),
+	startTime time default cast(getdate() as time),
+	endTime as dateadd(hour, 1, startTime) persisted,
+	date date default cast(getdate() as date)
 );
 
 
@@ -1098,7 +1239,7 @@ CREATE TABLE payroll (
     overtime_hours DECIMAL(5,2) DEFAULT 0.00,
     base_salary DECIMAL(10,2),
     overtime_pay DECIMAL(10,2) DEFAULT 0.00,
-    total_salary AS (base_salary + overtime_pay) PERSISTED,
+    total_salary AS (base_salary + overtime_pay * overtime_hours) PERSISTED,
 	status VARCHAR(10) CHECK (status IN ('Pending', 'Paid')) DEFAULT 'Pending',
     FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID) ON DELETE CASCADE
 );
@@ -1232,8 +1373,6 @@ INSERT INTO payroll (EmployeeID, salary_month, salary_year, total_working_days, 
 
 
 
-
-
 -- Accounts
 CREATE TABLE Account (
     Username NVARCHAR(100) PRIMARY KEY,  -- Using Employee's Mail as Username
@@ -1277,80 +1416,25 @@ VALUES
     ('ethan.carter@email.com', 'EthanC789!',6),
     ('sophia.martinez@email.com', 'SophiaM321!',7),
     ('liam.anderson@email.com', 'LiamA654!',8),
-    ('olivia.thomas@email.com', 'OliviaT987!',2),
-    ('noah.roberts@email.com', 'NoahR234!',3),
-    ('ava.johnson@email.com', 'AvaJ567!',4),
-    ('mason.lewis@email.com', 'MasonL890!',5),
-    ('isabella.walker@email.com', 'IsabellaW123!',6),
-    ('james.scott@email.com', 'JamesS456!',7),
-    ('charlotte.hall@email.com', 'CharlotteH789!',8);
+    ('bruce.wayne@email.com', 'bruce123!',2),
+    ('diana.prince2@email.com', 'dia123!',3),
+    ('clark.kent@email.com', 'AvaJ567!',4),
+    ('natasha.romanoff@email.com', 'MasonL890!',5),
+    ('peter.parker@email.com', 'IsabellaW123!',6),
+    ('wade.wilson@email.com', 'JamesS456!',7),
+    ('emp@email.com', '123',8);
+
+-- Add a new column 'phoneNum' to the 'account' table
+ALTER TABLE account ADD phoneNum VARCHAR(15), statusID int;
+-- Update the 'phoneNum' column in the 'account' table with values from the 'employee' table
+UPDATE a
+SET a.phoneNum = e.phoneNum, a.statusID = e.StatusID
+FROM Account a
+JOIN Employee e ON a.Username = e.mail;
 
 
--- Bảng Customer 
-CREATE TABLE Customer (
-    CustomerID INT IDENTITY(1,1) PRIMARY KEY,
-    Name NVARCHAR(100) NOT NULL,
-    PhoneNumber NVARCHAR(20),
-    Email NVARCHAR(100)
-);
--- Bảng Customer
-INSERT INTO Customer (Name, PhoneNumber, Email) VALUES
-('Alice Brown', '555-1234', 'alice@example.com'),		--1
-('Bob White', '555-5678', 'bob@example.com'),			--2
-('Cathy Green', '555-2345', 'cathy@example.com'),		--3
-('David Black', '555-6789', 'david@example.com'),		--4
-('Ella Blue', '555-3456', 'ella@example.com'),			--5
-('Frank Gray', '555-7890', 'frank@example.com'),		--6
-('Grace Orange', '555-4567', 'grace@example.com'),		--7
-('Hank Purple', '555-8901', 'hank@example.com'),		--8
-('Ivy Red', '555-5678', 'ivy@example.com'),				--9
-('Jack Yellow', '555-1235', 'jack@example.com'),		--10
-('Charlie Black', '555-9999', 'charlie@example.com'),	--11
-('David Green', '555-8888', 'david@example.com');		--12
-
-
--- Bảng Booking 
-CREATE TABLE Booking (
-    BookingID INT IDENTITY(1,1) PRIMARY KEY,
-    CustomerID INT,
-	RoomID INT,
-	BookingDate DATE NOT NULL DEFAULT GETDATE(),
-	CheckInDate DATE DEFAULT null,
-    CheckOutDate DATE DEFAULT null,
-    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID) ON DELETE CASCADE,
-	--FOREIGN KEY (HotelID, RoomNumber) REFERENCES Room(HotelID, RoomNumber) ON DELETE CASCADE
-	FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
-
-);
--- Bảng Booking
-INSERT INTO Booking (CustomerID, RoomID, BookingDate, CheckInDate, CheckOutDate) VALUES
-(1, 1, '2023-10-01', '2023-10-10', '2023-10-15'),
-(2, 2, '2023-11-01', '2023-11-05', '2023-11-10'),
-(3, 3, '2023-10-05', '2023-10-15', '2023-10-20'),
-(4, 4, '2023-10-08', '2023-10-18', '2023-10-23'),
-(5, 5, '2023-09-10', '2023-09-15', '2023-09-20'),
-(6, 6, '2023-08-01', '2023-08-05', '2023-08-10'),
-(7, 7, '2023-07-01', '2023-07-05', '2023-07-10'),
-(8, 7, '2023-06-01', '2023-06-05', '2023-06-10'),
-(9, 9, '2023-05-01', '2023-05-05', '2023-05-10'),
-(1, 10, '2024-10-01', '2024-10-10', '2024-10-15'),
-(2, 11, '2024-11-01', '2024-11-05', '2024-11-10'),
-(3, 12, '2024-10-05', '2024-10-15', '2024-10-20'),
-(4, 13, '2024-10-08', '2024-10-18', '2024-10-23'),
-(5, 14, '2024-09-10', '2024-09-15', '2024-09-20'),
-(6, 15, '2024-08-01', '2024-08-05', '2024-08-10'),
-(7, 16, '2024-07-01', '2024-07-05', '2024-07-10'),
-(8, 17, '2024-06-01', '2024-06-05', '2024-06-10'),
-(9, 18, '2024-05-01', '2024-05-05', '2024-05-10'),
-(10, 19, '2024-12-01', '2024-07-05', '2024-07-10'),
-(11, 20, '2024-01-01', '2024-06-05', '2024-06-10'),
-(12, 21, '2024-02-01', '2024-05-05', '2024-05-10');
 
 
 GO
 use HotelManagement
 go
-
-
-
-
