@@ -51,15 +51,16 @@ public class Login extends HttpServlet {
             }
             session.setAttribute("account", account);
             int roleId = account.getRoleId();
-//            System.out.println(roleId);
+            System.out.println("role id: " + roleId);
             if (roleId == 0) {
                 session.setAttribute("role", "admin");
                 response.sendRedirect("admin");
                 return;
-            } else if (roleId == 1) {
-                session.setAttribute("role", "manager");
-                response.sendRedirect("manager");
-                return;
+//            }
+//            else if (roleId == 1) {
+//                session.setAttribute("role", "manager");
+//                response.sendRedirect("manager");
+//                return;
             } else {
                 response.sendRedirect("employee");
             }

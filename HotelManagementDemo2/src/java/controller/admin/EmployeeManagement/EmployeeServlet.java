@@ -137,8 +137,10 @@ public class EmployeeServlet extends HttpServlet {
             Employee newEmp = new Employee(name, role, hotelName, mail, phoneNum, address, Float.parseFloat(salary));
             EmployeeDAO eDAO = new EmployeeDAO();
             eDAO.addNew(newEmp, Float.parseFloat(overtimePay), password);
+            session.setAttribute("empAdded", "Successfully added new employee!");
         }
-        request.getRequestDispatcher("admin/EmployeeDashboard.jsp").forward(request, response);
+//        request.getRequestDispatcher("admin/EmployeeDashboard.jsp").forward(request, response);
+        response.sendRedirect("admin");
     }
 
 

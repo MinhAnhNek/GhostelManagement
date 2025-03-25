@@ -79,14 +79,14 @@
                                             ${sessionScope.requestStatusDistribution.get(0)}
 <%--                                        </c:if>--%>
                                     </div>
-                                    <div class="progress-bar bg-warning" style="width: ${sessionScope.requestStatusDistribution.get(1) / sessionScope.totalRequest.size() * 100}%">
+                                    <div class="progress-bar bg-warning" style="width: ${sessionScope.requestStatusDistribution.get(2) / sessionScope.totalRequest.size() * 100}%">
                                         <c:if test="${sessionScope.requestStatusDistribution.size() >= 2}">
-                                            ${sessionScope.requestStatusDistribution.get(1)}
+                                            ${sessionScope.requestStatusDistribution.get(2)}
                                         </c:if>
                                     </div>
-                                    <div class="progress-bar bg-danger" style="width: ${sessionScope.requestStatusDistribution.get(2) / sessionScope.totalRequest.size() * 100}%">
+                                    <div class="progress-bar bg-danger" style="width: ${sessionScope.requestStatusDistribution.get(1) / sessionScope.totalRequest.size() * 100}%">
                                         <c:if test="${sessionScope.requestStatusDistribution.size() >= 3}">
-                                            ${sessionScope.requestStatusDistribution.get(2)}
+                                            ${sessionScope.requestStatusDistribution.get(1)}
                                         </c:if>
                                     </div>
                                 </div>
@@ -110,14 +110,14 @@
                                                 ${sessionScope.requestStatusDistributionToday.get(0)}
 <%--                                            </c:if>--%>
                                         </div>
-                                        <div class="progress-bar bg-warning" style="width: ${sessionScope.requestStatusDistributionToday.get(1) / sessionScope.todayRequest.size() * 100}%">
+                                        <div class="progress-bar bg-warning" style="width: ${sessionScope.requestStatusDistributionToday.get(2) / sessionScope.todayRequest.size() * 100}%">
                                             <c:if test="${sessionScope.requestStatusDistributionToday.size() >= 2}">
-                                                ${sessionScope.requestStatusDistributionToday.get(1)}
+                                                ${sessionScope.requestStatusDistributionToday.get(2)}
                                             </c:if>
                                         </div>
-                                        <div class="progress-bar bg-danger" style="width: ${sessionScope.requestStatusDistributionToday.get(2) / sessionScope.todayRequest.size() * 100}%">
+                                        <div class="progress-bar bg-danger" style="width: ${sessionScope.requestStatusDistributionToday.get(1) / sessionScope.todayRequest.size() * 100}%">
                                             <c:if test="${sessionScope.requestStatusDistributionToday.size() >= 3}">
-                                                ${sessionScope.requestStatusDistributionToday.get(2)}
+                                                ${sessionScope.requestStatusDistributionToday.get(1)}
                                             </c:if>
                                         </div>
                                     </div>
@@ -405,7 +405,7 @@
 
                             <c:forEach var="requestStatus" items="${sessionScope.requestStatuses}">
                                 <div class="tab-pane fade" id="${requestStatus}" role="tabpanel">
-                                    <c:if test="${empty sessionScope.requests}">
+                                    <c:if test="${empty sessionScope.totalRequest}">
                                         <div class="alert alert-warning" role="alert">There is no such request</div>
                                     </c:if>
                                     <div class="table-responsive">
@@ -422,7 +422,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach var="request" items="${sessionScope.requests}">
+                                            <c:forEach var="request" items="${sessionScope.totalRequest}">
 <%--                                                <c:out value="${request.getStatus()}"/>--%>
                                                 <c:if test="${request.getStatus() eq requestStatus}">
                                                     <tr>
@@ -506,7 +506,7 @@
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label class="form-label">Admin Feedback</label>
-                                                                            <textarea class="form-control" rows="3" name="AdminFeedback" required></textarea>
+                                                                            <textarea class="form-control" rows="3" name="AdminFeedback" required>${request.getFeedback()}</textarea>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">

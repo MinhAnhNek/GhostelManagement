@@ -139,7 +139,7 @@
             <div class="row mb-3">
               <div class="col-md-4">
                 <select class="form-select" name="status" aria-label="Filter by" onchange="redirectToServlet('${pageContext.request.contextPath}', 'EmployeeAttendance?hotelID=${requestScope.hotelID}&status=' + this.value)">
-                  <option value="">Sort by...</option>
+                  <option value="">Filter by...</option>
                   <option value="Present" ${requestScope.status eq 'Present' ? 'selected' : ''}>Present</option>
                   <option value="Late" ${requestScope.status eq 'Late' ? 'selected' : ''}>Late</option>
                   <option value="Absent" ${requestScope.status eq 'Absent' ? 'selected' : ''}>Absent</option>

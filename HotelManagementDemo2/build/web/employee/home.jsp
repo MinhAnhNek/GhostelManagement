@@ -13,13 +13,13 @@
 <c:set var="emp" value="${sessionScope.emp}"/>
 <nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9" width="40" height="40" class="rounded-circle" alt="Company Logo">
-        </a>
-        <div class="d-flex align-items-center">
+<%--        <a class="navbar-brand" href="#">--%>
+<%--            <img src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9" width="40" height="40" class="rounded-circle" alt="Company Logo">--%>
+<%--        </a>--%>
+        <div class="col-md-12 d-flex align-items-center justify-content-between m-2">
             <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#attendanceCode">Set Attendance by Code</button>
             <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d" width="40" height="40" class="rounded-circle me-2" alt="Profile">
-            <button class="btn btn-danger btn-sm">Logout</button>
+            <a href="${pageContext.request.contextPath}/logout" class="bg-danger text-decoration-none text-white rounded-3 p-2">Log out</a>
         </div>
     </div>
 </nav>
@@ -58,10 +58,13 @@
 
         <div class="col-lg-3 col-md-6">
             <div class="card h-100 shadow-sm hover-card">
-                <div class="card-header bg-info text-white">Attendance Overview</div>
+                <div class="d-flex justify-content-between card-header bg-info text-white">
+                    Attendance Overview
+                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#allAttendance">View all</button>
+                </div>
                 <div class="card-body text-center">
                     <div class="attendance-circle mb-3">
-                        <h2><fmt:formatNumber type="percent" maxFractionDigits="2" value = "${sessionScope.monthlyPresentCount / sessionScope.attendance.size()}"/></h2>
+                        <h2><fmt:formatNumber type="percent" maxFractionDigits="2" value = "${sessionScope.monthlyPresentCount / sessionScope.attendances.size()}"/></h2>
                         <p class="text-muted">Monthly Attendance</p>
                     </div>
                     <div class="row g-2">
@@ -75,6 +78,20 @@
                             <div class="p-2 bg-danger-subtle rounded">
                                 <h6>Absent</h6>
                                 <span>${sessionScope.monthlyAbsentCount} day</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-2 mt-2">
+                        <div class="col-6">
+                            <div class="p-2 bg-warning-subtle rounded">
+                                <h6>Late</h6>
+                                <span>${sessionScope.monthlyLateCount} days</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-2 bg-info-subtle rounded">
+                                <h6>Day Off</h6>
+                                <span>${sessionScope.monthlyDayOffCount} day</span>
                             </div>
                         </div>
                     </div>
@@ -354,9 +371,63 @@
     </form>
 </div>
 
+
+<div class="modal fade" id="allAttendance" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">All Attendance This Month</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Clock In</th>
+                            <th>Clock Out</th>
+                            <th>Total Hours</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="att" items="${sessionScope.attendances}">
+                            <tr>
+                                <td>${att.getDate()}</td>
+                                <td>${att.getCheckInTime()}</td>
+                                <td>${att.getCheckOutTime()}</td>
+                                <td>${att.getTotalHours()}</td>
+                                <td>
+                                    <c:if test="${att.getStatus() == 'Present'}">
+                                        <span class="badge bg-success">${att.getStatus()}</span>
+                                    </c:if>
+                                    <c:if test="${att.getStatus() == 'Absent'}">
+                                        <span class="badge bg-danger">${att.getStatus()}</span>
+                                    </c:if>
+                                    <c:if test="${att.getStatus() == 'Late'}">
+                                        <span class="badge bg-warning">${att.getStatus()}</span>
+                                    </c:if>
+                                    <c:if test="${att.getStatus() == 'Day Off'}">
+                                        <span class="badge bg-info">${att.getStatus()}</span>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+<%--                <button type="submit" class="btn btn-primary">Submit</button>--%>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="request" tabindex="-1">
     <form class="modal-dialog modal-dialog-centered" action="EmployeeRequest" method="POST">
-        <div class="modal-content">
+        <div class="modal-content p-2">
             <div class="modal-header">
                 <h4 class="modal-title">New Request</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -373,18 +444,20 @@
                     </div>
                 </div>
                 <div class="row">
-<%--                    <div class="col-md-12">--%>
+                    <div class="col-md-12">
                         <strong class="col-md-6">Request Type:</strong>
                         <select class="form-select" name="requestType">
                             <c:forEach var="requestType" items="${sessionScope.requestTypes}">
                                 <option value="${requestType.getId()}" selected="selected">${requestType.getName()}</option>
                             </c:forEach>
                         </select>
-<%--                    </div>--%>
+                    </div>
                 </div>
                 <div class="row">
-                    <div>Reason:</div>
-                    <textarea class="form-control" rows="3" name="reason"></textarea>
+                    <div class="col-md-12">
+                        <div>Reason:</div>
+                        <textarea class="form-control" rows="3" name="reason"></textarea>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

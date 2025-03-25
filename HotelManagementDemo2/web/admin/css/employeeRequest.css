@@ -114,7 +114,13 @@ body {
     border-color: var(--border);
 }
 
-.pagination .page-item.active .page-link.active {
+.pagination .page-item .page-link.active {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--primary-foreground);
+}
+
+.active>.page-link, .page-link.active {
     background-color: var(--primary);
     border-color: var(--primary);
     color: var(--primary-foreground);

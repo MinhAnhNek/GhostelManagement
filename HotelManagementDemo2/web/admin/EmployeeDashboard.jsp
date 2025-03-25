@@ -104,15 +104,15 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="card h-100">
                             <div class="card-body">
-                                <c:set var="atworkEmp" value="${sessionScope.presentEmp + sessionScope.lateEmp}"/>
+<%--                                <c:set var="atworkEmp" value="${sessionScope.totalEmp.size()}"/>--%>
                                 <h6 class="card-subtitle mb-2">Today Attendance</h6>
-                                <h2 class="card-title mb-0 text-center">${atworkEmp}</h2>
+                                <h2 class="card-title mb-0 text-center">${sessionScope.totalEmp.size()}</h2>
                                 <div class="mt-3">
                                     <div class="progress mt-2">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: ${sessionScope.presentEmp * 100 / atworkEmp}%" aria-valuenow="${sessionScope.presentEmp}" aria-valuemin="0" aria-valuemax="100">${sessionScope.presentEmp}</div>
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: ${sessionScope.lateEmp * 100 / atworkEmp}%">${sessionScope.lateEmp}</div>
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: ${sessionScope.absentEmp.size() * 100 / atworkEmp}%">${sessionScope.absentEmp.size()}</div>
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: ${sessionScope.dayoff.size() * 100 / atworkEmp}%">${sessionScope.dayoff.size()}</div>
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: ${sessionScope.presentEmp * 100 / sessionScope.totalEmp.size()}%" aria-valuenow="${sessionScope.presentEmp}" aria-valuemin="0" aria-valuemax="100">${sessionScope.presentEmp}</div>
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: ${sessionScope.lateEmp * 100 / sessionScope.totalEmp.size()}%">${sessionScope.lateEmp}</div>
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: ${sessionScope.absentEmp.size() * 100 / sessionScope.totalEmp.size()}%">${sessionScope.absentEmp.size()}</div>
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: ${sessionScope.dayoff.size() * 100 / sessionScope.totalEmp.size()}%">${sessionScope.dayoff.size()}</div>
                                     </div>
                                 </div>
                                 <div class="mt-3 d-flex justify-content-between">
@@ -378,6 +378,9 @@
                             </tr>
                             </thead>
                             <tbody id="employeeTable">
+                            <c:if test="${empty sessionScope.employees}">
+                                <div class="alert alert-warning" role="alert">There is no such employees</div>
+                            </c:if>
                                 <c:forEach var="employee" items="${sessionScope.employees}">
                                     <tr>
                                         <td>${employee.getId()}</td>
@@ -507,6 +510,18 @@
 
 
     <script src="admin/js/home.js"></script>
+    <script>
+
+        var success = '${not empty sessionScope.empAdded}';
+        document.addEventListener("DOMContentLoaded", function() {
+            if (success === 'true') {
+                alert('${sessionScope.empAdded}');
+            }
+        });
+    </script>
+    <%
+        session.removeAttribute("empAdded");
+    %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

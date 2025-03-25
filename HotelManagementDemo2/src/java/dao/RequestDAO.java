@@ -5,9 +5,7 @@ import model.Request;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class RequestDAO extends DBContext {
     public List<Request> getAll() {
@@ -121,16 +119,39 @@ public class RequestDAO extends DBContext {
                 "from Request r " + additionalTable + " " +
                 "group by " + groupByType + " " +
                 condition;
-//        System.out.println(sql);
+        System.out.println(sql);
+        Map<String, Integer> map = new HashMap<>();
+        if (groupByType.contains("status")) {
+            map.put("Approved", 0);
+            map.put("Pending", 0);
+            map.put("Rejected", 0);
+        }
         LinkedList<Integer> list = new LinkedList<>();
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
-                list.add(
-                        rs.getInt(1)
-                );
+            if (groupByType.contains("status")) {
+                while (rs.next()) {
+                    for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                        if (rs.getString(2).equals(entry.getKey())) {
+                            entry.setValue(rs.getInt(1));
+                        }
+                    }
+                }
+                for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                    System.out.println(entry.getKey() + " " + entry.getValue());
+                    list.add(entry.getValue());
+                }
+                System.out.println(Arrays.toString(list.toArray()));
+            } else {
+                while (rs.next()) {
+                    list.add(
+                            rs.getInt(1)
+                    );
+
+                }
             }
+
         } catch (SQLException e) {
             System.out.println("RequestDAO getRequestDistributionBy: " + e.getMessage());
         }

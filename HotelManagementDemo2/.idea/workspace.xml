@@ -4,24 +4,55 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="change employee attendance">
+    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="finish employee attends by attendance code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/ForgotPasswordServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/ForgotPasswordServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/Login.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/Logout.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/Logout.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/DeleteEmployee.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeAttendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeAttendance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EmployeeManagement/EmployeeRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/employee/HomeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/employee/HomeServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/AttendanceDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/AttendanceDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RequestDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/RequestDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/filter/Authorization.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/filter/Authorization.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/filter/LoginFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/filter/LoginFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeAttendance.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeAttendance.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeDashboard.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/EmployeeRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/EmployeeRequests.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/admin/css/employeeRequest.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/css/employeeRequest.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/employee/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/employee/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/AttendanceCodeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/AttendanceCodeServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeAttendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeAttendance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/ForgotPasswordServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/ForgotPasswordServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/Login.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/Logout.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/Logout.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/DeleteEmployee.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/admin/EmployeeManagement/EmployeeServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/employee/HomeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/controller/employee/HomeServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/AttendanceDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/AttendanceDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeAttendance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeAttendance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/RequestDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/dao/RequestDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/filter/Authorization.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/filter/Authorization.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HotelManagementDemo2/filter/LoginFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HotelManagementDemo2/filter/LoginFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/ForgotPasswordServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/ForgotPasswordServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/Logout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/Logout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/DeleteEmployee.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EmployeeManagement/EmployeeServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/controller/employee/HomeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/employee/HomeServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dao/AttendanceCodeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/AttendanceCodeDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/dao/AttendanceDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/AttendanceDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/RequestDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/RequestDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/filter/Authorization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/filter/Authorization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/filter/LoginFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/filter/LoginFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/admin/EmployeeAttendance.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeAttendance.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeDashboard.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/EmployeeRequests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/EmployeeRequests.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/admin/css/employeeRequest.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/css/employeeRequest.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/employee/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/employee/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/login.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +249,10 @@
       <workItem from="1742637517137" duration="2869000" />
       <workItem from="1742646426870" duration="1362000" />
       <workItem from="1742781312063" duration="3573000" />
-      <workItem from="1742786569660" duration="1627000" />
+      <workItem from="1742786569660" duration="8331000" />
+      <workItem from="1742797067952" duration="5528000" />
+      <workItem from="1742806127599" duration="625000" />
+      <workItem from="1742885494073" duration="516000" />
     </task>
     <task id="LOCAL-00001" summary="fix css">
       <option name="closed" value="true" />
@@ -500,7 +534,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742762953031</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="finish employee attends by attendance code">
+      <option name="closed" value="true" />
+      <created>1742788612760</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1742788612760</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -527,7 +569,8 @@
     <MESSAGE value="delete sorting by salary and start date in emp dashboard" />
     <MESSAGE value="add link to employee attendance on side bar menu" />
     <MESSAGE value="change employee attendance" />
-    <option name="LAST_COMMIT_MESSAGE" value="change employee attendance" />
+    <MESSAGE value="finish employee attends by attendance code" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish employee attends by attendance code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

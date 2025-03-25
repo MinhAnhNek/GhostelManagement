@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
-    <filter>
-        <filter-name>LoginFilter</filter-name>
-        <filter-class>filter.LoginFilter</filter-class>
-    </filter>
+
     <filter>
         <filter-name>Authorization</filter-name>
         <filter-class>filter.Authorization</filter-class>
@@ -12,10 +9,7 @@
         <filter-name>Authorization</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>controller.Login</servlet-class>
@@ -31,10 +25,6 @@
     <servlet>
         <servlet-name>AddEmployee</servlet-name>
         <servlet-class>controller.admin.EmployeeManagement.AddEmployee</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteEmployee</servlet-name>
-        <servlet-class>controller.admin.EmployeeManagement.DeleteEmployee</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RoomServlet</servlet-name>
@@ -96,10 +86,7 @@
         <servlet-name>AddEmployee</servlet-name>
         <url-pattern>/addEmployee</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteEmployee</servlet-name>
-        <url-pattern>/DeleteEmployee</url-pattern>
-    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>RoomServlet</servlet-name>
         <url-pattern>/RoomManagement</url-pattern>
@@ -144,4 +131,28 @@
         <servlet-name>AttendanceCode</servlet-name>
         <url-pattern>/AttendanceCode</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <!--        <url-pattern>/*</url-pattern>-->
+        <url-pattern>/AttendanceCode</url-pattern>
+        <url-pattern>/EmployeeAttendance</url-pattern>
+        <url-pattern>/logout</url-pattern>
+        <url-pattern>/employee</url-pattern>
+        <url-pattern>/EmployeeSalaryDetail</url-pattern>
+        <url-pattern>/EmployeeRequest</url-pattern>
+        <url-pattern>/UpdateRequest</url-pattern>
+        <url-pattern>/UpdateRoom</url-pattern>
+        <url-pattern>/AddRoom</url-pattern>
+        <url-pattern>/RoomManagement</url-pattern>
+        <url-pattern>/addEmployee</url-pattern>
+        <url-pattern>/updateEmployee</url-pattern>
+        <url-pattern>/admin</url-pattern>
+
+<!--        <url-pattern>/Employee</url-pattern>-->
+    </filter-mapping>
 </web-app>

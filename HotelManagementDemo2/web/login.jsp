@@ -51,10 +51,11 @@
                         <span class="password-toggle"><i class="bi bi-eye"></i></span>
                         <div class="invalid-feedback">Password is required</div>
                     </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
-                    </div>
+<%--                    <div class="mb-3 form-check">--%>
+<%--                        <input type="checkbox" class="form-check-input" id="rememberMe">--%>
+<%--                        <label class="form-check-label" for="rememberMe">Remember me</label>--%>
+<%--                    </div>--%>
+
 
                     <div class="text-center mt-3">
                         <c:if test="${not empty requestScope.warningL}">
@@ -134,7 +135,7 @@
                         <button type="submit" class="btn btn-primary w-100">Reset Password</button>
                     </div>
                     <div class="text-center mt-3">
-                        <a href="" class="return-link" data-bs-toggle="pill" data-bs-target="#login">Return to Login</a>
+                        <a href="${pageContext.request.contextPath}/login" class="return-link">Return to Login</a>
                     </div>
                 </form>
             </div>
@@ -160,5 +161,9 @@
         });
     });
 </script>
+<% request.removeAttribute("Username");
+    request.removeAttribute("password");
+    request.removeAttribute("phoneNum");
+%>
 </body>
 </html>

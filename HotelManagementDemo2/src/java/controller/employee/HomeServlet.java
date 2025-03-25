@@ -32,18 +32,20 @@ public class HomeServlet extends HttpServlet {
         EmployeeDAO employeeDAO = new EmployeeDAO();
         HttpSession session = request.getSession();
 
-//        Account account = (Account) session.getAttribute("account");
+        Account account = (Account) session.getAttribute("account");
         AccountDAO accountDAO = new AccountDAO();
-        Account account = accountDAO.getAccount("Username","emp@email.com");
+//        Account account = accountDAO.getAccount("Username","emp@email.com");
 
 
         Employee emp = employeeDAO.getEmployeeByUsername(account.getUsername());
         session.setAttribute("emp", emp);
 
         AttendanceDAO attendanceDAO = new AttendanceDAO();
-        session.setAttribute("attendance", attendanceDAO.getByEmployeeID(emp.getId(), " month(getdate()) "));
+        session.setAttribute("attendances", attendanceDAO.getByEmployeeID(emp.getId(), " month(getdate()) "));
         session.setAttribute("monthlyPresentCount", attendanceDAO.countByEmployeeID(emp.getId(), "Present"));
         session.setAttribute("monthlyAbsentCount", attendanceDAO.countByEmployeeID(emp.getId(),  "Absent"));
+        session.setAttribute("monthlyLateCount", attendanceDAO.countByEmployeeID(emp.getId(),  "Late"));
+        session.setAttribute("monthlyDayOff", attendanceDAO.countByEmployeeID(emp.getId(),  "Day Off"));
 
         PayrollDAO payrollDAO = new PayrollDAO();
         session.setAttribute("payroll", payrollDAO.getByEmpIDAndMonth(emp.getId(), " month(getdate()) "));

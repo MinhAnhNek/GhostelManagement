@@ -57,12 +57,12 @@ public class EmployeeRequest extends HttpServlet {
         session.setAttribute("hotelRequestDistribution", requestDAO.getRequestDistributionBy("e.HotelID", "left join Employee e on e.EmployeeID = r.EmployeeID", ""));
         session.setAttribute("todayRequest", requestDAO.getRequestDistributionBy("cast (applied_at as date)", "", "having cast(getdate() as date) = cast (applied_at as date)"));
         LinkedList<Integer> requestStatusDistributionToday = (LinkedList<Integer>) requestDAO.getRequestDistributionBy("status, cast (applied_at as date) ","", "having cast(getdate() as date) = cast (applied_at as date)");
-        if (requestStatusDistributionToday.size() < 2) {
-            requestStatusDistributionToday.add(0);
-            requestStatusDistributionToday.add(0);
-        } else if (requestStatusDistributionToday.size() == 2) {
-            requestStatusDistributionToday.add(0);
-        }
+//        if (requestStatusDistributionToday.size() < 2) {
+//            requestStatusDistributionToday.add(0);
+//            requestStatusDistributionToday.add(0);
+//        } else if (requestStatusDistributionToday.size() == 2) {
+//            requestStatusDistributionToday.add(0);
+//        }
         session.setAttribute("requestStatusDistributionToday", requestStatusDistributionToday);
 
         LinkedList<String> requestStatus = new LinkedList<>();
