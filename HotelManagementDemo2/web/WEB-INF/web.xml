@@ -21,10 +21,6 @@
         <servlet-class>controller.admin.EmployeeManagement.UpdateEmployee</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddEmployee</servlet-name>
-        <servlet-class>controller.admin.EmployeeManagement.AddEmployee</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RoomServlet</servlet-name>
         <servlet-class>controller.admin.RoomManagement.RoomServlet</servlet-class>
     </servlet>
@@ -83,10 +79,6 @@
     <servlet-mapping>
         <servlet-name>UpdateEmployee</servlet-name>
         <url-pattern>/updateEmployee</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddEmployee</servlet-name>
-        <url-pattern>/addEmployee</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RoomServlet</servlet-name>
