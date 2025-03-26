@@ -142,6 +142,8 @@ body {
 }
 
 .modal {
+    --bs-modal-width: 80vw;
+    --bs-modal-height: 90vh;
 }
 
 .custom-modal {

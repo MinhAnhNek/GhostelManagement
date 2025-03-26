@@ -1,10 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--
-    Document   : RoomManagement
-    Created on : Mar 6, 2025, 6:23:18 PM
-    Author     : ADMIN
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,33 +19,59 @@
         <div class="logo mb-4">
             <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d" alt="Hotel Logo" class="img-fluid rounded-circle">
         </div>
+        <div class="mb-4 d-flex justify-content-center align-items-center">
+            <a class="link-danger bg-danger text-white rounded-3 p-2" href="${pageContext.request.contextPath}/logout">Log Out</a>
+        </div>
         <ul class="nav flex-column">
+            <%--            <li class="nav-item">--%>
+            <%--                <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>--%>
+            <%--            </li>--%>
             <li class="nav-item">
-                <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius); border-bottom: none;">
+                    <i class="bi bi-people me-2"></i>
+                    Employee Dashboard
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Details</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeAttendance" style="border-bottom: none;">
+                    <i class="bi bi-calendar-check me-2"></i>Employee Attendance
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="${pageContext.request.contextPath}/RoomManagement"><i class="bi bi-door-open me-2"></i>Room Details</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeSalaryDetail" style="border-bottom: none;">
+                    <i class="bi bi-cash me-2"></i>Employee Salary
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="bi bi-calendar-check me-2"></i>Booking Details</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeRequest" style="border-bottom: none;">
+                    <i class="bi bi-graph-up me-2"></i>Employee Request
+                </a>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link" href="#"  style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);"><i class="bi bi-graph-up me-2"></i>Finance Overview</a>
+                <a class="nav-link active" href="${pageContext.request.contextPath}/RoomManagement" style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);">
+                    <i class="bi bi-door-open me-2"></i>Room Details
+                </a>
             </li>
         </ul>
     </div>
 
     <div class="main-content p-4 w-100">
-
         <div class="mb-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2 class="col-md-10">Room Management</h2>
-                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#addRoomModal">
-                    <i class="bi bi-plus-circle me-2"></i>Add New Room
+                <button class="btn btn-outline-primary" type="button" onclick="showButtons()">Add New</button>
+            </div>
+            <div id="buttonBar" class="d-flex justify-content-end align-items-center d-none">
+                <button class="btn btn-primary w-100" style="margin-right: 2rem" data-bs-toggle="modal" data-bs-target="#addRoomModal">
+                    <i class="bi bi-plus-circle me-2"></i>Add Room
                 </button>
+                <button class="btn btn-primary w-100" style="margin: 2rem 0" data-bs-toggle="modal" data-bs-target="#addRoomTypeModal">
+                    <i class="bi bi-plus-circle me-2"></i>Add Room Type
+                </button>
+<%--                <button class="btn btn-primary w-100" style="margin-left: 2rem" data-bs-toggle="modal" data-bs-target="#addHotelModal">--%>
+<%--                    <i class="bi bi-pencil me-2"></i>Add Hotel--%>
+<%--                </button>--%>
             </div>
         </div>
         <div class="container-fluid py-4">
@@ -65,7 +86,7 @@
                                 </button>
                             </div>
                             <form action="${pageContext.request.contextPath}/RoomManagement" method="get">
-                                <div class="hidden" id="filterContainer">
+                                <div class="hidden" id="filterContainer" class="d-flex justify-content-between align-items-center">
                                     <div class="row g-3 d-flex">
                                         <div class="col-md-3 form-group">
                                             <label for="hotelName">Hotel Branch</label>
@@ -113,14 +134,30 @@
                                                 <option value="" ${empty requestScope.roomStatusID ? "selected" : ""}>Select all Status</option>
                                             </select>
                                         </div>
+                                        <div class="col-md-3 form-group">
+                                            <label for="capacity">Capacity</label>
+                                            <input type="number" name="capacity" id="capacity" class="form-control" placeholder="Capacity" value="${requestScope.capacity}">
+                                        </div>
+
                                     </div>
                                     <div class="buttons">
-                                        <button class="btn btn-secondary" type="button" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'RoomManagement')">Reset all Filters</button>
+                                        <select name="sortType" class="form-select" style="width: 25%" id="type">
+                                            <option value="roomNumber" ${fn:contains(requestScope.type, "roomNumber") ? 'selected' : ''}>Sort by Room Number Ascending</option>
+                                            <option value="roomNumber desc" ${fn:contains(requestScope.type, "roomNumber desc") ? 'selected' : ''}>Sort by Room Number Descending</option>
+                                            <option value="price" ${fn:contains(requestScope.type, "price") ? 'selected' : ''}>Sort by Price Ascending</option>
+                                            <option value="price desc" ${fn:contains(requestScope.type, "price desc") ? 'selected' : ''}>Sort by Price Descending</option>
+                                            <option value="roomType" ${fn:contains(requestScope.type, "roomType") ? 'selected' : ''}>Sort by Room Type Ascending</option>
+                                            <option value="roomType desc" ${fn:contains(requestScope.type, "roomType desc") ? 'selected' : ''}>Sort by Room Type Descending</option>
+                                            <option value="" ${empty requestScope.type ? 'selected' : ''}>Sort by Room ID</option>
+                                            <option value="capacity" ${fn:contains(requestScope.type, "capacity") ? 'selected' : ''}>Sort by Capacity Ascending</option>
+                                            <option value="capacity desc" ${fn:contains(requestScope.type, "capacity desc") ? 'selected' : ''}>Sort by Capacity Descending</option>
+                                        </select>
+                                        <button class="btn btn-secondary" type="button" onclick="redirectToServlet('${pageContext.request.contextPath}', 'RoomManagement')">Reset all Filters</button>
                                         <button class="btn btn-primary" type="submit" id="filterButton">Filter</button>
                                     </div>
                                 </div>
                             </form>
-                       </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,10 +168,11 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body">
-                            <h5 class="card-title">${room.getHotelName()}</h5>
-                            <div class="mb-2"><strong>Room:</strong> ${room.getRoomNumber()}</div>
+                            <h5 class="card-title">${room.getHotelName()} - ${room.getRoomNumber()}</h5>
+                            <div class="mb-2"><strong>Room ID:</strong> ${room.getRoomID()}</div>
                             <div class="mb-2"><strong>Type:</strong> ${room.getRoomType()}</div>
                             <div class="mb-2"><strong>Price:</strong> $${room.getPrice()}/night</div>
+                            <div class="mb-2"><strong>Capacity:</strong> ${room.getCapacity()} persons</div>
                             <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewRoomModal${room.getRoomID()}">View Details</button>
                         </div>
 
@@ -157,13 +195,6 @@
                                         </div>
                                         <div class="mb-3 d-flex justify-content-between">
                                             <label class="form-label col-md-4">Room Type</label>
-<%--                                            <select name="roomType" class="form-select" disabled>--%>
-<%--                                                <c:forEach var="roomType" items="${sessionScope.roomTypes}">--%>
-<%--                                                    <option value="${roomType.getId()}" ${fn:contains(roomType.getId(), requestScope.roomTypeID) ? "selected" : ""}>--%>
-<%--                                                            ${roomType.getName()}--%>
-<%--                                                    </option>--%>
-<%--                                                </c:forEach>--%>
-<%--                                            </select>--%>
                                             <input type="text" class="form-control" value="${room.getRoomType()}" readonly>
                                         </div>
                                         <div class="mb-3 d-flex justify-content-between">
@@ -174,6 +205,10 @@
                                             <label class="form-label col-md-4">Room Status</label>
                                             <input type="text" class="form-control" value="${room.getRoomStatus()}" readonly>
                                         </div>
+                                        <div class="mb-3 d-flex justify-content-between">
+                                            <label class="form-label col-md-4">Capacity</label>
+                                            <input type="number" name="capacity" class="form-control" placeholder="Capacity" value="${room.getCapacity()}">
+                                        </div>
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>
                                             <textarea class="form-control" rows="3" readonly>${room.getDescription()}</textarea>
@@ -181,7 +216,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'UpdateRoom?roomID=' + ${room.getRoomID()})">Update Information</button>
+                                        <button type="button" class="btn btn-primary" onclick="redirectToServlet('${pageContext.request.contextPath}', 'UpdateRoom?roomID=' + ${room.getRoomID()})">Update Information</button>
                                     </div>
                                 </div>
                             </div>
@@ -193,7 +228,7 @@
     </div>
 
     <!-- Add Room Modal -->
-    <div class="modal fade" id="addRoomModal" tabindex="-1">
+    <div class="modal fade ${requestScope.type eq "room" ? "show" : ""}" id="addRoomModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -201,7 +236,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="addRoomForm" action="${pageContext.request.contextPath}/AddRoom" method="post">
+                    <form id="addRoomForm" action="${pageContext.request.contextPath}/AddRoom?type=room" method="post">
                         <div class="mb-3">
                             <label class="form-label">Hotel Name</label>
                             <select name="hotelName" class="form-select" required>
@@ -224,10 +259,6 @@
                             <input name="roomNumber" type="number" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Price per Night</label>
-                            <input name="price" type="number" class="form-control" min="0" step="0.01" required>
-                        </div>
-                        <div class="mb-3">
                             <label class="form-label">Description</label>
                             <textarea name="description" class="form-control" rows="3"></textarea>
                         </div>
@@ -240,6 +271,59 @@
             </div>
         </div>
     </div>
+
+
+
+    <%--    add new room type--%>
+    <div class="modal fade" id="addRoomTypeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Room Type</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addRoomTypeForm" action="${pageContext.request.contextPath}/AddRoom?type=roomType" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Room Type Name</label>
+                            <input name="roomTypeName" type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Capacity</label>
+                            <input name="capacity" type="number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Add this Room Type for:</label>
+                            <c:forEach var="hotel" items="${sessionScope.hotels}">
+                                <div class="form-check form-switch d-flex">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input class="form-check-inline" type="checkbox" name="selectedHotels" value="${hotel.getHotelId()}" onclick="enablePrice('price${hotel.getHotelId()}')">
+                                            </td>
+                                            <td>${hotel.getName()}</td>
+                                            <td>
+                                                <input type="number" id="price${hotel.getHotelId()}" name="price" placeholder="Enter Price" class="form-control form-control-sm w-50 d-none" min="0" step="0.01">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="description" class="form-control" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <button type="submit" form="addRoomTypeForm" class="btn btn-primary">Add Room Type</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

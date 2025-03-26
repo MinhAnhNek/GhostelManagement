@@ -6,7 +6,6 @@
 package controller.admin.RoomManagement;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -17,9 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.FilterType;
-import model.RoomStatus;
-
+import model.*;
 /**
  *
  * @author ADMIN
@@ -49,8 +46,12 @@ public class RoomServlet extends HttpServlet {
             selected.put(filterType, request.getParameter(filterType));
             request.setAttribute(filterType, request.getParameter(filterType));
         }
-        session.setAttribute("rooms", roomDAO.getRoomsByTypes(selected));
+        String sortType = request.getParameter("sortType");
+        LinkedList<Room> list = (LinkedList<Room>) roomDAO.getRoomsByTypes(selected, sortType == null ? "" : sortType);
 
+//        response.sendRedirect("admin/EmployeeDashboard.jsp");
+        request.setAttribute("sortType", sortType);
+        session.setAttribute("rooms", list);
 
 //        response.sendRedirect("admin/RoomManagement.jsp");
         request.getRequestDispatcher("admin/RoomManagement.jsp").forward(request, response);

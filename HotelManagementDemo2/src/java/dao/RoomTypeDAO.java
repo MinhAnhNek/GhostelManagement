@@ -19,8 +19,7 @@ public class RoomTypeDAO extends DBContext {
                 list.add(new RoomType(
                         rs.getInt(1),
                         rs.getString(2),
-                        rs.getInt(3),
-                        rs.getString(4)
+                        rs.getString(3)
                 ));
             }
         } catch (SQLException e) {
@@ -30,17 +29,17 @@ public class RoomTypeDAO extends DBContext {
     }
 
     public RoomType getById(int id) {
-        String sql = "select * from RoomType where RoomTypeID=?";
+        String sql = "select * from RoomType where RoomTypeID = ? ";
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
+            System.out.println(sql + id);
             pre.setInt(1, id);
             ResultSet rs = pre.executeQuery();
             if (rs.next()) {
                 return new RoomType(
                         rs.getInt(1),
                         rs.getString(2),
-                        rs.getInt(3),
-                        rs.getString(4)
+                        rs.getString(3)
                 );
             }
         } catch (SQLException e) {
@@ -53,12 +52,28 @@ public class RoomTypeDAO extends DBContext {
         String sql = "select RoomTypeID from RoomType where RoomTypeName like ?";
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
-            pre.setString(1, "%" + roomType + "%");
+            pre.setString(1, "'%" + roomType + "%'");
             ResultSet rs = pre.executeQuery();
             if (rs.next()) return rs.getInt(1);
         } catch (SQLException e) {
             System.out.println("RoomTypeDAO getRoomTypeByID(): " + e.getMessage());
         }
         return -1;
+    }
+
+
+
+    // ==================================   ADD NEW ROOM TYPE ======================================
+
+    public void add(RoomType roomType) {
+        String sql = "insert into RoomType(RoomTypeName, Description) values(?,?)";
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.setString(1, roomType.getName());
+            pre.setString(2, roomType.getDescription());
+            pre.execute();
+        } catch (SQLException e) {
+            System.out.println("RoomTypeDAO add(): " + e.getMessage());
+        }
     }
 }

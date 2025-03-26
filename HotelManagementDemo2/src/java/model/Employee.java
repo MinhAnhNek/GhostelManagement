@@ -1,5 +1,8 @@
 package model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Employee {
     private int id;
     private String name, status, role, startDate, hotelName, mail, phoneNum, address;
@@ -34,6 +37,16 @@ public class Employee {
         this.status = status;
         this.role = role;
         this.startDate = startDate;
+        this.hotelName = hotelName;
+        this.mail = mail;
+        this.phoneNum = phoneNum;
+        this.address = address;
+        this.salary = salary;
+    }
+
+    public Employee(String name, String role, String hotelName, String mail, String phoneNum, String address, float salary) {
+        this.name = name;
+        this.role = role;
         this.hotelName = hotelName;
         this.mail = mail;
         this.phoneNum = phoneNum;
@@ -80,4 +93,52 @@ public class Employee {
         return salary;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setSalary(float salary) {
+        this.salary = salary;
+    }
+
+    public static List<Employee> getPage(int pageNo, LinkedList<Employee> empList, int empDisplayedPerPage) {
+        LinkedList<Employee> page = new LinkedList<>();
+        int max = pageNo * empDisplayedPerPage;
+        for (int i = (pageNo-1)*empDisplayedPerPage; i < max && i < empList.size(); i++) {
+            page.add(empList.get(i));
+        }
+        return page;
+    }
 }

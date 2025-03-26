@@ -34,7 +34,7 @@ public class Room {
         return RoomID;
     }
 
-    public int getRoomCapacity() {
+    public int getCapacity() {
         return RoomCapacity;
     }
 
@@ -58,7 +58,7 @@ public class Room {
         RoomID = roomID;
     }
 
-    public void setRoomCapacity(int roomCapacity) {
+    public void setCapacity(int roomCapacity) {
         RoomCapacity = roomCapacity;
     }
 

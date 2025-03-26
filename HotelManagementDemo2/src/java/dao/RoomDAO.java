@@ -12,14 +12,17 @@ import java.util.List;
 import java.util.Map;
 
 public class RoomDAO extends DBContext {
-    public List<Room> getAll() {
-        String sql = "select r.RoomID, h.Name, r.RoomNumber, rt.RoomTypeName, rt.Capacity, rt.Description, p.Price, rs.RoomStatusName " +
+    public List<Room> getAll(String sortType) {
+        String sql = "select r.RoomID, h.Name, r.RoomNumber, rt.RoomTypeName, r.Capacity, rt.Description, p.Price, rs.RoomStatusName " +
                 "from Room r " +
                 "left join RoomType rt on r.roomTypeID = rt.roomTypeID " +
                 "left join Hotel h on r.HotelID = h.HotelID " +
                 "left join Price p on r.HotelID = p.HotelID and r.RoomTypeID = p.RoomTypeID " +
                 "left join RoomStatus rs on r.RoomStatusID = rs.RoomStatusID";
         List<Room> list = new LinkedList<>();
+        if (!sortType.isEmpty()) {
+            sql += " order by " + convertTypeToColumnName(sortType) + " ";
+        }
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
@@ -41,9 +44,9 @@ public class RoomDAO extends DBContext {
         return list;
     }
 
-    public List<Room> getRoomsByTypes(Map<String, String> selected) {
+    public List<Room> getRoomsByTypes(Map<String, String> selected, String sortType) {
         StringBuilder sql = new StringBuilder(
-                "select r.RoomID, h.Name, r.RoomNumber, rt.RoomTypeName, rt.Capacity, rt.Description, p.Price, rs.RoomStatusName " +
+                "select r.RoomID, h.Name, r.RoomNumber, rt.RoomTypeName, r.Capacity, rt.Description, p.Price, rs.RoomStatusName " +
                         "from Room r " +
                         "left join RoomType rt on r.roomTypeID = rt.roomTypeID " +
                         "left join Hotel h on r.HotelID = h.HotelID " +
@@ -69,9 +72,12 @@ public class RoomDAO extends DBContext {
             }
         }
         if (!appended) {
-            return getAll();
+            return getAll(sortType);
         }
         String sql2 = sql.substring(0, sql.length() - 4);
+        if (!sortType.isEmpty()) {
+            sql2 += " order by " + convertTypeToColumnName(sortType) + " ";
+        }
         LinkedList<Room> list = new LinkedList<>();
         try {
             PreparedStatement pre = connection.prepareStatement(sql2);
@@ -105,14 +111,14 @@ public class RoomDAO extends DBContext {
 
     private String convertTypeToColumnName(String key) {
         return switch (key) {
-            case "minPrice", "maxPrice" -> "p." + key;
+            case "price desc", "price", "minPrice", "maxPrice" -> "p." + key;
             case "description" -> "rt." + key;
             default -> "r." + key;
         };
     }
 
     public Room getByID(int id) {
-        String sql = "select r.RoomID, h.Name, r.RoomNumber, rt.RoomTypeName, rt.Capacity, rt.Description, p.Price, rs.RoomStatusName " +
+        String sql = "select r.RoomID, h.Name, r.RoomNumber, rt.RoomTypeName, r.Capacity, rt.Description, p.Price, rs.RoomStatusName " +
                 "from Room r " +
                 "left join RoomType rt on r.roomTypeID = rt.roomTypeID " +
                 "left join Hotel h on r.HotelID = h.HotelID " +
@@ -142,13 +148,13 @@ public class RoomDAO extends DBContext {
     }
 
     public Room getByHotelNameAndRoomNumber(String hotelName, String roomNumber) {
-        String sql = "select r.RoomID, h.Name, r.RoomNumber, rt.RoomTypeName, rt.Capacity, rt.Description, p.Price, rs.RoomStatusName " +
+        String sql = "select r.RoomID, h.Name, r.RoomNumber, rt.RoomTypeName, r.Capacity, rt.Description, p.Price, rs.RoomStatusName " +
                 "from Room r " +
                 "left join RoomType rt on r.roomTypeID = rt.roomTypeID " +
                 "left join Hotel h on r.HotelID = h.HotelID " +
                 "left join Price p on r.HotelID = p.HotelID and r.RoomTypeID = p.RoomTypeID " +
                 "left join RoomStatus rs on r.RoomStatusID = rs.RoomStatusID " +
-                "where h.Name = ? and r.RoomNumber = ?";
+                "where h.Name = ? and r.RoomNumber = ? ";
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setString(1, hotelName);
@@ -193,9 +199,9 @@ public class RoomDAO extends DBContext {
 
     // ===============================      UPDATE ROOM    ===============================
 
-    public boolean update(String roomID, String roomTypeID, String roomStatusID) {
+    public boolean update(String roomID, String roomTypeID, String roomStatusID, String capacity) {
         String sql = "update Room " +
-                "set RoomTypeID = ?, RoomStatusID = ? " +
+                "set RoomTypeID = ?, RoomStatusID = ?, Capacity = ? " +
                 "where RoomID like '%" + roomID + "%'";
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
@@ -203,6 +209,9 @@ public class RoomDAO extends DBContext {
             RoomStatusDAO roomStatusDAO = new RoomStatusDAO();
             pre.setInt(1, Integer.parseInt(roomTypeID));
             pre.setInt(2, Integer.parseInt(roomStatusID));
+            pre.setInt(3, Integer.parseInt(capacity));
+            pre.setInt(4, Integer.parseInt(roomID));
+
             pre.executeUpdate();
             return true;
         } catch (SQLException e) {

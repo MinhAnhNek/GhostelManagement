@@ -52,4 +52,23 @@ public class PriceDAO extends DBContext {
         }
         return null;
     }
+
+
+    // ==================================   ADD NEW PRICE TYPE ======================================
+
+    public void add(Price price) {
+        String sql = "insert into Price(HotelID, RoomTypeID, Price, StartDate, EndDate) values(?,?,?,?,?)";
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.setInt(1, price.getHotelID());
+            pre.setInt(2, price.getRoomTypeID());
+            pre.setFloat(3, price.getPrice());
+            pre.setString(4, String.valueOf(price.getStartDate()));
+            pre.setString(5, String.valueOf(price.getEndDate()));
+            pre.execute();
+            System.out.println("PriceDAO add price: " + price);
+        } catch (SQLException e) {
+            System.out.println("RoomTypeDAO add(): " + e.getMessage());
+        }
+    }
 }

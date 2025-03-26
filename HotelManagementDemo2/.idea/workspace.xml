@@ -4,23 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/admin/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/admin/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/HotelManagementDemo2.war" beforeDir="false" afterPath="$PROJECT_DIR$/dist/HotelManagementDemo2.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/admin/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/admin/css/home.css" afterDir="false" />
-    </list>
+    <list default="true" id="7fe968cd-13be-4d65-ae90-7eafe63af569" name="Changes" comment="delete unused files and folder" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="Jsp File" />
+        <option value="package.json" />
+        <option value="CSS File" />
         <option value="Class" />
       </list>
     </option>
@@ -28,23 +27,34 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="statistic" />
+        <entry key="$PROJECT_DIR$/.." value="PRJ301_Assignment" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "MinhAnhNek"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MinhAnhNek&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/MinhAnhNek/GhostelManagement.git",
-    "accountId": "f305d64b-c177-48eb-8f3b-259817c94405"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MinhAnhNek/GhostelManagement.git&quot;,
+    &quot;accountId&quot;: &quot;f305d64b-c177-48eb-8f3b-259817c94405&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;MinhAnhNek&quot;,
+    &quot;repository&quot;: &quot;GhostelManagement&quot;
   }
-}]]></component>
+}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -59,6 +69,9 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2taGBB5jpEncF6p2GQz0biHWlgv" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -72,7 +85,7 @@
     "git-widget-placeholder": "PRJ301__Assignment",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/SE/K4/PRJ301/Assignment/GhostelManagement/HotelManagementDemo2/build/web",
+    "last_opened_file_path": "D:/SE/K4/PRJ301/Assignment/GhostelManagement/HotelManagementDemo2/build/web/admin/RoomManagement",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -83,7 +96,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "configurable.group.appearance",
+    "settings.editor.selected.configurable": "preferences.general",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -94,6 +107,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\SE\K4\PRJ301\Assignment\GhostelManagement\HotelManagementDemo2\build\web\admin\RoomManagement" />
       <recent name="D:\SE\K4\PRJ301\Assignment\HotelManagementDemo2\web\admin\js" />
       <recent name="D:\SE\K4\PRJ301\Assignment\HotelManagementDemo2\web" />
     </key>
@@ -156,12 +170,385 @@
       <workItem from="1741420853626" duration="21667000" />
       <workItem from="1741494379363" duration="8057000" />
       <workItem from="1741533383658" duration="4990000" />
-      <workItem from="1741866087868" duration="1533000" />
+      <workItem from="1741866087868" duration="1651000" />
+      <workItem from="1741874310435" duration="1431000" />
+      <workItem from="1741888437673" duration="419000" />
+      <workItem from="1741926112225" duration="1536000" />
+      <workItem from="1741930092218" duration="7944000" />
+      <workItem from="1741942724546" duration="12569000" />
+      <workItem from="1742010094232" duration="9401000" />
+      <workItem from="1742021939063" duration="585000" />
+      <workItem from="1742025896153" duration="8979000" />
+      <workItem from="1742035151139" duration="21522000" />
+      <workItem from="1742098637582" duration="37792000" />
+      <workItem from="1742174238648" duration="13386000" />
+      <workItem from="1742187908333" duration="361000" />
+      <workItem from="1742191572585" duration="4470000" />
+      <workItem from="1742209339649" duration="3669000" />
+      <workItem from="1742216315196" duration="2289000" />
+      <workItem from="1742225517936" duration="8371000" />
+      <workItem from="1742261788409" duration="222000" />
+      <workItem from="1742265511816" duration="19072000" />
+      <workItem from="1742286103407" duration="2945000" />
+      <workItem from="1742294719769" duration="8191000" />
+      <workItem from="1742304982275" duration="14231000" />
+      <workItem from="1742361896288" duration="16830000" />
+      <workItem from="1742380905347" duration="453000" />
+      <workItem from="1742455934660" duration="646000" />
+      <workItem from="1742459563629" duration="1392000" />
+      <workItem from="1742572469786" duration="7739000" />
+      <workItem from="1742637517137" duration="2869000" />
+      <workItem from="1742646426870" duration="1362000" />
+      <workItem from="1742781312063" duration="3573000" />
+      <workItem from="1742786569660" duration="8331000" />
+      <workItem from="1742797067952" duration="5528000" />
+      <workItem from="1742806127599" duration="625000" />
+      <workItem from="1742885494073" duration="516000" />
+      <workItem from="1742917407695" duration="900000" />
     </task>
+    <task id="LOCAL-00001" summary="fix css">
+      <option name="closed" value="true" />
+      <created>1741872506058</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1741872506058</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix css">
+      <option name="closed" value="true" />
+      <created>1741876360065</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741876360065</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix css">
+      <option name="closed" value="true" />
+      <created>1741876375297</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1741876375297</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix css">
+      <option name="closed" value="true" />
+      <created>1741888461489</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1741888461489</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix css">
+      <option name="closed" value="true" />
+      <created>1741888524148</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1741888524148</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix css">
+      <option name="closed" value="true" />
+      <created>1741888706598</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1741888706598</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix css">
+      <option name="closed" value="true" />
+      <created>1741888733651</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1741888733651</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix css">
+      <option name="closed" value="true" />
+      <created>1741888743849</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1741888743849</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix login&#10;add search by capacity for room&#10;add sort for Room">
+      <option name="closed" value="true" />
+      <created>1741948028795</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1741948028795</updated>
+    </task>
+    <task id="LOCAL-00010" summary="insert add buttons for adding new room type and hotel">
+      <option name="closed" value="true" />
+      <created>1741950452809</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1741950452809</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add form for adding new room type">
+      <option name="closed" value="true" />
+      <created>1742010316618</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1742010316618</updated>
+    </task>
+    <task id="LOCAL-00012" summary="add form for adding new room type">
+      <option name="closed" value="true" />
+      <created>1742010389890</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1742010389890</updated>
+    </task>
+    <task id="LOCAL-00013" summary="pagination">
+      <option name="closed" value="true" />
+      <created>1742039237183</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1742039237183</updated>
+    </task>
+    <task id="LOCAL-00014" summary="delete redundant comment and variables">
+      <option name="closed" value="true" />
+      <created>1742039338096</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1742039338096</updated>
+    </task>
+    <task id="LOCAL-00015" summary="use admin servlet to manage searching employees instead of SearchServlet">
+      <option name="closed" value="true" />
+      <created>1742042045477</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1742042045477</updated>
+    </task>
+    <task id="LOCAL-00016" summary="show salary by month for each employee">
+      <option name="closed" value="true" />
+      <created>1742051203030</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1742051203030</updated>
+    </task>
+    <task id="LOCAL-00017" summary="finish viewing and adding employee at EmployeeDashboard.jsp">
+      <option name="closed" value="true" />
+      <created>1742143995812</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1742143995812</updated>
+    </task>
+    <task id="LOCAL-00018" summary="finish displaying and changing employeeSalary">
+      <option name="closed" value="true" />
+      <created>1742185191293</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1742185191293</updated>
+    </task>
+    <task id="LOCAL-00019" summary="finish displaying and changing employeeSalary">
+      <option name="closed" value="true" />
+      <created>1742185197543</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1742185197543</updated>
+    </task>
+    <task id="LOCAL-00020" summary="finish displaying and changing employeeSalary">
+      <option name="closed" value="true" />
+      <created>1742187378284</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1742187378284</updated>
+    </task>
+    <task id="LOCAL-00021" summary="comment register">
+      <option name="closed" value="true" />
+      <created>1742187447575</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1742187447575</updated>
+    </task>
+    <task id="LOCAL-00022" summary="comment register">
+      <option name="closed" value="true" />
+      <created>1742188068297</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1742188068298</updated>
+    </task>
+    <task id="LOCAL-00023" summary="comment register">
+      <option name="closed" value="true" />
+      <created>1742188074678</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1742188074678</updated>
+    </task>
+    <task id="LOCAL-00024" summary="change reading infor on EmployeeRequests.jsp">
+      <option name="closed" value="true" />
+      <created>1742238037869</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1742238037869</updated>
+    </task>
+    <task id="LOCAL-00025" summary="update EmployeeRequest with statistical chart and diagram">
+      <option name="closed" value="true" />
+      <created>1742296210396</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1742296210396</updated>
+    </task>
+    <task id="LOCAL-00026" summary="fix add employee">
+      <option name="closed" value="true" />
+      <created>1742305038201</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1742305038201</updated>
+    </task>
+    <task id="LOCAL-00027" summary="fix get emp by filter. fix employee request">
+      <option name="closed" value="true" />
+      <created>1742380996991</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1742380996991</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fix login, add log out">
+      <option name="closed" value="true" />
+      <created>1742647563798</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1742647563798</updated>
+    </task>
+    <task id="LOCAL-00029" summary="add sort for salary dashboard">
+      <option name="closed" value="true" />
+      <created>1742656604417</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1742656604417</updated>
+    </task>
+    <task id="LOCAL-00030" summary="add sort for salary dashboard">
+      <option name="closed" value="true" />
+      <created>1742656610348</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1742656610348</updated>
+    </task>
+    <task id="LOCAL-00031" summary="add sort for salary dashboard">
+      <option name="closed" value="true" />
+      <created>1742656614823</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1742656614823</updated>
+    </task>
+    <task id="LOCAL-00032" summary="add sort for salary dashboard">
+      <option name="closed" value="true" />
+      <created>1742656670864</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1742656670864</updated>
+    </task>
+    <task id="LOCAL-00033" summary="delete sorting by salary and start date in emp dashboard">
+      <option name="closed" value="true" />
+      <created>1742656951869</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1742656951870</updated>
+    </task>
+    <task id="LOCAL-00034" summary="add link to employee attendance on side bar menu">
+      <option name="closed" value="true" />
+      <created>1742736868727</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1742736868727</updated>
+    </task>
+    <task id="LOCAL-00035" summary="change employee attendance">
+      <option name="closed" value="true" />
+      <created>1742762953031</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1742762953031</updated>
+    </task>
+    <task id="LOCAL-00036" summary="finish employee attends by attendance code">
+      <option name="closed" value="true" />
+      <created>1742788612760</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1742788612760</updated>
+    </task>
+    <task id="LOCAL-00037" summary="demo project">
+      <option name="closed" value="true" />
+      <created>1742917437284</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1742917437284</updated>
+    </task>
+    <task id="LOCAL-00038" summary="delete unused files and folder">
+      <option name="closed" value="true" />
+      <created>1742919443981</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1742919443981</updated>
+    </task>
+    <task id="LOCAL-00039" summary="delete unused files and folder">
+      <option name="closed" value="true" />
+      <created>1742919448099</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1742919448099</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix css" />
+    <MESSAGE value="fix login&#10;add search by capacity for room&#10;add sort for Room" />
+    <MESSAGE value="insert add buttons for adding new room type and hotel" />
+    <MESSAGE value="add form for adding new room type" />
+    <MESSAGE value="pagination" />
+    <MESSAGE value="delete redundant comment and variables" />
+    <MESSAGE value="use admin servlet to manage searching employees instead of SearchServlet" />
+    <MESSAGE value="show salary by month for each employee" />
+    <MESSAGE value="finish viewing and adding employee at EmployeeDashboard.jsp" />
+    <MESSAGE value="finish displaying and changing employeeSalary" />
+    <MESSAGE value="comment register" />
+    <MESSAGE value="change reading infor on EmployeeRequests.jsp" />
+    <MESSAGE value="update EmployeeRequest with statistical chart and diagram" />
+    <MESSAGE value="fix add employee" />
+    <MESSAGE value="fix get emp by filter. fix employee request" />
+    <MESSAGE value="fix login, add log out" />
+    <MESSAGE value="add sort for salary dashboard" />
+    <MESSAGE value="delete sorting by salary and start date in emp dashboard" />
+    <MESSAGE value="add link to employee attendance on side bar menu" />
+    <MESSAGE value="change employee attendance" />
+    <MESSAGE value="finish employee attends by attendance code" />
+    <MESSAGE value="demo project" />
+    <MESSAGE value="delete unused files and folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete unused files and folder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

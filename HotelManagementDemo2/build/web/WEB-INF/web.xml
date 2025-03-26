@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <filter>
-        <filter-name>LoginFilter</filter-name>
-        <filter-class>filter.LoginFilter</filter-class>
-    </filter>
-    <filter>
         <filter-name>Authorization</filter-name>
         <filter-class>filter.Authorization</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>Authorization</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <servlet>
@@ -29,14 +21,6 @@
         <servlet-class>controller.admin.EmployeeManagement.UpdateEmployee</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddEmployee</servlet-name>
-        <servlet-class>controller.admin.EmployeeManagement.AddEmployee</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteEmployee</servlet-name>
-        <servlet-class>controller.admin.EmployeeManagement.DeleteEmployee</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RoomServlet</servlet-name>
         <servlet-class>controller.admin.RoomManagement.RoomServlet</servlet-class>
     </servlet>
@@ -49,8 +33,40 @@
         <servlet-class>controller.admin.RoomManagement.UpdateRoom</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchServlet</servlet-name>
-        <servlet-class>controller.admin.EmployeeManagement.SearchServlet</servlet-class>
+        <servlet-name>ForgotPasswordServlet</servlet-name>
+        <servlet-class>controller.ForgotPasswordServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeSalaryDetail</servlet-name>
+        <servlet-class>controller.admin.EmployeeManagement.EmployeeSalaryDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeRequest</servlet-name>
+        <servlet-class>controller.admin.EmployeeManagement.EmployeeRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateRequest</servlet-name>
+        <servlet-class>controller.admin.EmployeeManagement.UpdateRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>controller.employee.HomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>controller.Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeAttendance</servlet-name>
+        <servlet-class>controller.admin.EmployeeManagement.EmployeeAttendance</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AttendanceCode</servlet-name>
+        <servlet-class>controller.admin.EmployeeManagement.AttendanceCodeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddRequest</servlet-name>
+        <servlet-class>controller.employee.AddRequest</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -65,14 +81,6 @@
         <url-pattern>/updateEmployee</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddEmployee</servlet-name>
-        <url-pattern>/addEmployee</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteEmployee</servlet-name>
-        <url-pattern>/DeleteEmployee</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>RoomServlet</servlet-name>
         <url-pattern>/RoomManagement</url-pattern>
     </servlet-mapping>
@@ -85,7 +93,61 @@
         <url-pattern>/UpdateRoom</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/SearchEmployee</url-pattern>
+        <servlet-name>ForgotPasswordServlet</servlet-name>
+        <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeSalaryDetail</servlet-name>
+        <url-pattern>/EmployeeSalaryDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeRequest</servlet-name>
+        <url-pattern>/EmployeeRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRequest</servlet-name>
+        <url-pattern>/UpdateRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/employee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeAttendance</servlet-name>
+        <url-pattern>/EmployeeAttendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttendanceCode</servlet-name>
+        <url-pattern>/AttendanceCode</url-pattern>
+    </servlet-mapping>
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <!--        <url-pattern>/*</url-pattern>-->
+        <url-pattern>/AttendanceCode</url-pattern>
+        <url-pattern>/EmployeeAttendance</url-pattern>
+        <url-pattern>/logout</url-pattern>
+        <url-pattern>/employee</url-pattern>
+        <url-pattern>/EmployeeSalaryDetail</url-pattern>
+        <url-pattern>/EmployeeRequest</url-pattern>
+        <url-pattern>/UpdateRequest</url-pattern>
+        <url-pattern>/UpdateRoom</url-pattern>
+        <url-pattern>/AddRoom</url-pattern>
+        <url-pattern>/RoomManagement</url-pattern>
+        <url-pattern>/addEmployee</url-pattern>
+        <url-pattern>/updateEmployee</url-pattern>
+        <url-pattern>/admin</url-pattern>
+        <!--        <url-pattern>/Employee</url-pattern>-->
+    </filter-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRequest</servlet-name>
+        <url-pattern>/AddRequestForEmployee</url-pattern>
     </servlet-mapping>
 </web-app>

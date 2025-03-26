@@ -8,12 +8,20 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -93,6 +101,18 @@ public class Authorization implements Filter {
      * @exception IOException if an input/output error occurs
      * @exception ServletException if a servlet error occurs
      */
+
+    private static final Set<String> ADMIN_PAGES = new HashSet<>(Arrays.asList(
+            "/AttendanceCode", "/EmployeeAttendance", "/EmployeeSalaryDetail", "/EmployeeRequest", "/UpdateRequest", "/UpdateRequest", "/AddRoom",
+            "/RoomManagement", "/addEmployee", "/updateEmployee", "/admin",
+            "/admin/EmployeeAttendance.jsp", "/admin/EmployeeDashboard.jsp", "/admin/EmployeeDetails.jsp",
+            "/admin/EmployeeRequests.jsp", "/admin/EmployeeSalaryDashboard.jsp", "/admin/RoomManagement.jsp", "/admin/UpdateRoom.jsp"
+    ));
+
+    private static final Set<String> EMPLOYEE_PAGES = new HashSet<>(Arrays.asList(
+            "/employee",
+            "/home.jsp"
+    ));
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
@@ -102,7 +122,50 @@ public class Authorization implements Filter {
         }
         
         doBeforeProcessing(request, response);
-        
+
+
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        HttpSession session = req.getSession(false);
+
+        String uri = req.getRequestURI().substring(req.getContextPath().length());
+        Account user = (session != null) ? (Account) session.getAttribute("account") : null;
+
+//        Boolean isAdminObj = user != null ? user.getRoleId() == 0 : null;
+//        boolean isAdmin = (isAdminObj != null) && isAdminObj;
+        boolean isAdmin = (session != null) ? session.getAttribute("role") == "admin" : false;
+//        System.out.println(isAdmin);
+//        if (user != null) {
+//            System.out.println(user.getUsername());
+//            isAdmin = user.getRoleId() == 0;
+//        }
+
+        if (ADMIN_PAGES.contains(uri)) {
+            if (user == null || !isAdmin) {
+                res.getWriter().println("<script>alert('You must be admin'); history.back();</script>");
+                return;
+            }
+        }
+
+        if (EMPLOYEE_PAGES.contains(uri)) {
+            if (user == null || isAdmin) {
+                res.getWriter().println("<script>alert('You must be an employee'); history.back();</script>");
+                return;
+            }
+        }
+
+//        if (EMPLOYEE_PAGES.contains(uri)) {
+//            if (user == null) {
+//                if (session == null) {
+//                    session = req.getSession(true);
+//                }
+//                session.setAttribute("alert", "You must login");
+//                res.sendRedirect(req.getContextPath() + "/login.jsp");
+//                return;
+//            }
+//
+//        }
+
         Throwable problem = null;
         try {
             chain.doFilter(request, response);

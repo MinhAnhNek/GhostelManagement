@@ -22,11 +22,7 @@ public class UpdateEmployee extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
         String name = request.getParameter("name");
         String role = request.getParameter("role");
         String startDate = request.getParameter("startDate");
@@ -35,10 +31,28 @@ public class UpdateEmployee extends HttpServlet {
         String phoneNum = request.getParameter("phoneNum");
         String status = request.getParameter("status");
         String address = request.getParameter("address");
-        Employee newEmp = new Employee(Integer.parseInt(request.getParameter("id")), name, status, role, startDate,hotelName, mail, phoneNum, address, Float.parseFloat(request.getParameter("salary")));
+        String monthStr = request.getParameter("month");
+        int month = monthStr == null ? 3 : Integer.parseInt(monthStr);
         EmployeeDAO eDAO = new EmployeeDAO();
-        eDAO.update(newEmp);
-        response.sendRedirect("admin");
+
+        Employee newEmp = eDAO.getEmployeeById(Integer.parseInt(request.getParameter("id")));
+        if (name != null && !name.isEmpty()) newEmp.setName(name);
+        if (role != null && !role.isEmpty()) newEmp.setRole(role);
+        if (startDate != null && !startDate.isEmpty()) newEmp.setStartDate(startDate);
+        if (hotelName != null && !hotelName.isEmpty()) newEmp.setHotelName(hotelName);
+        if (mail != null && !mail.isEmpty()) newEmp.setMail(mail);
+        if (phoneNum != null && !phoneNum.isEmpty()) newEmp.setPhoneNum(phoneNum);
+        if (status != null && !status.isEmpty()) newEmp.setStatus(status);
+        if (address != null && !address.isEmpty()) newEmp.setAddress(address);
+//                new Employee(Integer.parseInt(request.getParameter("id")), name, status, role, startDate,hotelName, mail, phoneNum, address, Float.parseFloat(request.getParameter("salary")));
+        eDAO.update(newEmp, Float.parseFloat(request.getParameter("overtime_pay")), month);
+        response.sendRedirect("admin?id=" + newEmp.getId());
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+
     }
 
     /** 

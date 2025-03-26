@@ -27,8 +27,6 @@ body {
 }
 
 .sidebar {
-    display: block;
-    /*position: fixed;*/
     width: 280px;
     min-height: 100vh;
     background: var(--card) !important;
@@ -126,23 +124,55 @@ body {
     color: var(--primary-foreground);
 }
 
+.page-link {
+    color: var(--primary);
+}
+
+.page-link:hover, .page-link.active{
+    color: var(--primary-foreground);
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
 .gap-2 {
     gap: 0.5rem;
 }
 
 .modal-dialog {
-    max-width: 80vw;
+    max-width: 60vw;
     max-height: 90vh;
-}
-.modal {
-    --bs-modal-width: 80vw;
-    --bs-modal-height: 90vh;
 }
 
 .modal-content {
     background: var(--card);
     border: 1px solid var(--border);
+    /*max-height: 80vh;*/
 }
+
+.modal-body {
+    overflow-y: auto; /* Enable vertical scrolling for the modal body if needed */
+    max-height: 80vh; /* Set a fixed max height for the modal body */
+}
+
+.progress {
+    height: 1.5rem;
+    background: var(--muted);
+}
+
+.wrapper {
+    min-height: 100vh;
+}
+
+.dropdown-menu {
+    color: var(--primary);
+    background: var(--background);
+    border-color: var(--border);
+}
+
+.dropdown-item {
+    color: var(--popover-foreground);
+}
+
 
 .form-control,
 .form-select {
@@ -163,13 +193,8 @@ body {
     box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
 }
 
-.search-row {
-    margin-top: 0.2rem;
-    width: 100%;
-}
-
-.row {
-    margin-top: 0.1rem;
+.modal-header .btn-close {
+    margin-left: 0;
 }
 
 .hidden {
@@ -195,6 +220,11 @@ body {
 
 .test {
     color: var(--primary);
+}
+
+.link-primary:hover {
+    color: var(--secondary);
+    background-color: var(--ring);
 }
 
 @media (max-width: 768px) {

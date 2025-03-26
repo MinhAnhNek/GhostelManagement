@@ -1,10 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--
-    Document   : UpdateRoom
-    Created on : Mar 9, 2025, 11:33:42 AM
-    Author     : ADMIN
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,23 +19,42 @@
             <div class="logo mb-4">
                 <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d" alt="Hotel Logo" class="img-fluid rounded-circle">
             </div>
+            <div class="mb-4 d-flex justify-content-center align-items-center">
+                <a class="link-danger bg-danger text-white rounded-3 p-2" href="${pageContext.request.contextPath}/logout">Log Out</a>
+            </div>
             <ul class="nav flex-column">
+                <%--            <li class="nav-item">--%>
+                <%--                <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>--%>
+                <%--            </li>--%>
                 <li class="nav-item">
-                    <a class="nav-link" href="" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius);"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/admin" style="border-top-left-radius: var(--radius); border-top-right-radius: var(--radius); border-bottom: none;">
+                        <i class="bi bi-people me-2"></i>
+                        Employee Dashboard
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/admin"><i class="bi bi-people me-2"></i>Employee Details</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeAttendance" style="border-bottom: none;">
+                        <i class="bi bi-calendar-check me-2"></i>Employee Attendance
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/RoomManagement"><i class="bi bi-door-open me-2"></i>Room Details</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeSalaryDetail" style="border-bottom: none;">
+                        <i class="bi bi-cash me-2"></i>Employee Salary
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-calendar-check me-2"></i>Booking Details</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/EmployeeRequest" style="border-bottom: none;">
+                        <i class="bi bi-graph-up me-2"></i>Employee Request
+                    </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#"  style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);"><i class="bi bi-graph-up me-2"></i>Finance Overview</a>
+                    <a class="nav-link active" href="${pageContext.request.contextPath}/RoomManagement" style="border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius);">
+                        <i class="bi bi-door-open me-2"></i>Room Details
+                    </a>
                 </li>
             </ul>
+
         </div>
 
         <div class="main-content p-4 w-100">
@@ -48,7 +62,7 @@
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 class="col-md-10">Room Management</h2>
-                    <button class="btn btn-primary w-100" onclick="redirectToSearchServlet('${pageContext.request.contextPath}', 'RoomManagement')">
+                    <button class="btn btn-primary w-100" onclick="redirectToServlet('${pageContext.request.contextPath}', 'RoomManagement')">
                         Back
                     </button>
                 </div>
@@ -70,7 +84,7 @@
                     <label class="form-label col-md-4">Room Type</label>
                     <select name="roomType" class="form-select" >
                         <c:forEach var="roomType" items="${sessionScope.roomTypes}">
-                            <option value="${roomType.getId()}" ${fn:contains(roomType.getId(), requestScope.roomTypeID)}>${item}</option>
+                            <option value="${roomType.getId()}" ${fn:contains(roomType.getId(), requestScope.roomTypeID)}>${roomType.getName()}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -83,10 +97,14 @@
                     <select name="roomStatusID" class="form-select">
                         <c:forEach var="roomStatus" items="${sessionScope.roomStatuses}">
                             <option value="${roomStatus.getStatusID()} ${fn:contains(roomStatus.getStatusID(), requestScope.roomStatusID) ? "selected" : ""}">
-                                ${roomStatus.getName()}
+                                ${roomStatus.getStatusName()}
                             </option>
                         </c:forEach>
                     </select>
+                </div>
+                <div class="mb-3 d-flex justify-content-between">
+                    <label class="form-label col-md-4">Capacity</label>
+                    <input name="capacity" type="number" class="form-control" value="${room.getCapacity()}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Description</label>
